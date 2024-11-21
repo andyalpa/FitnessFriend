@@ -41,7 +41,7 @@ def login():
     user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
     user = User.query.filter_by(email = user_email, password = user_password).first()
     if user and user.password == user_password:
-        access_token = create_access_token(identity = user.id)
+        access_token = create_access_token(identity = user.email)
         return jsonify(access_token = access_token, user = user.serialize())
     else:
         return jsonify("user does not exist")
@@ -49,6 +49,11 @@ def login():
 @api.route('/user', methods=['GET'])
 @jwt_required()
 def get_user():
-    uid = get_jwt_identity()
-    user = User.query.filter_by(id=uid).first()
-    return jsonify(user.serialize())
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    
+    if user is not None:
+        return jsonify(user.serialize()), 200
+
+    return jsonify(email), 400
+    
