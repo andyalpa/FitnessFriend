@@ -3,21 +3,13 @@ import { Context } from "../store/appContext";
 import { Navigate, useNavigate } from "react-router-dom";
 export const LogIn = () => {
     
-    const navigate = useNavigate(Navigate)
+    const navigate = useNavigate()
     const { store, actions } = useContext(Context);
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     
 	const logInUser = async() => {
-        let response = await fetch(process.env.BACKEND_URL + "/login", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify({ 
-                email: email,
-                password: password
-            })
-        })
-        let data = await response.json()
+        actions.login(email, password)
         navigate("/")
     }
 

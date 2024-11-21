@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const SignUp = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 	const { store, actions } = useContext(Context);
+    const navigate = useNavigate()
     const createUser = async() => {
         let response = await fetch(process.env.BACKEND_URL + "/signup", {
             method: "POST",
@@ -17,6 +18,7 @@ export const SignUp = () => {
             })
         })
         let data = await response.json()
+        navigate("/")
     }
 
 
