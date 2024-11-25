@@ -6,6 +6,9 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
+import { LogIn }  from "./pages/login"
+import { SignUp }  from "./pages/signup"
+import { Profile }  from "./pages/profile"
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -13,6 +16,8 @@ import { Footer } from "./component/footer";
 import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
 import FeaturedRecipes from "./component/FeaturedRecipes"
+// import Exercise from "./pages/Exercise";
+
 
 //create your first component
 const Layout = () => {
@@ -27,12 +32,15 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-
+//                     <Exercise />
                     <Routes>
                         <Route element={<Meal />} path="/" />
                         <Route element={<MealInfo />} path="/:MealId" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<LogIn />} path="/login" />
+                        <Route element={<Profile />} path="/profile" />
+                        <Route element={<SignUp />} path="/signup" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
 
