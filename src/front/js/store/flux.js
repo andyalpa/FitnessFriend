@@ -13,10 +13,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+
+			token: sessionStorage.getItem("token")
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			
+			login: async (email, password) => {
+				let response = await fetch(process.env.BACKEND_URL + "/login", {
+					method: "POST",
+					headers: { "Content-type": "application/json" },
+					body: JSON.stringify({ 
+						email: email,
+						password: password
+					})
+				})
+				let data = await response.json()
+				sessionStorage.setItem("token", data.access_token)
+				console.log(sessionStorage.getItem("token"))
+			},
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
@@ -24,7 +70,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getMessage: async () => {
 				try{
 					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+					const resp = await fetch(process.env.BACKEND_URL + "/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
 					// don't forget to return something, that is how the async resolves
