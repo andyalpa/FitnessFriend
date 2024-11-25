@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Home = () => {
 	const { store, actions } = useContext(Context);
-	console.log(store.token)
+
 	return (
 		<div className="text-center mt-5">
 			<Link to={"/signup"} className="btn btn-primary mx-2" >Sign Up</Link>

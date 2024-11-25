@@ -19,20 +19,20 @@ export const SignUp = () => {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
-    const createUser = async() => {
+    const createUser = async(e) => {
         e.preventDefault()
         let response = await fetch(process.env.BACKEND_URL + "/signup", {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify(formData)
         })
-        // if (response.ok) {
-        //     alert("User created successfully!");
-        // } else {
-        //     alert("Error creating user.");
-        // }
+        if (response.ok) {
+            alert("User created successfully!");
+        } else {
+            alert("Error creating user.");
+        }
         let data = await response.json()
-        console.log("here's the data", data)
+        
         // navigate("/")
     }
 
@@ -144,7 +144,7 @@ export const SignUp = () => {
                 required
             />
         </div>
-        <button type="submit" className="btn btn-primary w-100"  onClick={() => createUser()}>Sign Up</button>
+        <button type="submit" className="btn btn-primary w-100"  >Sign Up</button>
     </form>
 	);
 };
