@@ -18,6 +18,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			token: sessionStorage.getItem("token")
 		},
 		actions: {
+			
+
+
+
+
+
+
+
 			// Use getActions to call a function within a fuction
 			
 			login: async (email, password) => {
