@@ -24,17 +24,30 @@ export const Profile = () => {
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
-			{
-				user.email != undefined ?  
-				<div>
-					<h1>Welcome Back</h1>
-					<h3>{user.email}</h3> 
-				</div>
-				:
-				<h1>YOU MUST LOGIN</h1>
+		// <div className="text-center mt-5">
+		// 	{
+		// 		user.email != undefined ?  
+		// 		<div>
+		// 			<h1>Welcome Back</h1>
+		// 			<h3>{user.email}</h3> 
+		// 		</div>
+		// 		:
+		// 		<h1>YOU MUST LOGIN</h1>
 				
-			}
-		</div>
+		// 	}
+		// </div>
+		<div className="text-center mt-5">
+            {user.email ? (
+                <div>
+                    <h1>Welcome Back!</h1>
+                    <h3>Email: {user.email}</h3>
+                    <h4>Name: {user.name} {user.last_name}</h4>
+                    <h4>Height: {user.height} cm</h4>
+                    <h4>Weight: {user.weight} kg</h4>
+                </div>
+            ) : (
+                <h1>YOU MUST LOGIN</h1>
+            )}
+        </div>
 	);
 };
