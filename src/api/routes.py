@@ -28,7 +28,18 @@ def create_user():
     body = request.get_json()
     user_email = body['email']
     user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
-    user = User(email = user_email, password = user_password)
+    user_name = body['name']
+    user_last_name = body['last_name']
+    user_height = float(body['height'])
+    user_weight = float(body['weight'])
+    user = User(
+        email = user_email, 
+        password = user_password,
+        name=user_name,
+        last_name=user_last_name,
+        height=user_height,
+        weight=user_weight
+        )
     db.session.add(user)
     db.session.commit()
     
