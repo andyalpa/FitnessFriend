@@ -8,7 +8,7 @@ export const Carousel = () => {
         <div id="pics" className="carousel slide w-50  h-50 mx-auto" data-bs-ride="carousel" data-bs-interval="2000">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dec7195305efcfb37d28/previews/6737decc195305efcfb37d33/download/grooveland-designs-fhuPrCwAzaw-unsplash.webp" className="d-block w-100" alt="Slide 1" />
+                    <img height="200px" width="200px"src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dec7195305efcfb37d28/previews/6737decc195305efcfb37d33/download/grooveland-designs-fhuPrCwAzaw-unsplash.webp" className="d-block w-100" alt="Slide 1" />
                 </div>
                 <div className="carousel-item">
                     <img src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dbfc85f4c7493fe9331a/previews/6737dc0485f4c7493fe947ac/download/melissa-belanger-7YLe87dcrm8-unsplash_%281%29.webp" className="d-block w-100" alt="Slide 2" />

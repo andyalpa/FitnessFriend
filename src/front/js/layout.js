@@ -9,11 +9,16 @@ import { Single } from "./pages/single";
 import { LogIn }  from "./pages/login"
 import { SignUp }  from "./pages/signup"
 import { Profile }  from "./pages/profile"
+import MealCategories from "./pages/MealCategories";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
-import Exercise from "./pages/Exercise";
+import Meal from "./component/Meal";
+import MealInfo from "./pages/MealInfo";
+import FeaturedRecipes from "./component/FeaturedRecipes"
+// import Exercise from "./pages/Exercise";
+
 
 //create your first component
 const Layout = () => {
@@ -21,16 +26,17 @@ const Layout = () => {
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
     const basename = process.env.BASENAME || "";
 
-    if(!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL/ >;
+    if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
     return (
         <div>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-                    <Exercise />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<MealInfo />} path="/:MealId" />
+                        <Route element={<MealCategories />} path="/mealcategories" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<LogIn />} path="/login" />
@@ -38,6 +44,7 @@ const Layout = () => {
                         <Route element={<SignUp />} path="/signup" />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
+
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
