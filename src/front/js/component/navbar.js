@@ -1,19 +1,64 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { LoginModal } from "./loginmodal";
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+  return (
+    
+    <nav className="navbar navbar-expand-lg bg-body-tertiary ">
+      <div className="container-fluid ">
+        <div>Logo Goes Here</div>
+
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          className="collapse navbar-collapse"
+          id="navbarNavDropdown"
+        >
+        
+          <ul className="navbar-nav">
+            <li className="nav-item">
+              <Link
+                to={"/home"}
+                a
+                className="nav-link active button"
+                aria-current="page"
+                href="#"
+              >
+                Home
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a className="button" href="#">
+                Recipes
+              </a>
+            </li>
+            <li className="nav-item">
+              <a className="button" href="#">
+                Workouts
+              </a>
+            </li>
+            <li className="nav-item">
+              <Link to={"/profile"} className="button" href="#">
+                Profile
+              </Link>
+            </li>
+
+            <LoginModal />
+          </ul>
+          </div>
+        </div>
+    </nav>
+    
+  );
 };
