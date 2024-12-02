@@ -32,7 +32,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-//                     <Exercise />
+{/* //                     <Exercise /> */}
                     <Routes>
                         <Route element={<Meal />} path="/" />
                         <Route element={<MealInfo />} path="/:MealId" />
