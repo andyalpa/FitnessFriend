@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MealCard from "./MealCard";
 import RecipeLetters from "./RecipeLetters";
-import MealCategories from "./MealCategories";
+import MealCategories from "../pages/MealCategories";
 import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
 
 const Meal = () => {

@@ -222,6 +222,25 @@ iframe {
   justify-content: space-between;
 }
 
+.box {
+ padding: 5px;
+}
+
+.recipe_card {
+
+}
+
+.recipe_card h3{
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+.recipe_card img {
+  border-radius: 15px;
+  width: 200px;
+  cursor: pointer;
+  box-shadow: 0 0 5px 5px #9e9c9c;
+}
 .meal-info_header h1 {
   font-size: 30px;
 }

@@ -27,7 +27,7 @@ export const LoginModal = () => {
                     <div className="modal-content">
                         <div className="modal-header">
                             <h1 className="modal-title fs-5" id="exampleModalLabel">
-                                {signupView ? "Sign Up" : "Welcome! Please sign up or Login to your account here:"}
+                                {signupView ? "Sign Up" : "Welcome! Please <sign up or Login to your account here:"}
                             </h1>
                             <button
                                 type="button"
@@ -42,12 +42,12 @@ export const LoginModal = () => {
                         <div className="modal-footer">
                             <button
                                 type="button"
-                                className="btn btn-secondary"
+                                className="button"
                                 onClick={() => setSignupView(!signupView)}
                             >
                                 {signupView ? "Go to Login" : "Create Account"}
                             </button>
-                            <button type="button" className="btn btn-primary">
+                            <button type="button" className="button">
                                 Save changes
                             </button>
                         </div>

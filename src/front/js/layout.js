@@ -9,6 +9,7 @@ import { Single } from "./pages/single";
 import { LogIn }  from "./pages/login"
 import { SignUp }  from "./pages/signup"
 import { Profile }  from "./pages/profile"
+import MealCategories from "./pages/MealCategories";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -32,10 +33,10 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
-{/* //                     <Exercise /> */}
                     <Routes>
-                        <Route element={<Meal />} path="/" />
+                        <Route element={<Home />} path="/" />
                         <Route element={<MealInfo />} path="/:MealId" />
+                        <Route element={<MealCategories />} path="/mealcategories" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<LogIn />} path="/login" />
