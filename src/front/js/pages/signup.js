@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Navigate, useNavigate } from "react-router-dom";
+
 
 export const SignUp = () => {
 
@@ -13,7 +13,7 @@ export const SignUp = () => {
         weight: ""
     })
 	const { store, actions } = useContext(Context);
-    const navigate = useNavigate()
+
     
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -32,7 +32,7 @@ export const SignUp = () => {
             alert("Error creating user.");
         }
         let data = await response.json()
-        navigate("/")
+        
     }
 
 	return (

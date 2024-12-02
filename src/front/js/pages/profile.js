@@ -11,7 +11,7 @@ export const Profile = () => {
 		let response = await fetch(process.env.BACKEND_URL + "/user" , {
 			method: "GET",
 			headers: {
-				"Authorization": `Bearer ${store.token.toString()}`, 
+				"Authorization": `Bearer ${store.token}`, 
 				"Content-Type": "application/json"
 			}
 		})
@@ -24,6 +24,7 @@ export const Profile = () => {
 	}, [])
 
 	return (
+		
 		<div className="text-center mt-5">
             {user.email ? (
                 <div>

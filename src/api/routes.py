@@ -67,4 +67,4 @@ def get_user():
         return jsonify(user.serialize()), 200
 
     return jsonify(email), 400
-    
+

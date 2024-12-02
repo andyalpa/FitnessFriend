@@ -52,7 +52,7 @@ export const LoginModal = () => {
       </button>
 
       <div
-        className="modal fade modal-dialog modal-lg"
+        className="modal fade modal-dialog-centered modal-lg"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
@@ -73,7 +73,7 @@ export const LoginModal = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="modal-body">
+            <div className="modal-body modal-dialog-centered">
               {signupView ? (
                 <form onSubmit={createUser} className="container mt-4">
                   <div className="row mb-3">
