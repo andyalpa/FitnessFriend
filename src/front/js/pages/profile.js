@@ -5,6 +5,8 @@ import { Context } from "../store/appContext";
 export const Profile = () => {
 	const [user, setUser] = useState({})
 	const { store, actions } = useContext(Context);
+	const [weightHistory, setWeightHistory] = useState([]);
+    const [newWeight, setNewWeight] = useState("");
 	
 	const getUser = async() => {
 		console.log(store.token)
@@ -22,6 +24,38 @@ export const Profile = () => {
 	useEffect(() => {
 		getUser()
 	}, [])
+
+	const getWeightHistory = async () => {
+        let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${store.token}`,
+                "Content-Type": "application/json"
+            }
+        });
+        let data = await response.json();
+        setWeightHistory(data);
+    };
+
+    const addNewWeight = async () => {
+        let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${store.token}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ weight: parseFloat(newWeight) })
+        });
+        if (response.ok) {
+            setNewWeight("");
+            getWeightHistory(); // Refresh weight history after adding new weight
+        }
+    };
+
+    useEffect(() => {
+        getUser();
+        getWeightHistory();
+    }, []);
 
 	return (
 		

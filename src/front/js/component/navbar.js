@@ -29,7 +29,7 @@ export const Navbar = () => {
           <ul className="navbar-nav">
             <li className="nav-item">
               <Link
-                to={"/home"}
+                to={"/"}
                 a
                 className="nav-link active button"
                 aria-current="page"

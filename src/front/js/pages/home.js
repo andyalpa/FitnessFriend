@@ -11,8 +11,6 @@ export const Home = () => {
 
 		<div>
 			<Carousel />
-			
-			
 		</div>
 	);
 };
