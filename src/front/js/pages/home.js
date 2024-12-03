@@ -13,7 +13,7 @@ export const Home = () => {
 		<div>
 		
 			<Carousel />
-			<FeaturedRecipes />
+			<FeaturedRecipes/>
 		</div>
 	);
 };
