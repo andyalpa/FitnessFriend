@@ -6,6 +6,7 @@ from api.models import db, User, UserMetrics
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
+from datetime import datetime, timedelta
 import hashlib
 
 api = Blueprint('api', __name__)
@@ -52,7 +53,8 @@ def login():
     user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
     user = User.query.filter_by(email = user_email, password = user_password).first()
     if user and user.password == user_password:
-        access_token = create_access_token(identity = user.email)
+        expiration = timedelta(days=1)
+        access_token = create_access_token(identity = user.email, expires_delta = expiration)
         return jsonify(access_token = access_token, user = user.serialize())
     else:
         return jsonify("user does not exist")

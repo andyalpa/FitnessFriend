@@ -6,10 +6,35 @@
     on that page only (the ones not reused in other pages).
 */
 
+.navbar .logo img {
+  height: 400px; 
+  width: auto;
+  margin: -270px;
+}
 
 .navbar {
-  padding-left: 30%
+  padding-left: 40%
+ 
   
+}
+
+/*#exampleModalLabel {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 200px;
+
+}*/
+
+#carouselHero .carousel-item img {
+object-fit: cover;
+object-position: cover;
+overflow: hidden;
+height: 60vh;
+padding-top: 20%;
+
 }
 
 .footer {
@@ -71,7 +96,6 @@
   width: 100%;
 }
 
-/* optional reset for presentation */
 * {
   font-family: "Poppins" sans-serif;
   text-decoration: none;
@@ -110,7 +134,7 @@ span a {
   size: 20px, 0, 0, 50px;
 }
 
-body {
+/*body {
   background: hsla(35, 87%, 49%, 1);
 
 background: linear-gradient(225deg, hsla(35, 87%, 49%, 1) 0%, hsla(94, 38%, 59%, 1) 86%);
@@ -120,4 +144,13 @@ background: -moz-linear-gradient(225deg, hsla(35, 87%, 49%, 1) 0%, hsla(94, 38%,
 background: -webkit-linear-gradient(225deg, hsla(35, 87%, 49%, 1) 0%, hsla(94, 38%, 59%, 1) 86%);
 
 filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA9010", endColorstr="#90BE6D", GradientType=1 );
+}*/
+
+
+body {
+  background-image: url("https://www.filterforge.com/filters/4532-v1.jpg");
+  background-size: repeat;
+  background-position: center;
+  height: 100vh;
 }
+
