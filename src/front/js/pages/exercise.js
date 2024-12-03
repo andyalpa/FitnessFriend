@@ -1,8 +1,8 @@
 import React from "react";
 
-const Exercise = () => {
+export const Exercise = () => {
     return ( 
-        <>
+ 
         <div className="main">
             <div className="heading">
                 <h1>Search Exercise</h1>
@@ -14,8 +14,7 @@ const Exercise = () => {
                 </div>
             </div>
         </div>
-        </>
+        
      );
 }
  
-export default Exercise;

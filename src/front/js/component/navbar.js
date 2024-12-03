@@ -15,22 +15,33 @@ export const Navbar = () => {
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarNavDropdown">
+
+        <div
+          className="collapse navbar-collapse"
+          id="navbarNavDropdown"
+        >
+        
           <ul className="navbar-nav">
     
             <li className="nav-item">
               <Link className="button" to={"/mealcategories"}>Recipes</Link>
             </li>
             <li className="nav-item">
-              <a className="button" href="#">Workouts</a>
+              <a className="button" href="#">
+                Workouts
+              </a>
+            </li>
+            <li className="nav-item">
+              <Link to={"/profile"} className="button" href="#">
+                Profile
+              </Link>
             </li>
 
             <LoginModal />
-
-
           </ul>
+          </div>
         </div>
-      </div>
     </nav>
+    
   );
 };

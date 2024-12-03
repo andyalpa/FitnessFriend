@@ -13,9 +13,6 @@ export const Home = () => {
 		<div>
 		
 			<Carousel />
-			<Link to={"/signup"} className="btn btn-primary mx-2" >Sign Up</Link>
-			<Link to={"/login"} className="btn btn-primary mx-2" >log In</Link>
-			<Link to={"/profile"} className="btn btn-primary mx-2" >Profile</Link>
 			<FeaturedRecipes/>
 		</div>
 	);

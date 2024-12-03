@@ -11,13 +11,12 @@ import { SignUp }  from "./pages/signup"
 import { Profile }  from "./pages/profile"
 import MealCategories from "./pages/MealCategories";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
 import FeaturedRecipes from "./component/FeaturedRecipes"
-// import Exercise from "./pages/Exercise";
+
 
 
 //create your first component
@@ -35,8 +34,8 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
+                        <Route element={<Meal />} path="/" />
                         <Route element={<MealInfo />} path="/:MealId" />
-                        <Route element={<MealCategories />} path="/mealcategories" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Single />} path="/single/:theid" />
                         <Route element={<LogIn />} path="/login" />

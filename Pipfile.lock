@@ -310,6 +310,7 @@
             ],
             "index": "pypi",
             "version": "==23.0.0"
+
         },
         "idna": {
             "hashes": [
@@ -670,5 +671,3 @@
             "version": "==3.1.2"
         }
     },
-    "develop": {}
-}
