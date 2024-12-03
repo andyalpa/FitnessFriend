@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MealCard from "./MealCard";
 import RecipeLetters from "./RecipeLetters";
-import MealCategories from "./MealCategories";
+import MealCategories from "../pages/MealCategories";
 import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
 
 const Meal = () => {
@@ -37,35 +37,33 @@ const Meal = () => {
     const searchRecipe = (e) => {
         if (e.key == 'Enter')
             setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
-            setSelectedCategory("search")
+
+        setSelectedCategory("search")
     }
     return (
         <>
             <div className="main text-center">
-                
-
                 <div className="heading">
-                    <h1>Search Recipe</h1>
-                    <h4>Lorem20 dsf sdf sdfds fdsf dsfds fdsfdsf sdfsdf sdfsdf
-                        dsfsdfsdfdsfdsfsdfdsfsdfsdfdsv xcvfsdfsd sdfsdf sdfsdf
-                        dsfdsvsddv dsfsd fdsfdsf
-                    </h4>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
+                    <h1 className="header">Recipes:</h1>
+                    <h2 className="subheader">Simple Recipes, Stunning Results</h2>
+                    <div className="search--box">
+                        <div class="search input-group mb-3">
+                            <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" class="input" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                        </div>
+                        <i class="fas fa-search"></i>
                     </div>
                 </div>
                 <div className="categories text-center d-flex">
                     <MealCategories catIndex={(cat) => catIndex(cat)} />
                 </div>
 
-                <div className="">
-                    {selectedCategory === null && <FeaturedRecipes />}  
-                    {show ? <MealCard data={meal} /> : "Not found"}
-                    
-                    
+                <div className="recipes_grid mt-5 mx-auto">
+                    {selectedCategory === null && <FeaturedRecipes />}
+                    {show ? <MealCard data={meal} /> : ""}
+
+
                 </div>
-                     
+
                 {/* Recipes Sort by Letters */}
                 {/* <div className="lettersContainer">
                 <RecipeLetters letterIndex={(letter) => letterIndex(letter)}/>
