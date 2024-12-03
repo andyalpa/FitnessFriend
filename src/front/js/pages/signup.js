@@ -37,39 +37,10 @@ export const SignUp = () => {
     }
 
 	return (
-		// <div className="text-center mt-5">
-        //     <div className="input-group mb-3">
-        //         <span 
-        //             className="input-group-text" 
-        //             id="inputGroup-sizing-default"
-        //         >    Email
-        //         </span>
-        //         <input 
-        //             onChange={(e) => setEmail(e.target.value)} 
-        //             type="text" className="form-control" 
-        //             aria-label="Sizing example input" 
-        //             aria-describedby="inputGroup-sizing-default"
-        //         />
-        //     </div>
-        //     <div className="input-group mb-3">
-        //         <span 
-        //             className="input-group-text" 
-        //             id="inputGroup-sizing-default"
-        //         >   Password
-        //         </span>
-        //         <input 
-        //             onChange={(e) => setPassword(e.target.value)}
-        //             type="password" 
-        //             className="form-control" 
-        //             aria-label="Sizing example input" 
-        //             aria-describedby="inputGroup-sizing-default"
-        //         />
-        //     </div>
-        //     <button className="btn btn-info" onClick={() => createUser()}>Sign Up</button>
-		// </div>
+	
         <form onSubmit={createUser} className="container mt-4">
-        <div className="row mb-3">
-            <div className="col-md-6">
+        <div className="mb-3">
+            <div className="">
                 <label htmlFor="name" className="form-label">Name</label>
                 <input
                     type="text"
@@ -81,7 +52,7 @@ export const SignUp = () => {
                     required
                 />
             </div>
-            <div className="col-md-6">
+            <div className="mb-3">
                 <label htmlFor="last_name" className="form-label">Last Name</label>
                 <input
                     type="text"
@@ -94,7 +65,7 @@ export const SignUp = () => {
                 />
             </div>
         </div>
-        <div className="row mb-3">
+        <div className="mb-3">
             <div className="col-md-6">
                 <label htmlFor="height" className="form-label">Height (cm)</label>
                 <input
@@ -107,7 +78,7 @@ export const SignUp = () => {
                     required
                 />
             </div>
-            <div className="col-md-6">
+            <div className="mb-3">
                 <label htmlFor="weight" className="form-label">Weight (kg)</label>
                 <input
                     type="number"

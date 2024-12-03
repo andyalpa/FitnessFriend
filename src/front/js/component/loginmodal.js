@@ -64,7 +64,7 @@ export const LoginModal = () => {
               <h1 className="modal-title fs-5" id="exampleModalLabel">
                 {signupView
                   ? "Sign Up"
-                  : "Welcome! Please sign up or Login to your account here:"}
+                  : "Log In"}
               </h1>
               <button
                 type="button"
@@ -75,11 +75,11 @@ export const LoginModal = () => {
             </div>
             <div className="modal-body modal-dialog-centered">
               {signupView ? (
-                <form onSubmit={createUser} className="container mt-4">
-                  <div className="row mb-3">
-                    <div className="col-md-6">
+                <form onSubmit={createUser} className=" mx-auto">
+                  <div className=" mb-3">
+                    <div className="mb-3">
                       <label htmlFor="name" className="form-label">
-                        Name
+                        
                       </label>
                       <input
                         type="text"
@@ -91,9 +91,9 @@ export const LoginModal = () => {
                         required
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="mb-3">
                       <label htmlFor="last_name" className="form-label">
-                        Last Name
+                        
                       </label>
                       <input
                         type="text"
@@ -106,10 +106,10 @@ export const LoginModal = () => {
                       />
                     </div>
                   </div>
-                  <div className="row mb-3">
-                    <div className="col-md-6">
+                  <div className="mb-3">
+                    <div className="mb-3">
                       <label htmlFor="height" className="form-label">
-                        Height (cm)
+                       
                       </label>
                       <input
                         type="number"
@@ -121,9 +121,9 @@ export const LoginModal = () => {
                         required
                       />
                     </div>
-                    <div className="col-md-6">
+                    <div className="mb-3">
                       <label htmlFor="weight" className="form-label">
-                        Weight (kg)
+                        
                       </label>
                       <input
                         type="number"
@@ -138,7 +138,7 @@ export const LoginModal = () => {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="email" className="form-label">
-                      Email
+                      
                     </label>
                     <input
                       type="email"
@@ -152,7 +152,7 @@ export const LoginModal = () => {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="password" className="form-label">
-                      Password
+                      
                     </label>
                     <input
                       type="password"
@@ -165,14 +165,14 @@ export const LoginModal = () => {
                     />
                   </div>
                   <button type="submit" className="btn btn-primary w-100">
-                    Sign Up
+                    Sign up
                   </button>
                 </form>
               ) : (
-                <div className="text-center mt-5">
+                <div className="input-group input-group-lg">
                   <div className="input-group mb-3">
                     <span
-                      className="input-group-text"
+                      className="input-group input-group-lg mb-3"
                       id="inputGroup-sizing-default"
                     >
                       {" "}
@@ -186,9 +186,9 @@ export const LoginModal = () => {
                       aria-describedby="inputGroup-sizing-default"
                     />
                   </div>
-                  <div className="input-group mb-3">
+                  <div className="input-group input-group-lg">
                     <span
-                      className="input-group-text"
+                      className="input-group mb-3 mx-auto"
                       id="inputGroup-sizing-default"
                     >
                       {" "}
@@ -202,7 +202,7 @@ export const LoginModal = () => {
                       aria-describedby="inputGroup-sizing-default"
                     />
                   </div>
-                  <button className="btn btn-info" onClick={() => logInUser()}>
+                  <button className="btn btn-info mt-2" onClick={() => logInUser()}>
                     Log in
                   </button>
                 </div>
@@ -214,7 +214,7 @@ export const LoginModal = () => {
                 className="btn btn-secondary"
                 onClick={() => setSignupView(!signupView)}
               >
-                {signupView ? "Go to Login" : "No Account? Create Account"}
+                {signupView ? "Go to Login" : "Create New Acount"}
               </button>
             </div>
           </div>
