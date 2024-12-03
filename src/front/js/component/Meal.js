@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import MealCard from "./MealCard";
 import RecipeLetters from "./RecipeLetters";
-import MealCategories from "../pages/MealCategories";
+import MealCategories from "./MealCategories";
 import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
 
 const Meal = () => {
@@ -37,12 +37,13 @@ const Meal = () => {
     const searchRecipe = (e) => {
         if (e.key == 'Enter')
             setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
-
         setSelectedCategory("search")
     }
     return (
         <>
             <div className="main text-center">
+
+
                 <div className="heading">
                     <h1 className="header">Recipes:</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>

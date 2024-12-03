@@ -24,7 +24,6 @@ const MealInfo = () => {
     .filter(key => key.startsWith('strMeasure') && info[key])
     .map(key => info[key]);
 
-
   const videoId = () => {
     let vId = '';
     if (info) {
@@ -78,6 +77,7 @@ const MealInfo = () => {
 
             </iframe>
           </div>
+
         </div>
       )}
     </>
