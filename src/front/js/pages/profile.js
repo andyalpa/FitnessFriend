@@ -17,13 +17,17 @@ export const Profile = () => {
 				"Content-Type": "application/json"
 			}
 		})
-		let data = await response.json()
-		setUser(data)
-	}
+
+    if (response.ok) {
+        let data = await response.json();
+        console.log("Fetched user data:", data);  // Check the fetched data here
+        setUser(data);  // Make sure the data is being set correctly
+    } else {
+        console.error("Failed to fetch user data:", response.status);
+    }
+};
 	
-	useEffect(() => {
-		getUser()
-	}, [])
+	
 
 	const getWeightHistory = async () => {
         let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
@@ -33,8 +37,13 @@ export const Profile = () => {
                 "Content-Type": "application/json"
             }
         });
-        let data = await response.json();
-        setWeightHistory(data);
+        if (response.ok) {
+            let data = await response.json();
+            console.log("Fetched weight history:", data);
+            setWeightHistory(data);  // Set the weight history data
+        } else {
+            console.error("Failed to fetch weight history:", await response.text());
+        }
     };
 
     const addNewWeight = async () => {
@@ -49,27 +58,62 @@ export const Profile = () => {
         if (response.ok) {
             setNewWeight("");
             getWeightHistory(); // Refresh weight history after adding new weight
+        } else {
+            console.error("Failed to add new weight:", response.status);
         }
     };
-
     useEffect(() => {
-        getUser();
-        getWeightHistory();
-    }, []);
-
+        if (store.token) {
+            getUser();
+            getWeightHistory();
+        }
+    }, [store.token]);
+  
+    
+    
 	return (
-		
+       
 		<div className="text-center mt-5">
-            {user.email ? (
+            {store.token ? (
                 <div>
                     <h1>Welcome Back!</h1>
                     <h3>Email: {user.email}</h3>
                     <h4>Name: {user.name} {user.last_name}</h4>
                     <h4>Height: {user.height} cm</h4>
                     <h4>Weight: {user.weight} kg</h4>
+
+                    {/* Weight Tracker Section */}
+                    <h2>Weight Tracker</h2>
+                    <input
+                        type="number"
+                        placeholder="Enter new weight"
+                        value={newWeight}
+                        onChange={(e) => setNewWeight(e.target.value)} // Update state with the new weight
+                        className="form-control"
+                    />
+                    <button
+                        onClick={addNewWeight}
+                        className="btn btn-primary mt-2"
+                        disabled={!newWeight || isNaN(newWeight)}
+                    >
+                        Add Weight
+                    </button>
+
+                    <h3>Weight History</h3>
+                    <ul className="list-group mt-3">
+                        {weightHistory.length > 0 ? (
+                            weightHistory.map((entry) => (
+                                <li key={entry.id} className="list-group-item">
+                                    <strong>{new Date(entry.created_at).toLocaleDateString()}</strong>: {entry.weight} kg
+                                </li>
+                            ))
+                        ) : (
+                            <li className="list-group-item">No weight history found.</li>
+                        )}
+                    </ul>
                 </div>
             ) : (
-                <h1>YOU MUST LOGIN</h1>
+                <h1>You must log in to view your profile</h1>
             )}
         </div>
 	);

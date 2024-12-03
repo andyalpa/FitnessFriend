@@ -55,7 +55,8 @@ def login():
     if user and user.password == user_password:
         expiration = timedelta(days=1)
         access_token = create_access_token(identity = user.email, expires_delta = expiration)
-        return jsonify(access_token = access_token, user = user.serialize())
+        return jsonify(access_token=access_token, user=user.serialize()[0])
+
     else:
         return jsonify("user does not exist")
     
@@ -63,12 +64,21 @@ def login():
 @jwt_required()
 def get_user():
     email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
+    # user = User.query.filter_by(email=email).first()
     
-    if user is not None:
-        return jsonify(user.serialize()), 200
+    # if user is not None:
+    #     return jsonify(user.serialize()), 200
 
-    return jsonify(email), 400
+    # return jsonify(email), 400
+    print(f"JWT email: {email}")  # Log the email from the JWT token
+    user = User.query.filter_by(email=email).first()
+
+    if user:
+        print(f"User found: {user}")  # Log the found user
+        return jsonify(user.serialize()[0]), 200  # Ensure to return the user data (not a tuple)
+    
+    print("User not found")
+    return jsonify({"error": "User not found"}), 404
 
 @api.route('/userMetrics', methods=['POST'])
 @jwt_required()
@@ -87,6 +97,9 @@ def add_user_metric():
 
     user_metric = UserMetrics(user_id=user.id, weight=weight)
     db.session.add(user_metric)
+
+    # Update user's weight
+    user.weight = weight
     db.session.commit()
 
     return jsonify({"message": "Weight added successfully", "user_metric": user_metric.serialize()}), 201
@@ -100,6 +113,19 @@ def get_user_metrics():
 
     if not user:
         return jsonify({"error": "User not found"}), 404
+    
+    # body = request.get_json()
+    # weight = body.get('weight')
+    
+    # if not weight:
+    #     return jsonify({"error": "Weight is required"}), 400
+
+    # user_metric = UserMetrics(user_id=user.id, weight=weight)
+    # db.session.add(user_metric)
+
+    # # Update user's weight
+    # user.weight = weight
+    # db.session.commit()
 
     user_metrics = UserMetrics.query.filter_by(user_id=user.id).order_by(UserMetrics.created_at.desc()).all()
     return jsonify([metric.serialize() for metric in user_metrics]), 200

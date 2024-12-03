@@ -24,7 +24,7 @@ export const Navbar = () => {
           <ul className="navbar-nav">
     
             <li className="nav-item">
-              <Link className="button" to={"/mealcategories"}>Recipes</Link>
+              <Link className="button" to={"/Meal"}>Recipes</Link>
             </li>
             <li className="nav-item">
               <a className="button" href="#">
