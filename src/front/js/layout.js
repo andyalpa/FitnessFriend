@@ -9,7 +9,6 @@ import { Single } from "./pages/single";
 import { LogIn } from "./pages/login";
 import { SignUp } from "./pages/signup";
 import { Profile } from "./pages/profile";
-import { MealCategories } from "./pages/MealCategories";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";

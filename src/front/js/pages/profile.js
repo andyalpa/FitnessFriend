@@ -73,16 +73,19 @@ export const Profile = () => {
     
 	return (
        
-		<div className="text-center mt-5">
+		<div className="mt-5">
             {store.token ? (
-                <div>
-                    <h1>Welcome Back!</h1>
-                    <h3>Email: {user.email}</h3>
-                    <h4>Name: {user.name} {user.last_name}</h4>
-                    <h4>Height: {user.height} cm</h4>
-                    <h4>Weight: {user.weight} kg</h4>
-
-                    {/* Weight Tracker Section */}
+                
+                <div className="container text-center  profile-layout ">
+                    
+                    <div className="profile-content my-auto">
+                        <h1 className="profile-title">Hello, {user.name}</h1>
+                        <h3>Email: {user.email}</h3>
+                        <h4>Name: {user.name} {user.last_name}</h4>
+                        <h4>Height: {user.height} cm</h4>
+                        <h4>Weight: {user.weight} kg</h4>
+                    </div>
+                <div className="container">
                     <h2>Weight Tracker</h2>
                     <input
                         type="number"
@@ -100,7 +103,7 @@ export const Profile = () => {
                     </button>
 
                     <h3>Weight History</h3>
-                    <ul className="list-group mt-3">
+                    <ul className="list-group mx-auto mt-3">
                         {weightHistory.length > 0 ? (
                             weightHistory.map((entry) => (
                                 <li key={entry.id} className="list-group-item">
@@ -110,11 +113,14 @@ export const Profile = () => {
                         ) : (
                             <li className="list-group-item">No weight history found.</li>
                         )}
+                        
                     </ul>
                 </div>
+            </div>
             ) : (
                 <h1>You must log in to view your profile</h1>
             )}
-        </div>
+           </div>
+        
 	);
 };

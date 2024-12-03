@@ -8,21 +8,16 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, JWTManager
 from datetime import datetime, timedelta
 import hashlib
+import os
+from flask import request
+from werkzeug.utils import secure_filename
 
 api = Blueprint('api', __name__)
+
 
 # Allow CORS requests to this API
 CORS(api)
 
-
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
-
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
-
-    return jsonify(response_body), 200
 
 @api.route('/signup', methods=['POST'])
 def create_user():
@@ -59,6 +54,16 @@ def login():
 
     else:
         return jsonify("user does not exist")
+    
+@api.route('/hello', methods=['POST', 'GET'])
+def handle_hello():
+
+    response_body = {
+        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+    }
+
+    return jsonify(response_body), 200
+
     
 @api.route('/user', methods=['GET'])
 @jwt_required()
@@ -129,4 +134,5 @@ def get_user_metrics():
 
     user_metrics = UserMetrics.query.filter_by(user_id=user.id).order_by(UserMetrics.created_at.desc()).all()
     return jsonify([metric.serialize() for metric in user_metrics]), 200
+
 

@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 // www.themealdb.com/api/json/v1/1/filter.php?c=Seafood
 
 
-export default function MealCategories  ({ catIndex })  {
+const MealCategories = ({ catIndex }) => {
     const [cat, setCat] = useState([])
 
     useEffect(() => {
@@ -41,3 +41,4 @@ export default function MealCategories  ({ catIndex })  {
     );
 }
 
+export default MealCategories;
