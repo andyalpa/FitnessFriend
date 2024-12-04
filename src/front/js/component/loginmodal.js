@@ -53,20 +53,22 @@ export const LoginModal = () => {
       </button>
 
       <div
-        className="modal fade modal-dialog-centered modal-lg"
+        className="modal fade  modal-lg modal-dialog-centered"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
+        
       >
-        <div className="modal-dialog">
+        <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h1 className="modal-title fs-5" id="exampleModalLabel">
-                {signupView
-                  ? "Sign Up"
-                  : "Log In"}
-              </h1>
+              
+            
+                  {/* <img className="img-fluid" alt="Responsive image"
+                    src="https://i.imgur.com/y0Ia8hZ.png" 
+                  /> */}
+              
               <button
                 type="button"
                 className="btn-close"
@@ -165,15 +167,19 @@ export const LoginModal = () => {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-primary w-100">
+                  <button type="submit" className="btn btn-warning w-100">
                     Sign up
                   </button>
                 </form>
               ) : (
-                <div className="input-group input-group-lg">
-                  <div className="input-group mb-3">
+                <div 
+                  className="input-group input-group-lg"
+                    
+                >
+                  <div className="input-group input-group-lg">
                     <span
-                      className="input-group input-group-lg mb-3"
+                      style={{"font-size":"15px"}}
+                      className="input-group input-group-lg mb-3 my-auto"
                       id="inputGroup-sizing-default"
                     >
                       {" "}
@@ -189,8 +195,9 @@ export const LoginModal = () => {
                   </div>
                   <div className="input-group input-group-lg">
                     <span
-                      className="input-group mb-3 mx-auto"
+                      className="input-group input-group-lg mb-3"
                       id="inputGroup-sizing-default"
+                      style={{"fontSize":"15px"}}
                     >
                       {" "}
                       Password
@@ -203,7 +210,11 @@ export const LoginModal = () => {
                       aria-describedby="inputGroup-sizing-default"
                     />
                   </div>
-                  <button className="btn btn-info mt-2" onClick={() => logInUser()}>
+                  <button 
+                    className=" btn btn-warning mt-3 rounded" 
+                    onClick={() => logInUser()}
+                    style={{"width":"483px"}}
+                  >
                     Log in
                   </button>
                 </div>
@@ -212,7 +223,7 @@ export const LoginModal = () => {
             <div className="modal-footer">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn"
                 onClick={() => setSignupView(!signupView)}
               >
                 {signupView ? "Go to Login" : "Create New Acount"}
