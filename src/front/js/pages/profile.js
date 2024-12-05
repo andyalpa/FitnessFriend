@@ -7,9 +7,14 @@ export const Profile = () => {
 	const { store, actions } = useContext(Context);
 	const [weightHistory, setWeightHistory] = useState([]);
     const [newWeight, setNewWeight] = useState("");
+    const [email, setEmail] = useState("");
+    const [height, setHeight] = useState("");
+    const [name, setName] = useState("");
+    const [lastName, setLastName] = useState("");
+
+
 	
 	const getUser = async() => {
-		console.log(store.token)
 		let response = await fetch(process.env.BACKEND_URL + "/user" , {
 			method: "GET",
 			headers: {
@@ -18,17 +23,20 @@ export const Profile = () => {
 			}
 		})
 
-    if (response.ok) {
-        let data = await response.json();
-        console.log("Fetched user data:", data);  // Check the fetched data here
-        setUser(data);  // Make sure the data is being set correctly
-    } else {
-        console.error("Failed to fetch user data:", response.status);
-    }
-};
-	
-	
+        if (response.ok) {
+            let data = await response.json();
+            console.log("Fetched user data:", data);  // Check the fetched data here
+            setUser(data);  // Make sure the data is being set correctly
+            setEmail(user.email)
+            setHeight(user.height)
+            setName(user.name)
+            setLastName(user.last_name)
 
+        } else {
+            console.error("Failed to fetch user data:", response.status);
+        }
+    };
+	
 	const getWeightHistory = async () => {
         let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
             method: "GET",
@@ -62,6 +70,10 @@ export const Profile = () => {
             console.error("Failed to add new weight:", response.status);
         }
     };
+
+    const updateUser = async () => {
+        actions.updateContactData({id: user.id, email: email, height: height, name: name, last_name:last_name, weight: newWeight})
+    }
     useEffect(() => {
         if (store.token) {
             getUser();
@@ -69,8 +81,6 @@ export const Profile = () => {
         }
     }, [store.token]);
   
-    
-    
 	return (
        
 		<div className="mt-5">
@@ -84,6 +94,15 @@ export const Profile = () => {
                         <h4>Name: {user.name} {user.last_name}</h4>
                         <h4>Height: {user.height} cm</h4>
                         <h4>Weight: {user.weight} kg</h4>
+                    </div>
+                    <div>
+                        <input
+                            type="text"
+                            placeholder="Enter new email"
+                            value={newWeight}
+                            onChange={(e) => setEmail(e.target.value)} // Update state with the new weight
+                            className="form-control"
+                        />
                     </div>
                 <div className="container">
                     <h2>Weight Tracker</h2>

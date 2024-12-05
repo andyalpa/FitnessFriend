@@ -54,17 +54,29 @@ def login():
 
     else:
         return jsonify("user does not exist")
+
+@api.route('/update_user', methods=['PUT'])
+@jwt_required()
+def update_user():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
     
-@api.route('/hello', methods=['POST', 'GET'])
-def handle_hello():
+    if not user:
+        return jsonify({"error": "User not found"}), 404
 
-    response_body = {
-        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
-    }
+    body = request.get_json()
 
-    return jsonify(response_body), 200
+    user.email = body.get('email', user.email)
+    user.name = body.get('name', user.name)
+    user.last_name = body.get('last_name', user.last_name)
+    user.height = body.get('height', user.height)
+    user.weight = body.get('weight', user.weight)
 
-    
+    db.session.commit()
+
+    return jsonify({"message": "User updated successfully"}), 200
+
+
 @api.route('/user', methods=['GET'])
 @jwt_required()
 def get_user():
@@ -96,7 +108,7 @@ def add_user_metric():
 
     body = request.get_json()
     weight = body.get('weight')
-
+    
     if not weight:
         return jsonify({"error": "Weight is required"}), 400
 
@@ -136,3 +148,10 @@ def get_user_metrics():
     return jsonify([metric.serialize() for metric in user_metrics]), 200
 
 
+@api.route('/hello', methods=['POST', 'GET'])
+def handle_hello():
+    response_body = {
+        "message": "Hello! I'm a message that came from the backend, check the network tab on the google inspector and you will see the GET request"
+    }
+
+    return jsonify(response_body), 200
