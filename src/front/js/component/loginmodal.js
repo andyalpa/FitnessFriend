@@ -4,41 +4,39 @@ import { Context } from "../store/appContext";
 
 export const LoginModal = () => {
   const [signupView, setSignupView] = useState(false);
-    const { store, actions } = useContext(Context);
-    const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
-    const [formData, setFormData] = useState({
-        email: "",
-        password: "",
-        name: "",
-        last_name: "",
-        height: "",
-        weight: ""
-    })
-    
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
+  const { store, actions } = useContext(Context);
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    name: "",
+    last_name: "",
+    height: "",
+    weight: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const logInUser = async () => {
+    actions.login(email, password);
+  };
+  const createUser = async (e) => {
+    e.preventDefault();
+    let response = await fetch(process.env.BACKEND_URL + "/signup", {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+    if (response.ok) {
+      alert("User created successfully!");
+    } else {
+      alert("Error creating user.");
     }
-    
-	const logInUser = async() => {
-        actions.login(email, password)
-        
-    }
-    const createUser = async(e) => {
-        e.preventDefault()
-        let response = await fetch(process.env.BACKEND_URL + "/signup", {
-            method: "POST",
-            headers: { "Content-type": "application/json" },
-            body: JSON.stringify(formData)
-        })
-        if (response.ok) {
-            alert("User created successfully!");
-        } else {
-            alert("Error creating user.");
-        }
-        let data = await response.json()
-    
-    }
+    let data = await response.json();
+  };
 
   return (
     <div>
@@ -53,37 +51,36 @@ export const LoginModal = () => {
       </button>
 
       <div
-        className="modal fade  modal-lg modal-dialog-centered"
+        className="modal fade"
         id="exampleModal"
         tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
-        
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              
-            
-                  {/* <img className="img-fluid" alt="Responsive image"
-                    src="https://i.imgur.com/y0Ia8hZ.png" 
-                  /> */}
-              
+              <img
+                className="img-fluid"
+                alt="Responsive image"
+                src="https://i.imgur.com/sB3VJu2.png"
+                style={{"width":"105px", "marginLeft":"auto"}}
+              />
+
               <button
                 type="button"
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
+                style={{"marginBottom":"30px"}}
               ></button>
             </div>
-            <div className="modal-body modal-dialog-centered">
+            <div className="modal-body">
               {signupView ? (
                 <form onSubmit={createUser} className=" mx-auto">
                   <div className=" mb-3">
                     <div className="mb-3">
-                      <label htmlFor="name" className="form-label">
-                        
-                      </label>
+                      <label htmlFor="name" className="form-label"></label>
                       <input
                         type="text"
                         className="form-control"
@@ -95,9 +92,7 @@ export const LoginModal = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="last_name" className="form-label">
-                        
-                      </label>
+                      <label htmlFor="last_name" className="form-label"></label>
                       <input
                         type="text"
                         className="form-control"
@@ -111,9 +106,7 @@ export const LoginModal = () => {
                   </div>
                   <div className="mb-3">
                     <div className="mb-3">
-                      <label htmlFor="height" className="form-label">
-                       
-                      </label>
+                      <label htmlFor="height" className="form-label"></label>
                       <input
                         type="number"
                         className="form-control"
@@ -125,9 +118,7 @@ export const LoginModal = () => {
                       />
                     </div>
                     <div className="mb-3">
-                      <label htmlFor="weight" className="form-label">
-                        
-                      </label>
+                      <label htmlFor="weight" className="form-label"></label>
                       <input
                         type="number"
                         className="form-control"
@@ -140,9 +131,7 @@ export const LoginModal = () => {
                     </div>
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="email" className="form-label">
-                      
-                    </label>
+                    <label htmlFor="email" className="form-label"></label>
                     <input
                       type="email"
                       className="form-control"
@@ -154,9 +143,7 @@ export const LoginModal = () => {
                     />
                   </div>
                   <div className="mb-3">
-                    <label htmlFor="password" className="form-label">
-                      
-                    </label>
+                    <label htmlFor="password" className="form-label"></label>
                     <input
                       type="password"
                       className="form-control"
@@ -172,13 +159,10 @@ export const LoginModal = () => {
                   </button>
                 </form>
               ) : (
-                <div 
-                  className="input-group input-group-lg"
-                    
-                >
+                <div className="input-group input-group-lg">
                   <div className="input-group input-group-lg">
                     <span
-                      style={{"font-size":"15px"}}
+                      style={{ "font-size": "15px" }}
                       className="input-group input-group-lg mb-3 my-auto"
                       id="inputGroup-sizing-default"
                     >
@@ -197,7 +181,7 @@ export const LoginModal = () => {
                     <span
                       className="input-group input-group-lg mb-3"
                       id="inputGroup-sizing-default"
-                      style={{"fontSize":"15px"}}
+                      style={{ fontSize: "15px" }}
                     >
                       {" "}
                       Password
@@ -210,10 +194,10 @@ export const LoginModal = () => {
                       aria-describedby="inputGroup-sizing-default"
                     />
                   </div>
-                  <button 
-                    className=" btn btn-warning mt-3 rounded" 
+                  <button
+                    className=" btn btn-warning mt-3 rounded"
                     onClick={() => logInUser()}
-                    style={{"width":"483px"}}
+                    style={{ width: "483px" }}
                   >
                     Log in
                   </button>
