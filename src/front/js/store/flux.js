@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-
+      user: sessionStorage.getItem("user"),
       token: sessionStorage.getItem("token"),
     },
     actions: {
@@ -31,9 +31,50 @@ const getState = ({ getStore, getActions, setStore }) => {
         });
         let data = await response.json();
         sessionStorage.setItem("token", data.access_token);
+        sessionStorage.setItem("user", data.user);
         console.log(sessionStorage.getItem("token"));
       },
       logout: () => {
+        sessionStorage.setItem("token", null);
+      },
+
+      updateUser: async (email, height, name, last_name) => {
+        console.log(email, height, name, last_name);
+        let response = await fetch(process.env.BACKEND_URL + "/update_user", {
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            height: height,
+            name: name,
+            last_name: last_name,
+          }),
+        });
+        let data = await response.json();
+      },
+
+      getUser: async () => {
+        let response = await fetch(process.env.BACKEND_URL + "/user", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          let data = await response.json();
+          console.log(data);
+          sessionStorage.setItem("user", data);
+        } else {
+          console.error("Failed to fetch user data:", response.status);
+        }
+      },
+
+      logout: async () => {
         sessionStorage.setItem("token", null);
       },
 

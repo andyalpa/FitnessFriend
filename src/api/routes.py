@@ -76,6 +76,26 @@ def update_user():
 
     return jsonify({"message": "User updated successfully"}), 200
 
+@api.route('/update', methods=['POST'])
+@jwt_required()
+def post_update_user():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    body = request.get_json()
+
+    user.email = body.get('email', user.email)
+    user.name = body.get('name', user.name)
+    user.last_name = body.get('last_name', user.last_name)
+    user.height = body.get('height', user.height)
+
+    db.session.commit()
+
+    return jsonify({"message": "User updated successfully"}), 200
+
 
 @api.route('/user', methods=['GET'])
 @jwt_required()

@@ -64,7 +64,7 @@ export const LoginModal = () => {
                 className="img-fluid"
                 alt="Responsive image"
                 src="https://i.imgur.com/sB3VJu2.png"
-                style={{"width":"105px", "marginLeft":"auto"}}
+                style={{ width: "105px", marginLeft: "auto" }}
               />
 
               <button
@@ -72,7 +72,7 @@ export const LoginModal = () => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-                style={{"marginBottom":"30px"}}
+                style={{ marginBottom: "30px" }}
               ></button>
             </div>
             <div className="modal-body">
