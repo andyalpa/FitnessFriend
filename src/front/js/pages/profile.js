@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../store/appContext";
 import { UpdateUserModal } from "../component/updateUserModal";
+import UploadImage from "../component/uploadImage ";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -66,19 +67,21 @@ export const Profile = () => {
       setLastName(user.last_name);
     }
   }, [store.user]);
+  
 
   return (
     <div className="mt-5">
       {store.token ? (
         <div className="container text-center  profile-layout ">
           <div className="profile-content my-auto">
-            <h1 className="profile-title">Hello, {user.name}</h1>
-            <h3>Email: {user.email}</h3>
+          <UploadImage />
+            <h1 className="profile-title">Hello, {store.user?.name}</h1>
+            <h3>Email: {store.user?.email}</h3>
             <h4>
-              Name: {user.name} {user.last_name}
+              Name: {store.user?.name} {store.user?.last_name}
             </h4>
-            <h4>Height: {user.height} cm</h4>
-            <h4>Weight: {user.weight} kg</h4>
+            <h4>Height: {store.user?.height} cm</h4>
+            <h4>Weight: {store.user?.weight} kg</h4>
           </div>{" "}
           <UpdateUserModal />
           <div className="container">

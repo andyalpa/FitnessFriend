@@ -66,15 +66,15 @@ def update_user():
 
     body = request.get_json()
 
-    user.email = body.get('email', user.email)
-    user.name = body.get('name', user.name)
-    user.last_name = body.get('last_name', user.last_name)
-    user.height = body.get('height', user.height)
-    user.weight = body.get('weight', user.weight)
-
-    db.session.commit()
+    user.email = body['email']
+    user.name = body['name']
+    user.last_name = body['last_name']
+    user.height = body['height']
+    user.weight = body['weight']
 
     return jsonify({"message": "User updated successfully"}), 200
+    
+
 
 @api.route('/update', methods=['POST'])
 @jwt_required()

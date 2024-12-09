@@ -3,27 +3,23 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const UpdateUserModal = () => {
-  const [signupView, setSignupView] = useState(false);
   const { store, actions } = useContext(Context);
-  const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
     email: "",
+    height: "",
     name: "",
     last_name: "",
-    height: "",
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const updateUser = async () => {
-    actions.updateUser({
-      email: formData.email,
-      height: formData.height,
-      name: formData.name,
-      last_name: formData.last_name,
-    });
+  // Update user profile
+  const handleUpdateUser = async () => {
+    await actions.updateUser(formData);
+    alert("Profile updated successfully!");
   };
 
   const update = async (e) => {
@@ -42,109 +38,92 @@ export const UpdateUserModal = () => {
   };
 
   useEffect(() => {
-    console.log(store.user);
     if (store.user) {
       setFormData({
         email: store.user.email,
         height: store.user.height,
         name: store.user.name,
-        last_name: user.last_name,
+        last_name: store.user.last_name,
+        weight: store.user.weight
       }); // Make sure the data is being set correctly
     } else {
       actions.getUser();
-      setFormData({
-        email: store.user.email,
-        height: store.user.height,
-        name: store.user.name,
-        last_name: user.last_name,
-      });
     }
-    console.log(formData);
-  }, []);
+  }, [store.user]);
+
   return (
     <div>
       <button
         type="button"
-        class="btn btn-primary"
+        className="btn btn-primary"
         data-bs-toggle="modal"
-        data-bs-target="#exampleModal2"
+        data-bs-target="#updateUserModal"
       >
         Update Profile
       </button>
 
       <div
-        class="modal fade"
-        id="exampleModal2"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
+        className="modal fade"
+        id="updateUserModal"
+        tabIndex="-1"
+        aria-labelledby="updateUserModalLabel"
         aria-hidden="true"
       >
         <div className="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <img
-                className="img-fluid"
-                alt="Responsive image"
-                src="https://i.imgur.com/sB3VJu2.png"
-                style={{ width: "105px", marginLeft: "auto" }}
-              />
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="updateUserModalLabel">
+                Update Profile
+              </h5>
               <button
                 type="button"
-                class="btn-close"
+                className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
               ></button>
             </div>
-            <div class="modal-body">
-              <form onSubmit={update} className=" mx-auto">
-                <div className=" mb-3">
-                  <div className="mb-3">
-                    <label htmlFor="name" className="form-label"></label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      name="name"
-                      placeholder="Name"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="last_name" className="form-label"></label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="last_name"
-                      name="last_name"
-                      placeholder="Last Name"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+            <div className="modal-body">
+              <form>
+                <div className="mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="name"
+                    placeholder="Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="mb-3">
-                  <div className="mb-3">
-                    <label htmlFor="height" className="form-label"></label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="height"
-                      name="height"
-                      placeholder="Height (cm)"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="last_name"
+                    placeholder="Last Name"
+                    value={formData.last_name}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label"></label>
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="height"
+                    placeholder="Height (cm)"
+                    value={formData.height}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
                     name="email"
                     placeholder="Email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                   />
@@ -153,9 +132,9 @@ export const UpdateUserModal = () => {
             </div>
             <div className="modal-footer">
               <button
-                className=" btn btn-warning mt-3 rounded"
-                onClick={() => updateUser()}
-                style={{ width: "483px" }}
+                className="btn btn-warning"
+                onClick={handleUpdateUser}
+                data-bs-dismiss="modal"
               >
                 Update
               </button>

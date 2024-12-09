@@ -14,7 +14,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           initial: "white",
         },
       ],
-      user: sessionStorage.getItem("user"),
+      user: null,
       token: sessionStorage.getItem("token"),
     },
     actions: {
@@ -32,14 +32,12 @@ const getState = ({ getStore, getActions, setStore }) => {
         let data = await response.json();
         sessionStorage.setItem("token", data.access_token);
         sessionStorage.setItem("user", data.user);
-        console.log(sessionStorage.getItem("token"));
       },
       logout: () => {
         sessionStorage.setItem("token", null);
       },
 
-      updateUser: async (email, height, name, last_name) => {
-        console.log(email, height, name, last_name);
+      updateUser: async (formData) => {
         let response = await fetch(process.env.BACKEND_URL + "/update_user", {
           method: "PUT",
           headers: {
@@ -47,15 +45,22 @@ const getState = ({ getStore, getActions, setStore }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            email: email,
-            height: height,
-            name: name,
-            last_name: last_name,
+            email: formData.email,
+            height: formData.height,
+            name: formData.name,
+            last_name: formData.last_name,
+            weight: formData.weight,
           }),
         });
-        let data = await response.json();
+      
+        if (response.ok) {
+          let updatedUser = await response.json();
+          setStore({ user: updatedUser }); // Update the global store with the new user data
+        } else {
+          console.error("Failed to update user:", response.status);
+        }
       },
-
+    
       getUser: async () => {
         let response = await fetch(process.env.BACKEND_URL + "/user", {
           method: "GET",
@@ -68,7 +73,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (response.ok) {
           let data = await response.json();
           console.log(data);
-          sessionStorage.setItem("user", data);
+          setStore({ user: data });
         } else {
           console.error("Failed to fetch user data:", response.status);
         }
