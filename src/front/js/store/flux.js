@@ -1,27 +1,18 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			],
-
-			token: sessionStorage.getItem("token")
-		},
-		actions: {
-			
-
-
-
+            favs: []
+        },
+        actions: {
+            addFavs: (fav, type) => {
+                const store = getStore();
+                setStore({ favs: [...store.favs, {...fav, type}] });
+            },
+            removeFavs: (fav) => {
+                const store = getStore();
+                const newFavs = store.favs.filter(favorite => favorite.idMeal !== fav.idMeal || favorite.type !== fav.type);
+                setStore({ favs: newFavs });
+            },
 
 
 
@@ -45,7 +36,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			
 			
 			
-			
+			logout: async () => {
+				sessionStorage.setItem("token", null)
+			},
 			
 			
 			

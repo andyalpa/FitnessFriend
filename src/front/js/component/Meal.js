@@ -44,7 +44,7 @@ const Meal = () => {
             <div className="main text-center">
 
 
-                <div className="heading">
+                <div data-aos="zoom-out-right" className="heading">
                     <h1 className="header">Recipes:</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
                     <div className="search--box">

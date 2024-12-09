@@ -154,3 +154,6 @@ body {
   height: 100vh;
 }
 
+.nav-item {
+  margin: 5px;
+}

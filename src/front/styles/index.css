@@ -227,7 +227,9 @@ iframe {
 }
 
 .recipe_card {
-
+background-color: #e0e0e0b2;
+box-shadow: 0 0 5px 5px #9e9c9c;
+transition: transform .2s ease-out;
 }
 
 .recipe_card h3{
@@ -239,8 +241,50 @@ iframe {
   border-radius: 15px;
   width: 200px;
   cursor: pointer;
-  box-shadow: 0 0 5px 5px #9e9c9c;
+  
 }
 .meal-info_header h1 {
   font-size: 30px;
+}
+
+.meal-body {
+  display: flex;
+}
+
+.recipe_card:hover {
+    transform: scale(1.05);
+}
+
+.corner-wrapper {
+  display: block;
+  overflow: hidden;
+height: 90%;
+  border-radius: 30px;
+  transform: translateZ(0px);
+  border: 3px solid #eeeeee00;
+}
+
+
+
+.meal-instructions {
+  padding: 1rem;
+  border-top-right-radius: 10px;
+border-bottom-right-radius: 10px;
+background: #25252565;
+
+}
+
+.meal-ingredients {
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background: #3d3d3d4a;
+}
+
+.list-group {
+  border-radius: 1.25rem;
+}
+
+.list-group-item {
+  background: #5d5d5d94;
 }

@@ -11,12 +11,14 @@ export const Home = () => {
 	return (
 
 		<div>
-		
+
 			<Carousel />
-			<Link to={"/signup"} className="btn btn-primary mx-2" >Sign Up</Link>
-			<Link to={"/login"} className="btn btn-primary mx-2" >log In</Link>
-			<Link to={"/profile"} className="btn btn-primary mx-2" >Profile</Link>
-			<FeaturedRecipes/>
+			<div data-aos="fade-in">
+				<h2>Featured Recipes: </h2>
+				<div className="recipes_grid mt-5 mx-auto">
+					<FeaturedRecipes />
+				</div>
+			</div>
 		</div>
 	);
 };
