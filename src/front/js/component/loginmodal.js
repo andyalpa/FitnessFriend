@@ -49,7 +49,6 @@ export const LoginModal = () => {
       >
         Login
       </button>
-
       <div
         className="modal fade"
         id="exampleModal"
@@ -218,4 +217,5 @@ export const LoginModal = () => {
       </div>
     </div>
   );
+
 };
