@@ -29,7 +29,6 @@ export const Navbar = () => {
               <LoginModal />
             </li>
           }
-          
         </li>
       </div>
     </nav>

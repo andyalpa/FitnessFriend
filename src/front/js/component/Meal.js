@@ -29,16 +29,15 @@ const Meal = () => {
     return (
         <>
             <div className="main text-center">
+                <div data-aos="zoom-out-right" className="heading">
+                    <h1 className="header">Recipes:</h1>
+                    <h2 className="subheader">Simple Recipes, Stunning Results</h2>
+                    <div className="search--box">
+                        <div class="search input-group mb-3">
+                            <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" class="input" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                        </div>
+                        <i class="fas fa-search"></i>
 
-                <div className="heading">
-                    <h1>Search Recipe</h1>
-                    <h4>Lorem20 dsf sdf sdfds fdsf dsfds fdsfdsf sdfsdf sdfsdf
-                        dsfsdfsdfdsfdsfsdfdsfsdfsdfdsv xcvfsdfsd sdfsdf sdfsdf
-                        dsfdsvsddv dsfsd fdsfdsf
-                    </h4>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">@</span>
-                        <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" />
                     </div>
                 </div>
                 <div className="categories text-center d-flex">

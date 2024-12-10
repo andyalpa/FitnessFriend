@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       user: null,
       token: sessionStorage.getItem("token"),
+       favs: []
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -82,11 +83,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: async () => {
         sessionStorage.setItem("token", null);
       },
-
+      addFavs: (fav, type) => {
+                const store = getStore();
+                setStore({ favs: [...store.favs, {...fav, type}] });
+            },
+            removeFavs: (fav) => {
+                const store = getStore();
+                const newFavs = store.favs.filter(favorite => favorite.idMeal !== fav.idMeal || favorite.type !== fav.type);
+                setStore({ favs: newFavs });
+            },
+        
+        
+        
+        
+        
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },
-
       getMessage: async () => {
         try {
           // fetching data from the backend
@@ -102,7 +115,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       changeColor: (index, color) => {
         //get the store
         const store = getStore();
-
         //we have to loop the entire demo array to look for the respective index
         //and change its color
         const demo = store.demo.map((elm, i) => {
