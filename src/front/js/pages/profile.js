@@ -67,21 +67,20 @@ export const Profile = () => {
       setLastName(user.last_name);
     }
   }, [store.user]);
-  
 
   return (
     <div className="mt-5">
       {store.token ? (
         <div className="container text-center  profile-layout ">
           <div className="profile-content my-auto">
-          <UploadImage />
-            <h1 className="profile-title">Hello, {store.user?.name}</h1>
-            <h3>Email: {store.user?.email}</h3>
+            <UploadImage user={user} />
+            <h1 className="profile-title">Hello, {name}</h1>
+            <h3>Email: {email}</h3>
             <h4>
-              Name: {store.user?.name} {store.user?.last_name}
+              Name: {name} {lastName}
             </h4>
-            <h4>Height: {store.user?.height} cm</h4>
-            <h4>Weight: {store.user?.weight} kg</h4>
+            <h4>Height: {height} cm</h4>
+            <h4>Weight: {newWeight} kg</h4>
           </div>{" "}
           <UpdateUserModal />
           <div className="container">

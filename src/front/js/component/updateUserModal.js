@@ -44,7 +44,7 @@ export const UpdateUserModal = () => {
         height: store.user.height,
         name: store.user.name,
         last_name: store.user.last_name,
-        weight: store.user.weight
+        weight: store.user.weight,
       }); // Make sure the data is being set correctly
     } else {
       actions.getUser();

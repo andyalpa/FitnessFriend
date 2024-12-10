@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.setItem("token", null);
       },
 
-      updateUser: async (formData) => {
+      updateUser: async (formData, pic) => {
         let response = await fetch(process.env.BACKEND_URL + "/update_user", {
           method: "PUT",
           headers: {
@@ -52,15 +52,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             weight: formData.weight,
           }),
         });
-      
+
         if (response.ok) {
-          let updatedUser = await response.json();
-          setStore({ user: updatedUser }); // Update the global store with the new user data
+          let data = await response.json();
+          setStore({ user: data.updated_user }); // Update the global store with the new user data
         } else {
           console.error("Failed to update user:", response.status);
         }
       },
-    
+
       getUser: async () => {
         let response = await fetch(process.env.BACKEND_URL + "/user", {
           method: "GET",

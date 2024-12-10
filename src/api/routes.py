@@ -71,8 +71,13 @@ def update_user():
     user.last_name = body['last_name']
     user.height = body['height']
     user.weight = body['weight']
+    user.pic = body['pic']
 
-    return jsonify({"message": "User updated successfully"}), 200
+    db.session.commit()
+
+    updated_user = User.query.filter_by(email=email).first()
+
+    return jsonify({"message": "User updated successfully", "user" : updated_user.serialize()}), 200
     
 
 
