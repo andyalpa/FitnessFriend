@@ -24,11 +24,19 @@ const FeaturedRecipes = () => {
 
   return (
     <>
+
         {
           show ? randomRecipes?.map((recipe, index) => (
             <MealCard key={index} data={recipe} />
 
           ))
+
+            : "Not found"
+        }
+
+      </div>
+
+
             : "Loading..."
         }
     </>

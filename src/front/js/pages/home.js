@@ -10,10 +10,13 @@ export const Home = () => {
 
 	return (
 
-		<div>
-		
+		<div className="mx-auto">
+			<div className="homeHeader">
+				<h1>Meet Your Newest Friend in Fitness! 
+					</h1>
+			</div>
 			<Carousel />
-			<FeaturedRecipes/>
+			<FeaturedRecipes />
 		</div>
 	);
 };
