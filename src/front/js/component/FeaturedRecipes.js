@@ -24,17 +24,21 @@ const FeaturedRecipes = () => {
 
 
   return (
-    <div class="d-flex flex-wrap  justify-content-center h-50">
+    <>
+      <div className="recipes_grid">
+        {
+          show ? randomRecipes?.map((recipe, index) => (
+            <MealCard key={index} data={recipe} />
 
-      {
-        show ? randomRecipes?.map((recipe, index) => (
-          <MealCard key={index} data={recipe} />
+          ))
 
-        ))
+            : "Not found"
+        }
 
-          : "Loading..."
-      }
-    </div>
+      </div>
+
+
+    </>
   );
 }
 

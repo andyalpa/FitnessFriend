@@ -11,13 +11,11 @@ import { SignUp }  from "./pages/signup"
 import { Profile }  from "./pages/profile"
 import MealCategories from "./pages/MealCategories";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
 import FeaturedRecipes from "./component/FeaturedRecipes"
-// import Exercise from "./pages/Exercise";
 
 
 //create your first component

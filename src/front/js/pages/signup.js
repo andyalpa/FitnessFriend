@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { Navigate, useNavigate } from "react-router-dom";
+
 
 export const SignUp = () => {
 
@@ -13,7 +13,7 @@ export const SignUp = () => {
         weight: ""
     })
 	const { store, actions } = useContext(Context);
-    const navigate = useNavigate()
+
     
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name]: e.target.value})
@@ -33,40 +33,10 @@ export const SignUp = () => {
         }
         let data = await response.json()
         
-        // navigate("/")
     }
 
 	return (
-		// <div className="text-center mt-5">
-        //     <div className="input-group mb-3">
-        //         <span 
-        //             className="input-group-text" 
-        //             id="inputGroup-sizing-default"
-        //         >    Email
-        //         </span>
-        //         <input 
-        //             onChange={(e) => setEmail(e.target.value)} 
-        //             type="text" className="form-control" 
-        //             aria-label="Sizing example input" 
-        //             aria-describedby="inputGroup-sizing-default"
-        //         />
-        //     </div>
-        //     <div className="input-group mb-3">
-        //         <span 
-        //             className="input-group-text" 
-        //             id="inputGroup-sizing-default"
-        //         >   Password
-        //         </span>
-        //         <input 
-        //             onChange={(e) => setPassword(e.target.value)}
-        //             type="password" 
-        //             className="form-control" 
-        //             aria-label="Sizing example input" 
-        //             aria-describedby="inputGroup-sizing-default"
-        //         />
-        //     </div>
-        //     <button className="btn btn-info" onClick={() => createUser()}>Sign Up</button>
-		// </div>
+
         <form onSubmit={createUser} className="container mt-4">
         <div className="row mb-3">
             <div className="col-md-6">

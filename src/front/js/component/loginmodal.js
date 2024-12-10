@@ -4,51 +4,52 @@ import { Context } from "../store/appContext";
 
 export const LoginModal = () => {
   const [signupView, setSignupView] = useState(false);
-  const { store, actions } = useContext(Context);
-  const [password, setPassword] = useState("")
-  const [email, setEmail] = useState("")
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    name: "",
-    last_name: "",
-    height: "",
-    weight: ""
-  })
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const logInUser = async () => {
-    actions.login(email, password)
-
-  }
-  const createUser = async (e) => {
-    e.preventDefault()
-    let response = await fetch(process.env.BACKEND_URL + "/signup", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formData)
+    const { store, actions } = useContext(Context);
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+        name: "",
+        last_name: "",
+        height: "",
+        weight: ""
     })
-    if (response.ok) {
-      alert("User created successfully!");
-    } else {
-      alert("Error creating user.");
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
     }
-    let data = await response.json()
-
-  }
+    
+	const logInUser = async() => {
+        actions.login(email, password)
+        
+    }
+    const createUser = async(e) => {
+        e.preventDefault()
+        let response = await fetch(process.env.BACKEND_URL + "/signup", {
+            method: "POST",
+            headers: { "Content-type": "application/json" },
+            body: JSON.stringify(formData)
+        })
+        if (response.ok) {
+            alert("User created successfully!");
+        } else {
+            alert("Error creating user.");
+        }
+        let data = await response.json()
+    
+    }
 
   return (
     <div>
-      <a
-        className="modal-btn"
+      <button
+        type="button"
+        className="button modal-btn"
         style={{ maxHeight: "47px" }}
         data-bs-toggle="modal"
         data-bs-target="#exampleModal"
       >
         Login
-      </a>
+      </button>
 
       <div
         className="modal fade modal-dialog-centered modal-lg"
@@ -89,6 +90,7 @@ export const LoginModal = () => {
                         onChange={handleChange}
                         required
                       />
+
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="last_name" className="form-label">
@@ -221,4 +223,5 @@ export const LoginModal = () => {
       </div>
     </div>
   );
+
 };
