@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 
 
 
-const Workout = ({ data }) => {
+const WorkoutCard = ({ data }) => {
     const { store, actions } = useContext(Context);
     let navigate = useNavigate()
 
@@ -52,4 +52,4 @@ const Workout = ({ data }) => {
     );
 }
 
-export default MealCard;
+export default WorkoutCard;

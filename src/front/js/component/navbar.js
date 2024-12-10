@@ -27,7 +27,7 @@ export const Navbar = () => {
               <Link className="button" to={"/meal"}>Recipes</Link>
             </li>
             <li className="nav-item">
-              <a className="button" href="#">Workouts</a>
+              <Link className="button" to={"/workout"}>Workouts</Link>
             </li>
 
             <LoginModal />

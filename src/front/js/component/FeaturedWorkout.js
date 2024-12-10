@@ -10,7 +10,10 @@ const FeaturedWorkout = () => {
     async function getInfo() {
       const workouts = []
       for (let i = 0; i < 8; i++) {
-        let res = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+        let res = await fetch(`https://api.api-ninjas.com/v1/exercises?muscle=biceps`, {
+          method: "GET", 
+          headers: {'X-Api-Key': proccess.env.API_KEY}
+      });
         let data = await res.json();
         workouts.push(data.meals)
       }

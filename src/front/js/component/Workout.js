@@ -12,10 +12,13 @@ const Workout = () => {
 
     useEffect(() => {
         async function getExercise() {
-            let res = await fetch(url);
+            let res = await fetch(url, {
+                method: "GET", 
+                headers: {'X-Api-Key': proccess.env.API_KEY}
+            });
             let data = await res.json();
             console.log(data);
-            // setWorkout(data.meals);
+            setWorkout(data);
             setShow(true)
 
 
@@ -25,13 +28,13 @@ const Workout = () => {
 
 
     const catIndex = (cat) => {
-        // setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
+        setUrl(`https://api.api-ninjas.com/v1/exercises?type=${cat}`)
         setSelectedCategory(cat)
     }
 
     const searchExercise = (e) => {
         if (e.key == 'Enter')
-            // setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
+            setUrl(`https://api.api-ninjas.com/v1/exercises?name=${search}`)
         setSelectedCategory("search")
     }
     return (
@@ -55,7 +58,7 @@ const Workout = () => {
 
                 <div className="recipes_grid mt-5 mx-auto">
                     {selectedCategory === null && <FeaturedWorkout />}
-                    {show ? <WorkoutCard data={meal} /> : ""}
+                    {show ? <WorkoutCard data={workout} /> : ""}
 
 
                 </div>

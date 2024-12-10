@@ -18,6 +18,7 @@ import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
 import FeaturedRecipes from "./component/FeaturedRecipes"
 import WorkoutInfo from "./pages/WorkoutInfo";
+import Workout from "./component/Workout";
 // import Exercise from "./pages/Exercise";
 
 
@@ -39,8 +40,7 @@ const Layout = () => {
                         <Route element={<MealInfo />} path="/:MealId" />
                         <Route element={<WorkoutInfo />} path="/:WorkoutID" />
                         <Route element={<Meal/>} path="/meal" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
+                        <Route element={<Workout/>} path="/workout" />
                         <Route element={<LogIn />} path="/login" />
                         <Route element={<Profile />} path="/profile" />
                         <Route element={<SignUp />} path="/signup" />
