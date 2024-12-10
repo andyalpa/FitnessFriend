@@ -6,16 +6,15 @@ import { BackendURL } from "./component/backendURL";
 import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
-import { LogIn }  from "./pages/login"
-import { SignUp }  from "./pages/signup"
-import { Profile }  from "./pages/profile"
-import MealCategories from "./pages/MealCategories";
+import { LogIn } from "./pages/login";
+import { SignUp } from "./pages/signup";
+import { Profile } from "./pages/profile";
 import injectContext from "./store/appContext";
+
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
-import FeaturedRecipes from "./component/FeaturedRecipes"
 
 //create your first component
 const Layout = () => {

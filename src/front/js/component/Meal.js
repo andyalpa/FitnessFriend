@@ -5,35 +5,20 @@ import MealCategories from "./MealCategories";
 import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
 
 const Meal = () => {
-    const [url, setUrl] = useState("");
-    const [meal, setMeal] = useState([])
-    const [show, setShow] = useState(false)
-    const [search, setSearch] = useState("")
-    const [selectedCategory, setSelectedCategory] = useState(null)
+  const [url, setUrl] = useState("");
+  const [meal, setMeal] = useState([]);
+  const [show, setShow] = useState(false);
+  const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
-    useEffect(() => {
-        async function getRecipe() {
-            let res = await fetch(url);
-            let data = await res.json();
-            console.log(data);
-            setMeal(data.meals);
-            setShow(true)
-
-
-        }
-        getRecipe();
-    }, [url])
-
-    // const letterIndex = (letter) => {
-    //     setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
-
-    // }
-
-    const catIndex = (cat) => {
-        setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
-        setSelectedCategory(cat)
+  useEffect(() => {
+    async function getRecipe() {
+      let res = await fetch(url);
+      let data = await res.json();
+      console.log(data);
+      setMeal(data.meals);
+      setShow(true);
     }
-
     const searchRecipe = (e) => {
         if (e.key == 'Enter')
             setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
@@ -72,14 +57,9 @@ const Meal = () => {
                 {/* <div className="lettersContainer">
                 <RecipeLetters letterIndex={(letter) => letterIndex(letter)}/>
             </div> */}
-
-
-            </div>
-
-
-        </>
-
-    );
-}
+      </div>
+    </>
+  );
+};
 // https://github.com/Valerieclaire96/whoKnows
 export default Meal;

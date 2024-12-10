@@ -12,8 +12,6 @@ const MealCard = ({ data }) => {
         <>
             {
                 (!data) ? "No Meal Found " : data.map((meal, index) => {
-
-
                         <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 10px 3px rgba(0,0,0,0.1)" }} key={index} onClick={() => {
                             navigate(`/${meal.idMeal}`)
                         }}>
