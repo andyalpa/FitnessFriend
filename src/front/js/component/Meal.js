@@ -37,14 +37,13 @@ const Meal = () => {
     const searchRecipe = (e) => {
         if (e.key == 'Enter')
             setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
+
         setSelectedCategory("search")
 
     }
     return (
         <>
             <div className="main text-center">
-
-                
 
                 <div className="heading">
                     <h1>Search Recipe</h1>

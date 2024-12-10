@@ -1,11 +1,9 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
-*{
-    font-family: "Poppins" sans-serif;
-    text-decoration: none;
-    font-size: 15px;
-  }
+
+* {
+  font-family: "Poppins" sans-serif;
+  text-decoration: none;
+  font-size: 15px;
+}
 
 
 iframe {
@@ -47,6 +45,37 @@ width: 100%;
 }
 
 .cat_button:before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  background-color: #008fb3;
+  transition: all 0.3s;
+  border-radius: 10rem;
+  z-index: -1;
+}
+
+.cat_button:hover {
+  color: #fff;
+}
+
+.cat_button:hover:before {
+  width: 100%;
+}
+
+
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(220, 220, 220, 0.445);
+  border-radius: 5px;
+}
 
     content: "";
         position: absolute;

@@ -17,7 +17,6 @@ import Meal from "./component/Meal";
 import MealInfo from "./pages/MealInfo";
 import FeaturedRecipes from "./component/FeaturedRecipes"
 
-
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain

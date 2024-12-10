@@ -50,7 +50,6 @@ export const LoginModal = () => {
       >
         Login
       </button>
-
       <div
         className="modal fade modal-dialog-centered modal-lg"
         id="exampleModal"
@@ -90,7 +89,6 @@ export const LoginModal = () => {
                         onChange={handleChange}
                         required
                       />
-
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="last_name" className="form-label">

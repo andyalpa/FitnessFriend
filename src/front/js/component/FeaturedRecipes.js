@@ -15,7 +15,6 @@ const FeaturedRecipes = () => {
         recipes.push(data.meals)
       }
 
-      console.log(recipes);
       setRandomRecipes(recipes);
       setShow(true);
     }
@@ -25,7 +24,7 @@ const FeaturedRecipes = () => {
 
   return (
     <>
-      <div className="recipes_grid">
+
         {
           show ? randomRecipes?.map((recipe, index) => (
             <MealCard key={index} data={recipe} />
@@ -38,6 +37,8 @@ const FeaturedRecipes = () => {
       </div>
 
 
+            : "Loading..."
+        }
     </>
   );
 }
