@@ -18,7 +18,6 @@ const MealInfo = () => {
   const ingredientArray = Object.keys(info)
     .filter(key => key.startsWith('strIngredient') && info[key])
     .map(key => info[key]);
-  
 
   const measureArray = Object.keys(info)
     .filter(key => key.startsWith('strMeasure') && info[key])

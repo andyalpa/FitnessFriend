@@ -90,6 +90,7 @@ export const LoginModal = () => {
                         onChange={handleChange}
                         required
                       />
+
                     </div>
                     <div className="col-md-6">
                       <label htmlFor="last_name" className="form-label">
@@ -222,4 +223,5 @@ export const LoginModal = () => {
       </div>
     </div>
   );
+
 };

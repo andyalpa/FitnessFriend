@@ -47,6 +47,7 @@ width: 100%;
 }
 
 .cat_button:before {
+
     content: "";
         position: absolute;
         bottom: 0;
@@ -96,3 +97,4 @@ width: 100%;
     cursor: pointer;
     box-shadow: 0 0 20px 10px #f3f3f3;
   }
+
