@@ -7,16 +7,22 @@
 */
 
 .navbar .logo img {
-  height: 400px; 
+  height: 359px;
   width: auto;
   margin: -270px;
 }
 
 .navbar {
-  padding-left: 40%
- 
-  
+  padding-top: 1%;
+  padding-bottom: 2%;
+  padding-left: 12%;
+  background: linear-gradient(0deg, #348ac7) 4%, rgba(15, 2, 5, 0.968207351299895 53%);
 }
+
+.nav-link {
+  color: white;
+}
+
 
 /*#exampleModalLabel {
   position: absolute;
@@ -29,11 +35,12 @@
 }*/
 
 #carouselHero .carousel-item img {
-object-fit: cover;
-object-position: cover;
-overflow: hidden;
-height: 60vh;
-padding-top: 20%;
+  object-fit: cover;
+  object-position: cover;
+  overflow: hidden;
+  height: 60vh;
+  padding-top: 4%;
+  padding-bottom: 6%;
 
 }
 
@@ -42,65 +49,34 @@ padding-top: 20%;
   bottom: 15px;
   left: 0;
   right: 0;
-  height: 20px;
+  height: 10px;
 }
 
 .footertext {
   font-size: xx-small;
 }
 
-.button {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.button:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #EA9010;
-  border-radius: 10rem;
-  z-index: -2;
-}
-
-.button:before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color:#90BE6D;
-  transition: all 0.3s;
-  border-radius: 10rem;
-  z-index: -1;
-}
-
 .button:hover {
   color: #fff;
 }
 
-.button:hover:before {
-  width: 100%;
-}
 
 * {
   font-family: "Poppins" sans-serif;
   text-decoration: none;
   font-size: 15px;
-  
+
+}
+
+.homeHeader {
+  font-family: "Poppins" sans-serif;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 2%;
+  font-size: 50px;
+  color: #f08834;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
 }
 
 .container {
@@ -110,7 +86,7 @@ padding-top: 20%;
   text-align: center;
 }
 
-h1 {
+#exampleModalLabel {
   text-transform: uppercase;
   font-size: 0.8rem;
   margin-bottom: 2rem;
@@ -148,9 +124,5 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA9010", en
 
 
 body {
-  background-image: url("https://www.filterforge.com/filters/4532-v1.jpg");
-  background-size: repeat;
-  background-position: center;
-  height: 100vh;
+  background-color: #98a863;
 }
-

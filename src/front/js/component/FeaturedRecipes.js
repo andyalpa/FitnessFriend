@@ -24,21 +24,17 @@ const FeaturedRecipes = () => {
 
 
   return (
-    <>
-      
-        {
-          show ? randomRecipes?.map((recipe, index) => (
-            <MealCard key={index} data={recipe} />
+    <div class="d-flex flex-wrap  justify-content-center h-50">
 
-          ))
+      {
+        show ? randomRecipes?.map((recipe, index) => (
+          <MealCard key={index} data={recipe} />
 
-            : "Loading..."
-        }
+        ))
 
-      
-
-
-    </>
+          : "Loading..."
+      }
+    </div>
   );
 }
 
