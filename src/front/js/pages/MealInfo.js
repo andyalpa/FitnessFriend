@@ -19,7 +19,6 @@ const MealInfo = () => {
     .filter(key => key.startsWith('strIngredient') && info[key])
     .map(key => info[key]);
 
-
   const measureArray = Object.keys(info)
     .filter(key => key.startsWith('strMeasure') && info[key])
     .map(key => info[key]);
@@ -32,13 +31,12 @@ const MealInfo = () => {
         const videoStr = videoUrl.split('=');
         vId = videoStr[videoStr.length - 1];
       }
-    }
-    return vId;
-  };
-
+      return vId;
+    };
+    
 
   const vId = videoId()
-
+  
   return (
     <>
       {!info ? (
@@ -69,6 +67,7 @@ const MealInfo = () => {
                   <h2>Instructions</h2>
                   <p>{info.strInstructions}</p>
                 </div>
+
               </div>
             </div>
           </div>

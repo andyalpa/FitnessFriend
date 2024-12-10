@@ -34,6 +34,7 @@ const MealCard = ({ data }) => {
                                 <i className={store.favs.some(fav => fav.idMeal === meal.idMeal && fav.type === "meal") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
 
                             </a>
+
                         </div>
 
                     )
@@ -41,10 +42,6 @@ const MealCard = ({ data }) => {
             }
 
             {/* className="recipe_card " */}
-
-
-
-
 
         </>
     );

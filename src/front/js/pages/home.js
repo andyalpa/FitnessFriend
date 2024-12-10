@@ -10,8 +10,11 @@ export const Home = () => {
 
 	return (
 
-		<div>
-
+		<div className="mx-auto">
+			<div className="homeHeader">
+				<h1>Meet Your Newest Friend in Fitness! 
+					</h1>
+			</div>
 			<Carousel />
 			<div data-aos="fade-in">
 				<h2>Featured Recipes: </h2>

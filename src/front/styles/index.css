@@ -1,6 +1,4 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+
 * {
   font-family: "Poppins" sans-serif;
   text-decoration: none;
@@ -9,35 +7,35 @@
 
 
 iframe {
-  height: 500px;
-  width: 100%;
+height: 500px;
+width: 100%;
 }
 
 .cat_button {
-  cursor: pointer;
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 10rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+    cursor: pointer;
+    display: inline-block;
+    padding: 0.75rem 1.25rem;
+    border-radius: 10rem;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 0.15rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .cat_button:after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #0cf;
-  border-radius: 10rem;
-  z-index: -2;
+    content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #0cf;
+        border-radius: 10rem;
+        z-index: -2;
 
 }
 
@@ -57,7 +55,6 @@ iframe {
   transition: all 0.3s;
   border-radius: 10rem;
   z-index: -1;
-
 }
 
 .cat_button:hover {
@@ -80,64 +77,55 @@ iframe {
   border-radius: 5px;
 }
 
-*::-webkit-scrollbar-thumb {
-  background: rgba(0, 6, 88, 0.192);
-  border-radius: 5px;
+    content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0%;
+        height: 100%;
+        background-color: #008fb3;
+        transition: all 0.3s;
+        border-radius: 10rem;
+        z-index: -1;
+
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #0300aa21;
-}
+.cat_button:hover {
+    color: #fff;
+  }
+  .cat_button:hover:before {
+    width: 100%;
+  }
 
-.recipes_grid {
-  display: grid;
-  grid-template-rows: repeat(2, auto);
-  grid-auto-flow: column;
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-height: 100vh;
-  gap: 20px;
-  padding: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
-  margin-bottom: 5rem;
-}
+  .recipes_grid {
+    display: grid;
+    grid-template-columns: repeat(4, 0fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+  }
 
-
-
-.box {
-  padding: 5px;
-}
-
-.recipe_card {
-  transition: transform .2s ease-out;
-  cursor: pointer;
   
-}
 
-.recipe_card:hover {
-  transform: scale(1.05);
-}
+  .box {
+   padding: 5px;
+  }
 
-.recipe_card h3 {
-  font-size: 15px;
-  margin-top: 10px;
-  font-family: Comic Sans MS;
-}
+  .recipe_card {
+    
+  }
 
-.recipe_card img {
-  border-radius: 20px;
-  width: 200px;
-  
-  
-}
+  .recipe_card h3{
+    font-size: 15px;
+    margin-top: 10px;
+  }
 
-.search--box {
-  right: 160px;
-  position: relative;
-  display: inline-block;
-}
+  .recipe_card img {
+    border-radius: 20px;
+    width: 200px;
+    cursor: pointer;
+    box-shadow: 0 0 20px 10px #f3f3f3;
+  }
 
 .input {
   padding: 10px;
@@ -288,3 +276,4 @@ background: #25252565;
 .list-group-item {
   background: #5d5d5d94;
 }
+
