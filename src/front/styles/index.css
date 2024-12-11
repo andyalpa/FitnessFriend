@@ -77,6 +77,8 @@ width: 100%;
   border-radius: 5px;
 }
 
+
+.cat_button:after {
     content: "";
         position: absolute;
         bottom: 0;
