@@ -23,19 +23,20 @@ const MealInfo = () => {
     .filter(key => key.startsWith('strMeasure') && info[key])
     .map(key => info[key]);
 
-  const videoId = () => {
-    let vId = '';
-    if (info) {
-      const videoUrl = info.strYoutube;
-      if (videoUrl) {
-        const videoStr = videoUrl.split('=');
-        vId = videoStr[videoStr.length - 1];
+    const videoId = () => {
+      let vId = '';
+      if (info) {
+        const videoUrl = info.strYoutube;
+        if (videoUrl) {
+          const videoStr = videoUrl.split('=');
+          vId = videoStr[videoStr.length - 1];
+        }
       }
       return vId;
     };
-    
-
-  const vId = videoId()
+  
+  
+    const vId = videoId()
   
   return (
     <>
