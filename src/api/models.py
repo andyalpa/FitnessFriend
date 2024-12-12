@@ -29,7 +29,7 @@ class User(db.Model):
 class UserMetrics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    weight = db.Column(db.Float, nullable=False)
+    weight = db.Column(db.Float, nullable=True)
     created_at = db.Column(db.DateTime, server_default=db.func.now(), nullable=False)
 
     def __repr__(self):

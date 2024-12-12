@@ -9,9 +9,9 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
           <div className="nav nav-tabs float-right border-0">
-           
           <div className="nav-item"> 
             <ul class="nav nav-tabs">
+
             <Link to={"/"} className="logo nav-link">
               <img src="https://i.imgur.com/y0Ia8hZ.png" alt="Logo Here" />
             </Link>
