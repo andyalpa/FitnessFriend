@@ -16,16 +16,22 @@ const Meal = () => {
             console.log(data);
             setMeal(data.meals);
             setShow(true)
+
+
         }
         getRecipe();
     }, [url])
+
     // const letterIndex = (letter) => {
     //     setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
+
     // }
+
     const catIndex = (cat) => {
         setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
         setSelectedCategory(cat)
     }
+
     const searchRecipe = (e) => {
         if (e.key == 'Enter')
             setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
@@ -34,6 +40,8 @@ const Meal = () => {
     return (
         <>
             <div className="main text-center">
+
+
                 <div data-aos="zoom-out-right" className="heading">
                     <h1 className="header">Recipes:</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
@@ -47,16 +55,25 @@ const Meal = () => {
                 <div className="categories text-center d-flex">
                     <MealCategories catIndex={(cat) => catIndex(cat)} />
                 </div>
+
                 <div className="recipes_grid mt-5 mx-auto">
                     {selectedCategory === null && <FeaturedRecipes />}
                     {show ? <MealCard data={meal} /> : ""}
+
+
                 </div>
+
                 {/* Recipes Sort by Letters */}
                 {/* <div className="lettersContainer">
                 <RecipeLetters letterIndex={(letter) => letterIndex(letter)}/>
             </div> */}
+
+
             </div>
+
+
         </>
+
     );
 }
 // https://github.com/Valerieclaire96/whoKnows
