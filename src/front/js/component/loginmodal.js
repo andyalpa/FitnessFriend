@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useContext } from "react";
 import { Context } from "../store/appContext";
 
 export const LoginModal = () => {
   const [signupView, setSignupView] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { store, actions } = useContext(Context);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -23,9 +23,10 @@ export const LoginModal = () => {
   const logInUser = async () => {
     actions.login(email, password);
   };
+
   const createUser = async (e) => {
     e.preventDefault();
-    let response = await fetch(process.env.BACKEND_URL + "/signup", {
+    let response = await fetch(`${process.env.BACKEND_URL}/signup`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),
@@ -35,8 +36,6 @@ export const LoginModal = () => {
     } else {
       alert("Error creating user.");
     }
-
-    let data = await response.json();
   };
 
   return (
@@ -45,41 +44,39 @@ export const LoginModal = () => {
         type="button"
         className="button modal-btn"
         style={{ maxHeight: "47px" }}
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
+        onClick={() => setShowModal(true)}
       >
         Login
       </button>
-      <div
-        className="modal fade"
-        id="exampleModal"
-        tabIndex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <img
-                className="img-fluid"
-                alt="Responsive image"
-                src="https://i.imgur.com/sB3VJu2.png"
-                style={{ width: "105px", marginLeft: "auto" }}
-              />
 
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-
-                style={{ marginBottom: "30px" }}
-              ></button>
-            </div>
-            <div className="modal-body">
-              {signupView ? (
-                <form onSubmit={createUser} className=" mx-auto">
-                  <div className=" mb-3">
+      {showModal && (
+        <div
+          className="modal show d-block"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered" role="document">
+            <div className="modal-content">
+              <div className="modal-header">
+                <img
+                  className="img-fluid"
+                  alt="Responsive image"
+                  src="https://i.imgur.com/sB3VJu2.png"
+                  style={{ width: "105px", marginLeft: "auto" }}
+                />
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowModal(false)}
+                  aria-label="Close"
+                  style={{ marginBottom: "30px" }}
+                ></button>
+              </div>
+              <div className="modal-body">
+                {signupView ? (
+                  <form onSubmit={createUser} className=" mx-auto">
                     <div className="mb-3">
                       <label htmlFor="name" className="form-label"></label>
                       <input
@@ -91,7 +88,6 @@ export const LoginModal = () => {
                         onChange={handleChange}
                         required
                       />
-
                     </div>
                     <div className="mb-3">
                       <label htmlFor="last_name" className="form-label"></label>
@@ -105,8 +101,6 @@ export const LoginModal = () => {
                         required
                       />
                     </div>
-                  </div>
-                  <div className="mb-3">
                     <div className="mb-3">
                       <label htmlFor="height" className="form-label"></label>
                       <input
@@ -119,7 +113,6 @@ export const LoginModal = () => {
                         required
                       />
                     </div>
-
                     <div className="mb-3">
                       <label htmlFor="weight" className="form-label"></label>
                       <input
@@ -132,99 +125,89 @@ export const LoginModal = () => {
                         required
                       />
                     </div>
-                  </div>
-                  <div className="mb-3">
-
-                    <label htmlFor="email" className="form-label"></label>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="mb-3">
-
-                    <label htmlFor="password" className="form-label"></label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      name="password"
-                      placeholder="Password"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-
-                  <button type="submit" className="btn btn-warning w-100">
-                    Sign up
-                  </button>
-                </form>
-              ) : (
-                <div className="input-group input-group-lg">
+                    <div className="mb-3">
+                      <label htmlFor="email" className="form-label"></label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="password" className="form-label"></label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="password"
+                        name="password"
+                        placeholder="Password"
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <button type="submit" className="btn btn-warning w-100">
+                      Sign up
+                    </button>
+                  </form>
+                ) : (
                   <div className="input-group input-group-lg">
-                    <span
-                      style={{ "font-size": "15px" }}
-                      className="input-group input-group-lg mb-3 my-auto"
-                      id="inputGroup-sizing-default"
+                    <div className="input-group input-group-lg">
+                      <span
+                        className="input-group input-group-lg mb-3 my-auto"
+                        id="inputGroup-sizing-default"
+                        style={{ fontSize: "15px" }}
+                      >
+                        Email
+                      </span>
+                      <input
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        className="form-control"
+                        aria-label="Email"
+                      />
+                    </div>
+                    <div className="input-group input-group-lg">
+                      <span
+                        className="input-group input-group-lg mb-3"
+                        id="inputGroup-sizing-default"
+                        style={{ fontSize: "15px" }}
+                      >
+                        Password
+                      </span>
+                      <input
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
+                        className="form-control"
+                        aria-label="Password"
+                      />
+                    </div>
+                    <button
+                      className="btn btn-warning mt-3 rounded"
+                      onClick={logInUser}
+                      style={{ width: "100%" }}
                     >
-                      {" "}
-                      Email
-                    </span>
-                    <input
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      className="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
+                      Log in
+                    </button>
                   </div>
-
-                  <div className="input-group input-group-lg">
-                    <span
-                      className="input-group input-group-lg mb-3"
-                      id="inputGroup-sizing-default"
-                      style={{ fontSize: "15px" }}
-                    >
-                      {" "}
-                      Password
-                    </span>
-                    <input
-                      onChange={(e) => setPassword(e.target.value)}
-                      type="password"
-                      className="form-control"
-                      aria-label="Sizing example input"
-                      aria-describedby="inputGroup-sizing-default"
-                    />
-                  </div>
-
-                  <button
-                    className=" btn btn-warning mt-3 rounded"
-                    onClick={() => logInUser()}
-                    style={{ width: "483px" }}
-                  >
-                    Log in
-                  </button>
-                </div>
-              )}
-
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn"
-                onClick={() => setSignupView(!signupView)}
-              >
-                {signupView ? "Go to Login" : "Create New Acount"}
-              </button>
+                )}
+              </div>
+              <div className="modal-footer">
+                <button
+                  type="button"
+                  className="btn btn-link"
+                  onClick={() => setSignupView(!signupView)}
+                >
+                  {signupView ? "Go to Login" : "Create New Account"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

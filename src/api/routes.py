@@ -19,99 +19,11 @@ api = Blueprint('api', __name__)
 CORS(api)
 
 
-@api.route('/signup', methods=['POST'])
-def create_user():
-    body = request.get_json()
-    user_email = body['email']
-    user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
-    user_name = body['name']
-    user_last_name = body['last_name']
-    user_height = float(body['height'])
-    user_weight = float(body['weight'])
-    user = User(
-        email = user_email, 
-        password = user_password,
-        name=user_name,
-        last_name=user_last_name,
-        height=user_height,
-        weight=user_weight
-        )
-    db.session.add(user)
-    db.session.commit()
-    
-    return jsonify("User successfully created!")
-
-@api.route('/login', methods=['POST'])
-def login():
-    body = request.get_json()
-    user_email = body['email']
-    user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
-    user = User.query.filter_by(email = user_email, password = user_password).first()
-    if user and user.password == user_password:
-        expiration = timedelta(days=1)
-        access_token = create_access_token(identity = user.email, expires_delta = expiration)
-        return jsonify(access_token=access_token, user=user.serialize()[0])
-
-    else:
-        return jsonify("user does not exist")
-
-@api.route('/update_user', methods=['PUT'])
-@jwt_required()
-def update_user():
-    email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
-    
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-
-    body = request.get_json()
-
-    user.email = body['email']
-    user.name = body['name']
-    user.last_name = body['last_name']
-    user.height = body['height']
-    user.weight = body['weight']
-    user.pic = body['pic']
-
-    db.session.commit()
-
-    updated_user = User.query.filter_by(email=email).first()
-
-    return jsonify({"message": "User updated successfully", "user" : updated_user.serialize()}), 200
-    
-
-
-@api.route('/update', methods=['POST'])
-@jwt_required()
-def post_update_user():
-    email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
-    
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-
-    body = request.get_json()
-
-    user.email = body.get('email', user.email)
-    user.name = body.get('name', user.name)
-    user.last_name = body.get('last_name', user.last_name)
-    user.height = body.get('height', user.height)
-
-    db.session.commit()
-
-    return jsonify({"message": "User updated successfully"}), 200
-
-
+#Get User
 @api.route('/user', methods=['GET'])
 @jwt_required()
 def get_user():
     email = get_jwt_identity()
-    # user = User.query.filter_by(email=email).first()
-    
-    # if user is not None:
-    #     return jsonify(user.serialize()), 200
-
-    # return jsonify(email), 400
     print(f"JWT email: {email}")  # Log the email from the JWT token
     user = User.query.filter_by(email=email).first()
 
@@ -122,6 +34,20 @@ def get_user():
     print("User not found")
     return jsonify({"error": "User not found"}), 404
 
+#UserMetrics
+@api.route('/userMetrics', methods=['GET'])
+@jwt_required()
+def get_user_metrics():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    user_metrics = UserMetrics.query.filter_by(user_id=user.id).order_by(UserMetrics.created_at.desc()).all()
+    return jsonify([metric.serialize() for metric in user_metrics]), 200
+
+#PostUserMetrics
 @api.route('/userMetrics', methods=['POST'])
 @jwt_required()
 def add_user_metric():
@@ -146,31 +72,133 @@ def add_user_metric():
 
     return jsonify({"message": "Weight added successfully", "user_metric": user_metric.serialize()}), 201
 
+#Sign Up User
+@api.route('/signup', methods=['POST'])
+def create_user():
+    body = request.get_json()
+    user_email = body['email']
+    user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
+    user_name = body['name']
+    user_last_name = body['last_name']
+    user_height = float(body['height'])
+    user_weight = float(body['weight'])
+    user = User(
+        email = user_email, 
+        password = user_password,
+        name=user_name,
+        last_name=user_last_name,
+        height=user_height,
+        weight=user_weight
+        )
+    db.session.add(user)
+    db.session.commit()
+    
+    return jsonify("User successfully created!")
 
-@api.route('/userMetrics', methods=['GET'])
+#LogIn User
+@api.route('/login', methods=['POST'])
+def login():
+    body = request.get_json()
+    user_email = body['email']
+    user_password = hashlib.sha256(body['password'].encode("utf-8")).hexdigest()
+    user = User.query.filter_by(email = user_email, password = user_password).first()
+    if user and user.password == user_password:
+        expiration = timedelta(days=1)
+        access_token = create_access_token(identity = user.email, expires_delta = expiration)
+        return jsonify(access_token=access_token, user=user.serialize()[0])
+
+    else:
+        return jsonify("user does not exist")
+
+#Update User
+@api.route('/update_user', methods=['PUT'])
 @jwt_required()
-def get_user_metrics():
+def update_user():
     email = get_jwt_identity()
     user = User.query.filter_by(email=email).first()
-
+    
     if not user:
         return jsonify({"error": "User not found"}), 404
+
+    body = request.get_json()
+
+    user.email = body.get('email', user.email)
+    user.height = body.get('height', user.height)
+    user.last_name = body.get('last_name', user.last_name)
+    user.name = body.get('name', user.name)
+    user.weight = body.get('weight', user.weight)
+    user.pic = body.get('pic', user.pic)
+
+    db.session.commit()
+
+    updated_user = User.query.filter_by(email=email).first()
+
+    return jsonify({"message": "User updated successfully", "user" : updated_user.serialize()}), 200
     
-    # body = request.get_json()
-    # weight = body.get('weight')
+#Post Update User
+@api.route('/update', methods=['POST'])
+@jwt_required()
+def post_update_user():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
     
-    # if not weight:
-    #     return jsonify({"error": "Weight is required"}), 400
+    if not user:
+        return jsonify({"error": "User not found"}), 404
 
-    # user_metric = UserMetrics(user_id=user.id, weight=weight)
-    # db.session.add(user_metric)
+    body = request.get_json()
 
-    # # Update user's weight
-    # user.weight = weight
-    # db.session.commit()
+    user.email = body.get('email', user.email)
+    user.name = body.get('name', user.name)
+    user.last_name = body.get('last_name', user.last_name)
+    user.height = body.get('height', user.height)
+    user.pic = body.get('pic', user.pic)
 
-    user_metrics = UserMetrics.query.filter_by(user_id=user.id).order_by(UserMetrics.created_at.desc()).all()
-    return jsonify([metric.serialize() for metric in user_metrics]), 200
+
+    db.session.commit()
+
+    return jsonify({"message": "User updated successfully"}), 200
+
+#UploadPicture
+@api.route('/upload', methods=['POST'])
+@jwt_required()
+def upload_image():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+
+    if file:
+        filename = secure_filename(file.filename)
+        file_path = os.path.join('uploads', filename)  # Define a folder for uploads
+        file.save(file_path)
+
+        user.pic = file_path
+        db.session.commit()
+        return jsonify({"message": "Image uploaded successfully", "pic": user.pic}), 200
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @api.route('/hello', methods=['POST', 'GET'])

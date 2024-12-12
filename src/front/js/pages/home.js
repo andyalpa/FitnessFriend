@@ -15,7 +15,7 @@ export const Home = () => {
 				<h1>Meet Your Newest Friend in Fitness! 
 					</h1>
 			</div>
-			<Carousel />
+			{/* <Carousel /> */}
 			<div data-aos="fade-in">
 				<h2>Featured Recipes: </h2>
 				<div className="recipes_grid mt-5 mx-auto">
