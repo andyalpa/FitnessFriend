@@ -10,7 +10,8 @@ export const Navbar = () => {
       <div className="container-fluid">
           <div className="nav nav-tabs float-right border-0">
           <div className="nav-item"> 
-            <ul className="nav nav-tabs">
+            <ul class="nav nav-tabs">
+
             <Link to={"/"} className="logo nav-link">
               <img src="https://i.imgur.com/y0Ia8hZ.png" alt="Logo Here" />
             </Link>
@@ -18,7 +19,7 @@ export const Navbar = () => {
               <Link to={"/meal"}>Recipes</Link>
             </li>
             <li className="nav-item nav-link">
-              <a href="#">Workouts</a>
+            <Link to={"/workout"}>Workout</Link>
             </li>
             <li className="nav-item nav-link">
               <Link to={"/profile"}>Profile</Link>
