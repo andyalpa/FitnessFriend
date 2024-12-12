@@ -3,14 +3,12 @@ import MealCard from "./MealCard";
 import RecipeLetters from "./RecipeLetters";
 import MealCategories from "../pages/MealCategories";
 import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
-
 const Meal = () => {
     const [url, setUrl] = useState("");
     const [meal, setMeal] = useState([])
     const [show, setShow] = useState(false)
     const [search, setSearch] = useState("")
     const [selectedCategory, setSelectedCategory] = useState(null)
-
     useEffect(() => {
         async function getRecipe() {
             let res = await fetch(url);
