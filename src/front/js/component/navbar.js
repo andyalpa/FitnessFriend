@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { LoginModal } from "./loginmodal";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { LogoutButton } from "../pages/logoutButton"
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context);
@@ -25,9 +26,11 @@ export const Navbar = () => {
                 <Link to={"/profile"}>Profile</Link>
               </li>
               {store.user ? (
-                <li className="nav-item nav-link">
-                  <a href="#">Logout</a>
-                </li>
+                 <>
+                 {/* Needs some styling */}
+                 {/* <span>Welcome, {store.user?.name || "User"}</span> */}
+                 <LogoutButton />
+               </>
               ) : (
                 <li className="nav-item nav-link">
                   <LoginModal />

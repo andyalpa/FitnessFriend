@@ -1,8 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState} from "react";
 import { Context } from "../store/appContext";
 import { UpdateUserModal } from "../component/updateUserModal";
 import UploadImage from "../component/uploadImage";
 import { LoginModal } from "../component/loginmodal";
+import { useNavigate } from "react-router-dom";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -13,6 +14,7 @@ export const Profile = () => {
   const [height, setHeight] = useState("");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
+  const navigate = useNavigate();
 
   const getUser = async () => {
     await actions.getUser();
@@ -69,6 +71,12 @@ export const Profile = () => {
       setName(store.user.name);
     }
   }, [store.user]);
+
+  useEffect(() => {
+    if (!store.token) {
+      navigate("/"); // Redirect to login if not authenticated
+    }
+  }, [store.token, navigate]);
 
   return (
     <div className="mt-5">

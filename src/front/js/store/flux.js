@@ -34,9 +34,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.setItem("token", data.access_token);
         sessionStorage.setItem("user", data.user);
       },
-      logout: () => {
-        sessionStorage.setItem("token", null);
-      },
+      
+     
+        logout: async () => {
+          // Clear token from sessionStorage
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("user");
+        
+          // Update the global store
+          setStore({
+            token: null,
+            user: null,
+            favs: [], // Reset other user-related state if needed
+          });
+        },
+      
+      
 
       updateUser: async (formData) => {
         let response = await fetch(process.env.BACKEND_URL + "/update_user", {
