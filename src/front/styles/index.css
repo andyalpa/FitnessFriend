@@ -162,6 +162,7 @@ width: 100%;
 }
 
 .recipe_card h3 {
+  padding: 1rem;
   font-size: 15px;
   margin-top: 10px;
   font-family: Comic Sans MS;
