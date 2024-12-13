@@ -185,9 +185,9 @@ export const Profile = () => {
       ) : (
         <div style={{ paddingTop: "240px" }}>
           <div className="alert alert-light">
-            <div class="text-center" role="alert">
+            <div className="text-center" role="alert">
               You must log in to see your profile{" "}
-              <a href="#" class="alert-link">
+              <a href="#" className="alert-link">
                 <LoginModal />
               </a>
             </div>

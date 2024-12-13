@@ -9,7 +9,8 @@
 .navbar .logo img {
   height: 359px;
   width: auto;
-  margin: -270px;
+  margin: -250px;
+  padding: 100px;
 }
 
 .navbar {
@@ -23,6 +24,10 @@
   color: white;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
 
 /*#exampleModalLabel {
   position: absolute;
@@ -44,6 +49,10 @@
 
 }
 
+.overlay {
+  overflow: hidden;
+  position: relative;
+}
 
 .footer {
   position: fixed;
@@ -141,35 +150,35 @@ body {
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
 }
 
 
 .breadcrumb {
-    background-color: #c5cee4;
+  background-color: #c5cee4;
 
 }
 
 .breadcrumb a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .container {
-    max-width: 1500px;
-    padding: 0;
+  max-width: 1500px;
+  padding: 0;
 }
 
 p {
-    margin: 0;
+  margin: 0;
 }
 
 .d-flex a {
-    text-decoration: none;
-    color: #686868;
+  text-decoration: none;
+  color: #686868;
 }
 
 /* img {
@@ -180,15 +189,15 @@ p {
 } */
 
 .fab.fa-twitter {
-    color: #8ab7f1;
+  color: #8ab7f1;
 }
 
 .fab.fa-instagram {
-    color: #E1306C;
+  color: #E1306C;
 }
 
 .fab.fa-facebook-f {
-    color: #5999ec;
+  color: #5999ec;
 }
 
 .basic-details {
