@@ -8,7 +8,7 @@ export const Carousel = () => {
         <div id="carouselHero" className="carousel slide w-50  h-50 mx-auto" data-bs-ride="carousel" data-bs-interval="3000">
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src="https://images.pexels.com/photos/14774567/pexels-photo-14774567.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 1" />
+                    <img src="https://i.imgur.com/3uDXlnP.png" className="d-block w-100" alt="Slide 1" />
                 </div>
                 
                 <div className="carousel-item">
