@@ -11,7 +11,7 @@ const WorkoutCard = ({ data }) => {
 
     const handleClick = (e, workout) => {
         e.preventDefault();
-        if (store.favs.some(fav => fav.id === workout.id && fav.type === "workout")) {    
+        if (store.favs.some(fav => fav.id === workout.id && fav.type === "workout")) {
             // come back to this to change IDs
             actions.removeFavs({ id: workout.id, type: "workout" });
         } else {
@@ -27,16 +27,19 @@ const WorkoutCard = ({ data }) => {
                         <div data-aos="fade-in">
                             <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)" }} key={index} >
                                 <div onClick={() => {
-                                 navigate(`/workout/${workout.id}`)
+                                    navigate(`/workout/${workout.id}`)
                                 }}>
                                     <img src={workout.gifUrl} alt="/" />
                                 </div>
                                 <h3 className="ms-2">{workout.name}</h3>
-                                <div className="fav-button-container">
-                                    <a onClick={(e) => handleClick(e, workout)} style={{ borderRadius: "1.25rem" }} href="#" className="btn btn-warning ms-5">
-                                        <i className={store.favs.some(fav => fav.id === workout.id && fav.type === "workout") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
-                                    </a>
-                                </div>
+                                {store.token ? (
+                                    <div className="fav-button-container">
+                                        <a onClick={(e) => handleClick(e, workout)} style={{ borderRadius: "1.25rem" }} href="#" className="btn btn-warning ms-5">
+                                            <i className={store.favs.some(fav => fav.id === workout.id && fav.type === "workout") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
+                                        </a>
+                                    </div>
+                                ) : (<div className="d-none"></div>)}
+
                             </div>
                         </div>
 
