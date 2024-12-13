@@ -44,6 +44,7 @@
 
 }
 
+
 .footer {
   position: fixed;
   bottom: 15px;
@@ -171,12 +172,12 @@ p {
     color: #686868;
 }
 
-img {
+/* img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-}
+} */
 
 .fab.fa-twitter {
     color: #8ab7f1;
