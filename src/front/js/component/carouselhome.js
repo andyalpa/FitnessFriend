@@ -30,7 +30,7 @@ export const Carousel = () => {
                     <img src="https://images.pexels.com/photos/7031705/pexels-photo-7031705.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 7" />
                 </div>
                 <div className="carousel-item">
-                    <img src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dd75459b029f544a4ec2/previews/6737dd7b459b029f544a5133/download/ella-olsson-lMcRyBx4G50-unsplash.webp" className="d-block w-100" alt="Slide 8" />
+                    <img src="https://stewarthunter.armymwr.com/application/files/3215/4143/4442/FSHAAF_Fitness_EWb.jpg" className="d-block w-100" alt="Slide 8" />
                 </div>
                 <div className="carousel-item">
                     <img src="https://images.pexels.com/photos/1552252/pexels-photo-1552252.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 8" />
