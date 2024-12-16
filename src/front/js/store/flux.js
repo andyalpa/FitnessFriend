@@ -83,10 +83,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       logout: async () => {
         sessionStorage.setItem("token", null);
       },
+
       addFavs: (fav, type) => {
         const store = getStore();
         setStore({ favs: [...store.favs, { ...fav, type }] });
       },
+      
       removeFavs: (fav) => {
         const store = getStore();
         const newFavs = store.favs.filter(

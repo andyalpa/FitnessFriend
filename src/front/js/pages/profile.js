@@ -73,11 +73,11 @@ export const Profile = () => {
   return (
     <div className="mt-5">
       {store.token ? (
-        <div className="container text-center  profile-layout">
+        <div data-aos="zoom-out" className="container text-center m-3 profile-layout">
           <div className="row">
             {/* top left User Info */}
             <div className="col-md-6">
-              <div className="bg-white p-0 px-3 py-3 mb-3">
+              <div className="profile-card bg-white p-0 px-3 py-3 mb-3">
                 <div className="d-flex flex-column align-items-center">
                   <UploadImage user={user} />
                   <p className="fw-bold h4 mt-3">
@@ -96,7 +96,7 @@ export const Profile = () => {
 
             {/* top right Basic Details */}
             <div className="col-md-6 ">
-              <div className="bg-white px-3 mb-3 pb-3 basic-details">
+              <div data-aos="zoom-in" className="profile-card bg-white px-3 mb-3 pb-3 basic-details">
                 <div className="d-flex align-items-center justify-content-between border-bottom">
                   <p className="py-2">Full Name</p>
                   <p className="py-2 text-muted">
@@ -122,7 +122,7 @@ export const Profile = () => {
           <div className="row">
           {/* Bottm Left - Social Links */}
           <div className="col-md-6">
-      <div className="bg-white p-0 px-2 pb-3 mb-3">
+      <div data-aos="zoom-out" className="profile-card bg-white p-0 px-2 pb-3 mb-3">
         <div className="d-flex justify-content-between border-bottom py-2 px-3">
           <p><span className="fas fa-globe me-2"></span>Website</p>
           <a href="#"></a>
@@ -148,7 +148,7 @@ export const Profile = () => {
 
     {/* Bottom Right Weight Tracker */}
     <div className="col-md-6">
-      <div className="bg-white p-0 px-2 pb-3 mb-3">
+      <div data-aos="zoom-in" className="profile-card bg-white p-3 px-2 pb-3 mb-3">
         <h2>Weight Tracker</h2>
         <input
           type="number"
@@ -164,7 +164,7 @@ export const Profile = () => {
         >
           Add Weight
         </button>
-        <h3>Weight History</h3>
+        <h3 className="pt-4">Weight History</h3>
         <ul className="list-group mx-auto mt-3">
           {weightHistory.length > 0 ? (
             weightHistory.map((entry) => (
