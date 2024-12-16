@@ -7,8 +7,13 @@ export const LogoutButton = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    actions.logout();
-    navigate("/"); // Redirect to homepage or login page
+    try {
+      // Perform logout
+      actions.logout();  // This should update the store and sessionStorage
+      navigate("/", { replace: true });  // Navigate to homepage or login page
+    } catch (error) {
+      console.error("Logout failed", error);
+    }
   };
 
   return (

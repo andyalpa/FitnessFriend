@@ -183,7 +183,58 @@ def upload_image():
         db.session.commit()
         return jsonify({"message": "Image uploaded successfully", "pic": user.pic}), 200
 
+# Add Favorite
+@api.route('/favorites', methods=['GET'])
+@jwt_required()
+def get_favorites():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
 
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify([fav.serialize() for fav in user.favorites]), 200
+@api.route('/favorites', methods=['POST'])
+@jwt_required()
+def add_favorite():
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    body = request.get_json()
+    favorite_name = body.get('name')
+    favorite_type = body.get('type')
+
+    if not favorite_name or not favorite_type:
+        return jsonify({"error": "Name and type are required"}), 400
+
+    favorite = Favorite(user_id=user.id, name=favorite_name, type=favorite_type)
+    db.session.add(favorite)
+    db.session.commit()
+
+    return jsonify({"message": "Favorite added successfully", "favorite": favorite.serialize()}), 201
+
+# Delete Favorite
+@api.route('/favorites/<int:favorite_id>', methods=['DELETE'])
+@jwt_required()
+def delete_favorite(favorite_id):
+    email = get_jwt_identity()
+    user = User.query.filter_by(email=email).first()
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    favorite = Favorite.query.filter_by(id=favorite_id, user_id=user.id).first()
+
+    if not favorite:
+        return jsonify({"error": "Favorite not found"}), 404
+
+    db.session.delete(favorite)
+    db.session.commit()
+
+    return jsonify({"message": "Favorite deleted successfully"}), 200
 
 
 

@@ -350,3 +350,8 @@ background: #25252565;
 .list-group-item {
   background: #5d5d5d94;
 }
+
+/* Modal Customizations */
+.Login-btn {
+  color: #006A4E;
+}
