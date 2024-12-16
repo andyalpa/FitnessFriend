@@ -16,7 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       ],
       user: null,
       token: sessionStorage.getItem("token"),
-       favs: []
+      favs: [],
     },
     actions: {
       // Use getActions to call a function within a fuction
@@ -38,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.setItem("token", null);
       },
 
-      updateUser: async (formData, pic) => {
+      updateUser: async (formData) => {
         let response = await fetch(process.env.BACKEND_URL + "/update_user", {
           method: "PUT",
           headers: {
@@ -48,8 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           body: JSON.stringify({
             email: formData.email,
             height: formData.height,
-            name: formData.name,
             last_name: formData.last_name,
+            name: formData.name,
             weight: formData.weight,
           }),
         });
@@ -84,19 +84,18 @@ const getState = ({ getStore, getActions, setStore }) => {
         sessionStorage.setItem("token", null);
       },
       addFavs: (fav, type) => {
-                const store = getStore();
-                setStore({ favs: [...store.favs, {...fav, type}] });
-            },
-            removeFavs: (fav) => {
-                const store = getStore();
-                const newFavs = store.favs.filter(favorite => favorite.idMeal !== fav.idMeal || favorite.type !== fav.type);
-                setStore({ favs: newFavs });
-            },
-        
-        
-        
-        
-        
+        const store = getStore();
+        setStore({ favs: [...store.favs, { ...fav, type }] });
+      },
+      removeFavs: (fav) => {
+        const store = getStore();
+        const newFavs = store.favs.filter(
+          (favorite) =>
+            favorite.idMeal !== fav.idMeal || favorite.type !== fav.type
+        );
+        setStore({ favs: newFavs });
+      },
+
       exampleFunction: () => {
         getActions().changeColor(0, "green");
       },

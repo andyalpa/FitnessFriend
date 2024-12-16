@@ -34,8 +34,8 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<MealInfo />} path="/:MealId" />
-                        <Route element={<WorkoutInfo />} path="/:WorkoutID" />
+                        <Route element={<MealInfo />} path="/meal/:MealId" />
+                        <Route element={<WorkoutInfo />} path="/workout/:WorkoutID" />
                         <Route element={<Meal/>} path="/meal" />
                         <Route element={<Workout/>} path="/workout" />
                         <Route element={<LogIn />} path="/login" />

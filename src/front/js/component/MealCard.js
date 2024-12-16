@@ -23,18 +23,29 @@ const MealCard = ({ data }) => {
             {
                 (!data) ? "No Meal Found " : data.map((meal, index) => {
                     return (
-                        <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)" }} key={index} >
-                            <div onClick={() => {
-                             navigate(`/${meal.idMeal}`)
-                            }}> 
-                                <img src={meal.strMealThumb} alt="/" />
+                        <div  data-aos="fade-in">
+                            <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)" }} key={index} >
+                                {store.token ? (                                <div onClick={() => {
+                                 navigate(`/meal/${meal.idMeal}`)
+                                }}>
+                                    <img src={meal.strMealThumb} alt="/" />
+                                </div>) : (                                <div onClick={() => {
+                                 navigate(`/profile`)
+                                }}>
+                                    <img src={meal.strMealThumb} alt="/" />
+                                </div>)}
+
+                                <h3 className="ms-2">{meal.strMeal}</h3>
+                               {store.token ? (
+                                <div className="fav-button-container">
+                                <a onClick={(e) => handleClick(e, meal)} style={{ borderRadius: "1.25rem" }} href="#" className="btn btn-warning ms-5">
+                                    <i className={store.favs.some(fav => fav.idMeal === meal.idMeal && fav.type === "meal") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
+                                </a>
                             </div>
-                            <h3 className="ms-2">{meal.strMeal}</h3>
-                            <a onClick={(e) => handleClick(e, meal)} style={{ borderRadius: "1.25rem" }} href="#" className="btn btn-warning ms-5">
-                                <i className={store.favs.some(fav => fav.idMeal === meal.idMeal && fav.type === "meal") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
 
-                            </a>
-
+                               ) : (<div className="d-none"></div>)}
+                                
+                            </div>
                         </div>
 
                     )
