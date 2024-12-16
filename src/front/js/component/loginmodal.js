@@ -85,7 +85,7 @@ export const LoginModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} style={{ backgroundColor: "transparent", border: "none", color: "black"  }} >
+      <Button variant="primary" onClick={handleShow} style={{ backgroundColor: "transparent", border: "none", color: "black" , padding: "0"}} >
         Login
       </Button>
 
