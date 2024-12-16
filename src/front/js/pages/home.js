@@ -12,10 +12,6 @@ export const Home = () => {
 	return (
 
 		<div className="mx-auto">
-			<div className="homeHeader">
-				<h1>Meet Your Newest Friend in Fitness! 
-					</h1>
-			</div>
 			<Carousel className="overlay"/>
 			<div data-aos="fade-in">
 				<h2  data-aos="fade-in" className="home-header">Featured Recipes: </h2>
