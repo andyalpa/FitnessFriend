@@ -173,8 +173,8 @@ body {
   padding: 0;
 }
 
-p {
-  margin: 0;
+.profile-txt {
+  margin: 5px;
 }
 
 .d-flex a {
@@ -203,4 +203,7 @@ p {
 
 .basic-details {
   height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
