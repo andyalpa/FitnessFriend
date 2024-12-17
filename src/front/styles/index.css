@@ -347,14 +347,8 @@ background: #25252565;
   background: #5d5d5d94;
 }
 
-.profile-layout {
-  
-}
-
-.profile-card {
-  background-color: #e0e0e0b2;
-  box-shadow: 0 0 9px 8px #3a3a3a4d;
-  transition: transform .2s ease-out;
-  border-radius: 15px;
+/* Modal styling */
+.Login-btn {
+  color: #006A4E;
 }
 

@@ -47,7 +47,7 @@ const Meal = () => {
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
                     <div className="search--box">
                         <div className="search input-group mb-3">
-                            <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" class="input" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
+                            <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" className="input" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
                         </div>
                         <i className="fas fa-search"></i>
                     </div>
@@ -62,12 +62,6 @@ const Meal = () => {
 
 
                 </div>
-
-                {/* Recipes Sort by Letters */}
-                {/* <div className="lettersContainer">
-                <RecipeLetters letterIndex={(letter) => letterIndex(letter)}/>
-            </div> */}
-
 
             </div>
 

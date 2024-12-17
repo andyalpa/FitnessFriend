@@ -60,11 +60,11 @@ const Workout = () => {
                     </div>
                 </div>
                 <div className="categories text-center d-flex">
-                    <WorkoutCategories catIndex={(cat) => catIndex(cat)} />
+                    {/* <WorkoutCategories catIndex={(cat) => catIndex(cat)} /> */}
                 </div>
                 <div className="recipes_grid mt-5 mx-auto">
-                    {selectedCategory === null && <FeaturedWorkout />}
-                    {show ? <WorkoutCard data={workout} /> : ""}
+                    {/* {selectedCategory === null && <FeaturedWorkout />}
+                    {show ? <WorkoutCard data={workout} /> : ""} */}
                 </div>
             </div>
         </>
