@@ -22,7 +22,7 @@ export const Home = () => {
 			<div data-aos="fade-out">
 				<h2  data-aos="fade-in" className="home-header">Featured Workouts: </h2>
 				<div className="recipes_grid mt-5 mx-auto">
-					{/* <FeaturedWorkout /> */}
+					<FeaturedWorkout />
 				</div>
 			</div>
 		</div>

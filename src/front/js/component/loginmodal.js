@@ -85,18 +85,25 @@ export const LoginModal = () => {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow} style={{ backgroundColor: "transparent", border: "none", color: "black", padding: "0"}}>
+      <Button variant="primary" onClick={handleShow} style={{ backgroundColor: "transparent", border: "none", color: "black" , padding: "0"}} >
         Login
       </Button>
 
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>{signupView ? "Sign Up" : "Log In"}</Modal.Title>
+          <Modal.Title>
+          <img
+                className="img-fluid"
+                alt="Responsive image"
+                src="https://i.imgur.com/sB3VJu2.png"
+                style={{ width: "105px", marginLeft: "177px" }}
+              />
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={signupView ? createUser : logInUser}>
             {renderFormFields(signupView ? signupFields : loginFields)}
-            <Button type="submit" variant="primary" className="w-100">
+            <Button type="submit" className="w-100" style={{backgroundColor: "#006A4E", border: "none"}}>
               {signupView ? "Sign Up" : "Log In"}
             </Button>
           </Form>
@@ -104,6 +111,7 @@ export const LoginModal = () => {
         <Modal.Footer>
           <Button
             variant="link"
+            style={{textDecoration: "none", color: "#000000"}}
             onClick={() => setSignupView(!signupView)}
           >
             {signupView ? "Go to Login" : "Create New Account"}
