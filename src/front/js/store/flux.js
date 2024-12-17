@@ -115,6 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
         setStore({ favs: [...store.favs, { ...fav, type }] });
       },
+      
       removeFavs: (fav) => {
         const store = getStore();
         const newFavs = store.favs.filter(

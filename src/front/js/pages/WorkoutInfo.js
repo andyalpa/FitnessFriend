@@ -63,7 +63,7 @@ const WorkoutInfo = () => {
 
             <div style={{ display: "flex", flexDirection: "column" }}>
               <div className="meal-body my-3">
-                <div data-aos="fade-left" className="meal-instructions ps-4">
+                <div style={{borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px" }} data-aos="fade-left" className="meal-instructions ps-4">
                   <h2>Instructions</h2>
                   <ul>
                     {instructions.map((instruction, index) => (

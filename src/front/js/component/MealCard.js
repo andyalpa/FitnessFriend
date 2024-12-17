@@ -65,31 +65,25 @@ const MealCard = ({ data }) => {
                                       </div>
                                   )}
 
-                                  <h3 className="ms-2">{meal.strMeal}</h3>
-                                  {store.token ? (
-                                      <div className="fav-button-container">
-                                          <a
-                                              onClick={(e) => handleClick(e, meal)}
-                                              style={{ borderRadius: "1.25rem" }}
-                                              href="#"
-                                              className="btn btn-warning ms-5"
-                                          >
-                                              <i
-                                                  className={
-                                                    store.favs.some((fav) => fav.name === meal.strMeal && fav.type === "meal")
-                                                          ? "fa fa-solid fa-heart"
-                                                          : "fa fa-regular fa-heart test"
-                                                  }
-                                              ></i>
-                                          </a>
-                                      </div>
-                                  ) : (
-                                      <div className="d-none"></div>
-                                  )}
-                              </div>
-                          </div>
-                      );
-                  })}
+                                <h3 className="ms-2">{meal.strMeal}</h3>
+                               {store.token ? (
+                                <div className="fav-button-container">
+                                <a onClick={(e) => handleClick(e, meal)} style={{ borderRadius: "1.25rem" }} href="#" className="btn btn-warning ms-5">
+                                    <i className={store.favs.some(fav => fav.idMeal === meal.idMeal && fav.type === "meal") ? "fa fa-solid fa-heart" : "fa fa-regular fa-heart test"}></i>
+                                </a>
+                            </div>
+
+                               ) : (<div className="d-none"></div>)}
+                                
+                            </div>
+                        </div>
+
+                    )
+                })
+            }
+
+            {/* className="recipe_card " */}
+
         </>
     );
 };
