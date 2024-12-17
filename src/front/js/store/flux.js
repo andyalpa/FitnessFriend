@@ -19,21 +19,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       favs: [],
     },
     actions: {
-      // Use getActions to call a function within a fuction
-
-      // login: async (email, password) => {
-      //   let response = await fetch(process.env.BACKEND_URL + "/login", {
-      //     method: "POST",
-      //     headers: { "Content-type": "application/json" },
-      //     body: JSON.stringify({
-      //       email: email,
-      //       password: password,
-      //     }),
-      //   });
-      //   let data = await response.json();
-      //   sessionStorage.setItem("token", data.access_token);
-      //   sessionStorage.setItem("user", data.user);
-      // },
+  
       login: async (email, password) => {
         let response = await fetch(process.env.BACKEND_URL + "/login", {
           method: "POST",
@@ -126,20 +112,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
      
-      addFavs: (fav, type) => {
-        const store = getStore();
-        setStore({ favs: [...store.favs, { ...fav, type }] });
-      },
-      
-      removeFavs: (fav) => {
-        const store = getStore();
-        const newFavs = store.favs.filter(
-          (favorite) =>
-            favorite.idMeal !== fav.idMeal || favorite.type !== fav.type
-        );
-        setStore({ favs: newFavs });
-      },
-
       getUserFavorites: async () => {
         try {
             const response = await fetch(process.env.BACKEND_URL + "/favorites", {

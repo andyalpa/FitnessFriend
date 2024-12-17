@@ -39,15 +39,9 @@ const SocialLinkModal = ({ show, onClose, onSave, title, currentLink }) => {
           <div className="modal-footer">
             <button
               type="button"
-              className="btn btn-secondary"
-              onClick={onClose}
-            >
-              Close
-            </button>
-            <button
-              type="button"
               className="btn btn-primary"
               onClick={handleSave}
+              style={{ backgroundColor: "#006A4E", border: "none" }}
             >
               Save changes
             </button>

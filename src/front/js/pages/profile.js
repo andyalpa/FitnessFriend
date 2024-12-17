@@ -200,10 +200,12 @@ export const Profile = () => {
                   }}
                 />
                 <button
+                  
                   onClick={addNewWeight}
                   className="btn btn-primary mt-2"
                   disabled={!newWeight || isNaN(newWeight)}
                   style={{
+                    backgroundColor: "#006A4E", border: "none", color: "white",
                     borderRadius: "5px",
                     padding: "8px 15px",
                     boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",

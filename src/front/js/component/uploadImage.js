@@ -47,6 +47,7 @@ function UploadImage(props) {
           />
           <br />
           <button
+
             onClick={handleRemove}
             className="btn btn-danger mt-2"
             style={{ borderRadius: "5px" }}

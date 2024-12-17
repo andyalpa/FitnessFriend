@@ -21,30 +21,17 @@ export const UpdateUserModal = () => {
   const handleUpdateUser = async () => {
     const updatedFormData = { ...formData };
     const result = await actions.updateUser(updatedFormData);
-  
+
     if (result.success) {
       alert(result.message); // Show success message
-      const modal = new bootstrap.Modal(document.getElementById("updateUserModal"));
+      const modal = new bootstrap.Modal(
+        document.getElementById("updateUserModal")
+      );
       modal.hide(); // Hide the modal on success
     } else {
       alert(result.message); // Show error message
     }
   };
-
-  // const update = async (e) => {
-  //   e.preventDefault();
-  //   let response = await fetch(process.env.BACKEND_URL + "/signup", {
-  //     method: "POST",
-  //     headers: { "Content-type": "application/json" },
-  //     body: JSON.stringify(formData),
-  //   });
-  //   if (response.ok) {
-  //     alert("User updated successfully!");
-  //   } else {
-  //     alert("Error updating user.");
-  //   }
-  //   let data = await response.json();
-  // };
 
   useEffect(() => {
     if (store.user) {
@@ -65,6 +52,7 @@ export const UpdateUserModal = () => {
   return (
     <div>
       <button
+        style={{ backgroundColor: "#006A4E", border: "none", color: "white" }}
         type="button"
         className="btn btn-primary"
         data-bs-toggle="modal"
@@ -83,12 +71,12 @@ export const UpdateUserModal = () => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-            <img
-            className="img-fluid"
-            alt="Responsive image"
-            src="https://i.imgur.com/sB3VJu2.png"
-            style={{ width: "105px", marginLeft: "177px" }}
-          />
+              <img
+                className="img-fluid"
+                alt="Responsive image"
+                src="https://i.imgur.com/sB3VJu2.png"
+                style={{ width: "105px", marginLeft: "177px" }}
+              />
               <button
                 type="button"
                 className="btn-close"
@@ -146,7 +134,12 @@ export const UpdateUserModal = () => {
             </div>
             <div className="modal-footer">
               <button
-                className="btn btn-warning"
+                style={{
+                  backgroundColor: "#006A4E",
+                  border: "none",
+                  color: "white",
+                }}
+                className="btn "
                 onClick={handleUpdateUser}
                 data-bs-dismiss="modal"
               >
