@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 export const UpdateUserModal = () => {
@@ -21,34 +20,43 @@ export const UpdateUserModal = () => {
   // Update user profile
   const handleUpdateUser = async () => {
     const updatedFormData = { ...formData };
-    await actions.updateUser(updatedFormData);
-    alert("Profile updated successfully!");
+    const result = await actions.updateUser(updatedFormData);
+  
+    if (result.success) {
+      alert(result.message); // Show success message
+      const modal = new bootstrap.Modal(document.getElementById("updateUserModal"));
+      modal.hide(); // Hide the modal on success
+    } else {
+      alert(result.message); // Show error message
+    }
   };
 
-  const update = async (e) => {
-    e.preventDefault();
-    let response = await fetch(process.env.BACKEND_URL + "/signup", {
-      method: "POST",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    if (response.ok) {
-      alert("User updated successfully!");
-    } else {
-      alert("Error updating user.");
-    }
-    let data = await response.json();
-  };
+  // const update = async (e) => {
+  //   e.preventDefault();
+  //   let response = await fetch(process.env.BACKEND_URL + "/signup", {
+  //     method: "POST",
+  //     headers: { "Content-type": "application/json" },
+  //     body: JSON.stringify(formData),
+  //   });
+  //   if (response.ok) {
+  //     alert("User updated successfully!");
+  //   } else {
+  //     alert("Error updating user.");
+  //   }
+  //   let data = await response.json();
+  // };
 
   useEffect(() => {
     if (store.user) {
+      console.log("Updated store user:", store.user);
+
       setFormData({
         email: store.user.email,
         height: store.user.height,
         name: store.user.name,
         last_name: store.user.last_name,
         weight: store.user.weight,
-      }); // Make sure the data is being set correctly
+      });
     } else {
       actions.getUser();
     }
@@ -75,9 +83,12 @@ export const UpdateUserModal = () => {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="updateUserModalLabel">
-                Update Profile
-              </h5>
+            <img
+            className="img-fluid"
+            alt="Responsive image"
+            src="https://i.imgur.com/sB3VJu2.png"
+            style={{ width: "105px", marginLeft: "177px" }}
+          />
               <button
                 type="button"
                 className="btn-close"

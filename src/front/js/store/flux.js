@@ -69,28 +69,43 @@ const getState = ({ getStore, getActions, setStore }) => {
       }, 
 
       updateUser: async (formData) => {
-        let response = await fetch(process.env.BACKEND_URL + "/update_user", {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            height: formData.height,
-            last_name: formData.last_name,
-            name: formData.name,
-            weight: formData.weight,
-          }),
-        });
-
-        if (response.ok) {
-          let data = await response.json();
-          setStore({ user: data.updated_user }); // Update the global store with the new user data
-        } else {
-          console.error("Failed to update user:", response.status);
+        try {
+          // Make the PUT request to update the user
+          let response = await fetch(process.env.BACKEND_URL + "/update", {
+            method: "PUT", // Ensure it's PUT, not POST
+            headers: {
+              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email: formData.email,
+              height: formData.height,
+              last_name: formData.last_name,
+              name: formData.name,
+              weight: formData.weight,
+            }),
+          });
+      
+          // Check if the response is OK (status code 200)
+          if (response.ok) {
+            let data = await response.json();
+            console.log("Updated user data:", data.updated_user); // Log to ensure we have the correct data
+      
+            // Update the global store with the updated user
+            setStore({ user: data.updated_user });
+      
+            return { success: true, message: "User updated successfully" };
+          } else {
+            const errorData = await response.json();
+            console.error("Failed to update user:", errorData.error || "Unknown error");
+            return { success: false, message: errorData.error || "Error updating user." };
+          }
+        } catch (error) {
+          console.error("Error occurred while updating user:", error);
+          return { success: false, message: "Error occurred while updating user." };
         }
       },
+      
 
       getUser: async () => {
         let response = await fetch(process.env.BACKEND_URL + "/user", {
