@@ -9,15 +9,7 @@ const WorkoutCard = ({ data }) => {
     const { store, actions } = useContext(Context);
     let navigate = useNavigate()
 
-    // const handleClick = (e, workout) => {
-    //     e.preventDefault();
-    //     if (store.favs.some(fav => fav.id === workout.id && fav.type === "workout")) {
-    //         // come back to this to change IDs
-    //         actions.removeFavs({ id: workout.id, type: "workout" });
-    //     } else {
-    //         actions.addFavs(workout, "workout");
-    //     }
-    // };
+
     const handleClick = (e, workout) => {
         e.preventDefault();
     
@@ -26,9 +18,9 @@ const WorkoutCard = ({ data }) => {
         );
     
         if (existingFav) {
-            actions.removeFav(existingFav.id); // Remove favorite from backend
+            actions.removeFav(existingFav.id); 
         } else {
-            actions.addFav({ name: workout.name }, "workout"); // Add favorite to backend
+            actions.addFav({ name: workout.name }, "workout"); 
         }
     };
     return (

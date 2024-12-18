@@ -143,26 +143,50 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
     }, 
     
-      addFav: async (fav, type) => {
-        try {
-          const response = await fetch(process.env.BACKEND_URL + "/favorites", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({ name: fav.name, type }),
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            const store = getStore();
-            setStore({ favs: [...store.favs, data.favorite] });
+    addFav: async (fav, type) => {
+      try {
+          let body;
+          let idField; // Store the correct ID field name
+  
+          if (type === "workout") {
+              body = JSON.stringify({ name: fav.name, type: type, id: fav.id });
+              idField = "id"; // For workouts, the ID is just "id"
+          } else if (type === "meal") {
+              body = JSON.stringify({ name: fav.strMeal, type: type, id: fav.idMeal });
+              idField = "idMeal"; // For meals, it's "idMeal"
           }
-        } catch (error) {
+  
+          const response = await fetch(process.env.BACKEND_URL + "/favorites", {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+                  Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+              },
+              body: body,
+          });
+  
+          if (response.ok) {
+              const data = await response.json();
+              const store = getStore();
+  
+              // Correctly add the favorite to the store using the right ID
+              setStore({
+                  favs: [
+                      ...store.favs,
+                      { ...data.favorite, [idField]: fav[idField] }, // Use dynamic key
+                  ],
+              });
+              console.log("Favorite added:", data.favorite);
+          } else {
+              const errorData = await response.json();
+              console.error("Failed to add favorite:", errorData.message);
+          }
+      } catch (error) {
           console.error("Failed to add favorite:", error);
-        }
-      },
+      }
+  },
+    
+    
 
       removeFav: async (favoriteId) => {
         try {

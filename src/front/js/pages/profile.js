@@ -187,7 +187,29 @@ export const Profile = () => {
               </div>
             </div>
           </div>
+          <div className="ml-auto">
+                <div className="dropdown">
+                    <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Favorites
+                    </a>
+                    <ul className="dropdown-menu dropdown-menu-end">
+                        {store.favs.length > 0 ? (
+                            store.favs.map((fav, index) => (
+                                <li key={index} className="d-flex align-items-center">
+                                    <Link className="dropdown-item" to={`/${fav.type}info/${fav.idMeal}`}>
+                                        {fav.name}
+                                    </Link>
+                                </li>
+                            ))
+                        ) : (
+                            <li className="dropdown-item text-center">No favorites added</li>
+                        )}
+                    </ul>
+                </div>
+            </div>
         </div>
+
+        
       ) : (
         <div style={{ paddingTop: "240px" }}>
           <div className="alert alert-light">
