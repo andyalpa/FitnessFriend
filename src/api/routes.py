@@ -110,35 +110,10 @@ def login():
     else:
         return jsonify("user does not exist")
 
-#Update User
-@api.route('/update_user', methods=['PUT'])
+# Put Update User (updated to PUT)
+@api.route('/update', methods=['PUT'])  # Changed to PUT
 @jwt_required()
-def update_user():
-    email = get_jwt_identity()
-    user = User.query.filter_by(email=email).first()
-    
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-
-    body = request.get_json()
-
-    user.email = body.get('email', user.email)
-    user.height = body.get('height', user.height)
-    user.last_name = body.get('last_name', user.last_name)
-    user.name = body.get('name', user.name)
-    user.weight = body.get('weight', user.weight)
-    user.pic = body.get('pic', user.pic)
-
-    db.session.commit()
-
-    updated_user = User.query.filter_by(email=email).first()
-
-    return jsonify({"message": "User updated successfully", "user" : updated_user.serialize()}), 200
-    
-#Post Update User
-@api.route('/update', methods=['POST'])
-@jwt_required()
-def post_update_user():
+def put_update_user():
     email = get_jwt_identity()
     user = User.query.filter_by(email=email).first()
     
@@ -151,12 +126,19 @@ def post_update_user():
     user.name = body.get('name', user.name)
     user.last_name = body.get('last_name', user.last_name)
     user.height = body.get('height', user.height)
-    user.pic = body.get('pic', user.pic)
-
+    
 
     db.session.commit()
 
-    return jsonify({"message": "User updated successfully"}), 200
+    # Return the updated user object (if needed on frontend)
+    return jsonify({"message": "User updated successfully", "updated_user": {
+        "email": user.email,
+        "name": user.name,
+        "last_name": user.last_name,
+        "height": user.height,
+      
+    }}), 200
+
 
 #UploadPicture
 @api.route('/upload', methods=['POST'])
