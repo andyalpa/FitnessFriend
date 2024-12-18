@@ -5,6 +5,8 @@ import UploadImage from "../component/uploadImage";
 import { LoginModal } from "../component/loginmodal";
 import SocialLinkModal from "../component/socialLinkModal";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import FoodTracker from "../component/FoodTracker";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -16,8 +18,9 @@ export const Profile = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
+  const [selectedFavs, setSelectedFavs] = useState([]);
 
-  // Social Media Links
+  // Social Media Links  
   const [socialLinks, setSocialLinks] = useState({
     website: "",
     github: "",
@@ -26,7 +29,7 @@ export const Profile = () => {
     facebook: "",
   });
 
-  // Modal State
+  // Modal State  
   const [modalState, setModalState] = useState({
     show: false,
     currentTitle: "",
@@ -73,6 +76,25 @@ export const Profile = () => {
       console.error("Failed to fetch weight history:", await response.text());
     }
   };
+
+  const handleFavoriteSelection = (favId) => {
+    setSelectedFavs((prevSelectedFavs) => {
+      if (prevSelectedFavs.includes(favId)) {
+        return prevSelectedFavs.filter((id) => id !== favId);
+      } else {
+        return [...prevSelectedFavs, favId];
+      }
+    });
+  };
+
+  useEffect(() => {
+    // Update dropdown menu items based on selectedFavs  
+    const updateDropdownItems = () => {
+      // Logic to update dropdown items based on selectedFavs  
+    };
+
+    updateDropdownItems();
+  }, [selectedFavs]);
 
   const addNewWeight = async () => {
     let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
@@ -122,7 +144,8 @@ export const Profile = () => {
           <div className="row">
             {/* Left Column - User Info & Social Links */}
             <div className="col-md-6">
-              <div data-aos="fade-in"
+              <div
+                data-aos="fade-in"
                 className="bg-white p-3 mb-3"
                 style={{ borderRadius: "10px", marginLeft: "30px" }}
               >
@@ -151,7 +174,8 @@ export const Profile = () => {
               </div>
 
               {/* Social Links */}
-              <div data-aos="fade-in"
+              <div
+                data-aos="fade-in"
                 className="bg-white p-3 mb-3"
                 style={{ borderRadius: "10px", marginLeft: "30px" }}
               >
@@ -200,12 +224,13 @@ export const Profile = () => {
                   }}
                 />
                 <button
-                  
                   onClick={addNewWeight}
                   className="btn btn-primary mt-2"
                   disabled={!newWeight || isNaN(newWeight)}
                   style={{
-                    backgroundColor: "#006A4E", border: "none", color: "white",
+                    backgroundColor: "#006A4E",
+                    border: "none",
+                    color: "white",
                     borderRadius: "5px",
                     padding: "8px 15px",
                     boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
@@ -239,29 +264,39 @@ export const Profile = () => {
               </div>
             </div>
           </div>
-          <div className="ml-auto">
-                <div className="dropdown">
-                    <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Favorites
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-end">
-                        {store.favs.length > 0 ? (
-                            store.favs.map((fav, index) => (
-                                <li key={index} className="d-flex align-items-center">
-                                    <Link className="dropdown-item" to={`/${fav.type}info/${fav.idMeal}`}>
-                                        {fav.name}
-                                    </Link>
-                                </li>
-                            ))
-                        ) : (
-                            <li className="dropdown-item text-center">No favorites added</li>
-                        )}
-                    </ul>
-                </div>
-            </div>
-        </div>
+          <div>
+            <FoodTracker />
+          </div>
 
-        
+
+          <div data-aos="fade-in">
+            <div className="recipes_grid mt-5 mx-auto">
+            <h2  data-aos="fade-in" className="home-header">Favorites: </h2>
+              <div className="recipes_grid mt-5 mx-auto">
+                {store.favs.length > 0 ? (
+                  store.favs.map((fav, index) => (
+                    <div data-aos="fade-in" key={index}>
+                      <div
+                        className="recipe_card m-2 d-flex"
+                        style={{
+                          borderRadius: "1.25rem",
+                          boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)",
+                        }}
+                      >
+                        <Link to={`/${fav.type}/${fav.id}`}>
+                          <img src={fav.image} alt={fav.name} />
+                        </Link>
+                        <h3 className="ms-2">{fav.name}</h3>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No favorites found</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div style={{ paddingTop: "240px" }}>
           <div className="alert alert-light">
