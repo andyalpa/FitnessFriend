@@ -112,44 +112,68 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
      
-      getUserFavorites: async () => {
-        try {
-            const response = await fetch(process.env.BACKEND_URL + "/favorites", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-                },
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                setStore({ favs: data }); // Store favorites in the state
-            }
-        } catch (error) {
-            console.error("Failed to fetch favorites:", error);
-        }
-    }, 
-    
-      addFav: async (fav, type) => {
-        try {
-          const response = await fetch(process.env.BACKEND_URL + "/favorites", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-            },
-            body: JSON.stringify({ name: fav.name, type }),
-          });
-      
-          if (response.ok) {
-            const data = await response.json();
-            const store = getStore();
-            setStore({ favs: [...store.favs, data.favorite] });
-          }
-        } catch (error) {
-          console.error("Failed to add favorite:", error);
-        }
+      getUserFavorites: async () => {  
+        try {  
+         const response = await fetch(process.env.BACKEND_URL + "/favorites", {  
+          method: "GET",  
+          headers: {  
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,  
+          },  
+         });  
+        
+         if (response.ok) {  
+          const data = await response.json();  
+          setStore({ favs: data }); // Store favorites in the state  
+         }  
+        } catch (error) {  
+         console.error("Failed to fetch favorites:", error);  
+        }  
       },
+      
+    
+      addFav: async (fav, type) => {  
+        try {  
+         let name, image, id;  
+        
+         if (type === "meal") {  
+          const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${fav.idMeal}`);  
+          const data = await response.json();  
+          name = data.meals[0].strMeal;  
+          image = data.meals[0].strMealThumb;  
+          id = fav.idMeal; // Use the original ID from the API  
+         } else if (type === "workout") {  
+          const response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/exercise/${fav.id}`, {  
+            headers: {  
+             'X-RapidAPI-Key': process.env.API_KEY, // Replace with your API key  
+             'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'  
+            }  
+          });  
+          const data = await response.json();  
+          name = data.name;  
+          image = data.gifUrl;  
+          id = fav.id; // Use the original ID from the API  
+         }  
+        
+         const response = await fetch(process.env.BACKEND_URL + "/favorites", {  
+          method: "POST",  
+          headers: {  
+            "Content-Type": "application/json",  
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,  
+          },  
+          body: JSON.stringify({ name, image, id, type }),  
+         });  
+        
+         if (response.ok) {  
+          const data = await response.json();  
+          const store = getStore();  
+          setStore({ favs: [...store.favs, { id, name, image, type }] }); // Use the original ID from the API  
+         }  
+        } catch (error) {  
+         console.error("Failed to add favorite:", error);  
+        }  
+      },
+      
+    
 
       removeFav: async (favoriteId) => {
         try {
