@@ -89,22 +89,7 @@ export const Profile = () => {
     });
   };
 
-  useEffect(() => {
 
-    // Update dropdown menu items based on selectedFavs
-    const updateDropdownItems = () => {
-      // Logic to update dropdown items based on selectedFavs
-    };
-  
-
-    // Update dropdown menu items based on selectedFavs  
-    const updateDropdownItems = () => {
-      // Logic to update dropdown items based on selectedFavs  
-    };
-
-
-    updateDropdownItems();
-  }, [selectedFavs]);
 
   const addNewWeight = async () => {
     let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
@@ -285,36 +270,9 @@ export const Profile = () => {
 
 
           </div>
-          <div className="ml-auto">
-  <div className="dropdown">
-    <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Favorites
-    </a>
-    <ul className="dropdown-menu dropdown-menu-end">
-      {store.favs.length > 0 ? (
-        store.favs.map((fav, index) => (
-          <li key={index} className="d-flex align-items-center">
-            <input
-              type="checkbox"
-              checked={selectedFavs.includes(fav.id)}
-              onChange={() => handleFavoriteSelection(fav.id)}
-            />
-            <Link className="dropdown-item" to={`/${fav.type}/${fav.id}`}>
-              {fav.name}
-              {fav.strMeal}
-            </Link>
-          </li>
-        ))
-      ) : (
-        <li className="list-group-item text-center">No favorites selected</li>
-      )}
-    </ul>
-  </div>
-</div>
 
-          <div>
-            <FoodTracker />
-          </div>
+
+
 
 
           <div data-aos="fade-in">
@@ -372,26 +330,3 @@ export const Profile = () => {
     </div>
   );
 };
-
-{/* <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-Favorites
-</a>
-<ul className="dropdown-menu dropdown-menu-end">
-{store.favs.length > 0 ? (
-  store.favs.map((fav, index) => (
-    <li key={index} className="d-flex align-items-center">
-      <input
-        type="checkbox"
-        checked={selectedFavs.includes(fav.id)}
-        onChange={() => handleFavoriteSelection(fav.id)}
-      />
-      <Link className="dropdown-item" to={`/${fav.type}/${fav.id}`}>
-        {fav.name}
-        {fav.strMeal}
-      </Link>
-    </li>
-  ))
-) : (
-  <li className="list-group-item text-center">No favorites selected</li>
-)}
-</ul> */}
