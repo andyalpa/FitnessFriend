@@ -352,3 +352,7 @@ background: #25252565;
   color: #006A4E;
 }
 
+.nav-item.nav-link.active {
+  font-weight: bold;
+  color: #007bff; /* Or any color you'd like */
+}

@@ -1,12 +1,16 @@
 import React, { useContext, useState } from "react";
 import { LoginModal } from "./loginmodal";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { LogoutButton } from "../pages/logoutButton";
 
 export const Navbar = () => {
   const { store } = useContext(Context);
   const [showLoginModal, setShowLoginModal] = useState(false);
+  const location = useLocation(); // Get the current location
+
+  // Function to check if the link is active
+  const isActive = (path) => location.pathname === path ? "active" : "";
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -19,16 +23,16 @@ export const Navbar = () => {
 
         <div className="nav nav-tabs">
           <ul className="nav nav-tabs">
-            <li className="nav-item nav-link">
+            <li className={`nav-item nav-link ${isActive("/meal")}`}>
               <Link to={"/meal"}>Recipes</Link>
             </li>
-            <li className="nav-item nav-link">
+            <li className={`nav-item nav-link ${isActive("/workout")}`}>
               <Link to={"/workout"}>Workout</Link>
             </li>
 
             {/* Show Profile only if user is logged in */}
             {store.user ? (
-              <li className="nav-item nav-link">
+              <li className={`nav-item nav-link ${isActive("/profile")}`}>
                 <Link to={"/profile"}>Profile</Link>
               </li>
             ) : (
