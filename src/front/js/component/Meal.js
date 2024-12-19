@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import FeaturedRecipes from "./FeaturedRecipes";
 import MealCategories from "../pages/MealCategories";
+import MealCard from "./MealCard";
 
 const Meal = () => {
     const [url, setUrl] = useState("");
