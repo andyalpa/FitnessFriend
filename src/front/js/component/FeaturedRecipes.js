@@ -3,16 +3,18 @@ import MealCard from "./MealCard.js";
 
 
 const FeaturedRecipes = () => {
-  const [randomRecipes, setRandomRecipes] = useState()
-  const [show, setShow] = useState(false)
+  const [randomRecipes, setRandomRecipes] = useState();
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     async function getInfo() {
-      const recipes = []
+      const recipes = [];
       for (let i = 0; i < 8; i++) {
-        let res = await fetch(`https://www.themealdb.com/api/json/v1/1/random.php`);
+        let res = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/random.php`
+        );
         let data = await res.json();
-        recipes.push(data.meals)
+        recipes.push(data.meals);
       }
 
       console.log(recipes);
@@ -22,22 +24,18 @@ const FeaturedRecipes = () => {
     getInfo();
   }, []);
 
-
   return (
     <>
-        {
-          show ? randomRecipes?.map((recipe, index) => (
-            <MealCard key={index} data={recipe} />
-
-          ))
-            : "Loading..."
-        }
-
-      
-
-
+      {show
+        ? randomRecipes?.map((recipe, index) => (
+          <MealCard
+            key={recipe[0]?.idMeal || index} // Use a unique identifier if possible
+            data={recipe}
+          />
+        ))
+        : "Loading..."}
     </>
   );
-}
+};
 
 export default FeaturedRecipes;
