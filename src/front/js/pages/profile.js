@@ -5,6 +5,8 @@ import UploadImage from "../component/uploadImage";
 import { LoginModal } from "../component/loginmodal";
 import SocialLinkModal from "../component/socialLinkModal";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { FoodTracker } from "../component/FoodTracker";
 
 export const Profile = () => {
   const [user, setUser] = useState({});
@@ -16,6 +18,7 @@ export const Profile = () => {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const navigate = useNavigate();
+  const [selectedFavs, setSelectedFavs] = useState([]);
 
   // Social Media Links
   const [socialLinks, setSocialLinks] = useState({
@@ -74,6 +77,25 @@ export const Profile = () => {
     }
   };
 
+  const handleFavoriteSelection = (favId) => {
+    setSelectedFavs((prevSelectedFavs) => {
+      if (prevSelectedFavs.includes(favId)) {
+        return prevSelectedFavs.filter((id) => id !== favId);
+      } else {
+        return [...prevSelectedFavs, favId];
+      }
+    });
+  };
+
+  useEffect(() => {
+    // Update dropdown menu items based on selectedFavs
+    const updateDropdownItems = () => {
+      // Logic to update dropdown items based on selectedFavs
+    };
+  
+    updateDropdownItems();
+  }, [selectedFavs]);
+
   const addNewWeight = async () => {
     let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
       method: "POST",
@@ -84,7 +106,7 @@ export const Profile = () => {
       body: JSON.stringify({ weight: parseFloat(newWeight) }),
     });
     if (response.ok) {
-      setNewWeight("");
+      setNewWeight(newWeight);
       getWeightHistory();
     } else {
       console.error("Failed to add new weight:", response.status);
@@ -153,7 +175,7 @@ export const Profile = () => {
               {/* Social Links */}
               <div data-aos="fade-in"
                 className="bg-white p-3 mb-3"
-                style={{ borderRadius: "10px", marginLeft: "30px" }}
+                style={{ borderRadius: "10px", marginLeft: "30px", height: "289px"}}
               >
                 <h5>Social Links</h5>
                 {Object.entries(socialLinks).map(([field, link]) => (
@@ -200,7 +222,7 @@ export const Profile = () => {
                   }}
                 />
                 <button
-                  
+
                   onClick={addNewWeight}
                   className="btn btn-primary mt-2"
                   disabled={!newWeight || isNaN(newWeight)}
@@ -239,7 +261,43 @@ export const Profile = () => {
               </div>
             </div>
           </div>
+          <div style={{marginLeft:"23px"}}>
+                  <FoodTracker/>
+
+
+
+
+          </div>
+          <div className="ml-auto">
+  <div className="dropdown">
+    <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Favorites
+    </a>
+    <ul className="dropdown-menu dropdown-menu-end">
+      {store.favs.length > 0 ? (
+        store.favs.map((fav, index) => (
+          <li key={index} className="d-flex align-items-center">
+            <input
+              type="checkbox"
+              checked={selectedFavs.includes(fav.id)}
+              onChange={() => handleFavoriteSelection(fav.id)}
+            />
+            <Link className="dropdown-item" to={`/${fav.type}/${fav.id}`}>
+              {fav.name}
+              {fav.strMeal}
+            </Link>
+          </li>
+        ))
+      ) : (
+        <li className="list-group-item text-center">No favorites selected</li>
+      )}
+    </ul>
+  </div>
+</div>
+
         </div>
+
+
       ) : (
         <div style={{ paddingTop: "240px" }}>
           <div className="alert alert-light">
@@ -264,3 +322,26 @@ export const Profile = () => {
     </div>
   );
 };
+
+{/* <a className="btn btn-primary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+Favorites
+</a>
+<ul className="dropdown-menu dropdown-menu-end">
+{store.favs.length > 0 ? (
+  store.favs.map((fav, index) => (
+    <li key={index} className="d-flex align-items-center">
+      <input
+        type="checkbox"
+        checked={selectedFavs.includes(fav.id)}
+        onChange={() => handleFavoriteSelection(fav.id)}
+      />
+      <Link className="dropdown-item" to={`/${fav.type}/${fav.id}`}>
+        {fav.name}
+        {fav.strMeal}
+      </Link>
+    </li>
+  ))
+) : (
+  <li className="list-group-item text-center">No favorites selected</li>
+)}
+</ul> */}
