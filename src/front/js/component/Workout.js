@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WorkoutCard from "./WorkoutCard";
-import FeaturedWorkout from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedWorkout.js";
 import WorkoutCategories from "../pages/WorkoutCategories";
+import FeaturedWorkout from "./FeaturedWorkout";
 
 const Workout = () => {
     const [url, setUrl] = useState("");
