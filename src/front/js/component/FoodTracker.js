@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-
 export const FoodTracker = () => {
-
-
-const FoodTracker = () => {
-
   const [foodName, setFoodName] = useState("");
   const [calories, setCalories] = useState("");
   const [protein, setProtein] = useState("");
@@ -27,11 +22,7 @@ const FoodTracker = () => {
     setFats("");
   };
   return (
-
     <div className="bg-white p-3 mb-3 mx-auto" style={{ borderRadius: "10px", width: "1466px" }}>
-
-    <div className="bg-white p-3 mb-3" style={{ borderRadius: "10px" }}>
-
       <h2>Food Tracker</h2>
       <div className="mb-3">
         <input
