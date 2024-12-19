@@ -21,7 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
   
       login: async (email, password) => {
-        let response = await fetch(process.env.BACKEND_URL + "/login", {
+        let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/login", {
           method: "POST",
           headers: { "Content-type": "application/json" },
           body: JSON.stringify({
@@ -57,7 +57,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       updateUser: async (formData) => {
         try {
           // Make the PUT request to update the user
-          let response = await fetch(process.env.BACKEND_URL + "/update", {
+          let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/update", {
             method: "PUT", // Ensure it's PUT, not POST
             headers: {
               Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -94,7 +94,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       
 
       getUser: async () => {
-        let response = await fetch(process.env.BACKEND_URL + "/user", {
+        let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/user", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,
@@ -114,7 +114,7 @@ const getState = ({ getStore, getActions, setStore }) => {
      
       getUserFavorites: async () => {  
         try {  
-         const response = await fetch(process.env.BACKEND_URL + "/favorites", {  
+         const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/favorites", {  
           method: "GET",  
           headers: {  
             Authorization: `Bearer ${sessionStorage.getItem("token")}`,  
@@ -154,7 +154,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           id = fav.id; // Use the original ID from the API  
          }  
         
-         const response = await fetch(process.env.BACKEND_URL + "/favorites", {  
+         const response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/favorites", {  
           method: "POST",  
           headers: {  
             "Content-Type": "application/json",  
@@ -178,7 +178,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       removeFav: async (favoriteId) => {
         try {
           const response = await fetch(
-            `${process.env.BACKEND_URL}/favorites/${favoriteId}`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/favorites/${favoriteId}`,
             {
               method: "DELETE",
               headers: {
@@ -238,7 +238,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getMessage: async () => {
         try {
           // fetching data from the backend
-          const resp = await fetch(process.env.BACKEND_URL + "/hello");
+          const resp = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/hello");
           const data = await resp.json();
           setStore({ message: data.message });
           // don't forget to return something, that is how the async resolves

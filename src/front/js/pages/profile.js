@@ -64,7 +64,7 @@ export const Profile = () => {
   };
 
   const getWeightHistory = async () => {
-    let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
+    let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/userMetrics", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${store.token}`,
@@ -92,7 +92,7 @@ export const Profile = () => {
 
 
   const addNewWeight = async () => {
-    let response = await fetch(process.env.BACKEND_URL + "/userMetrics", {
+    let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/userMetrics", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${store.token}`,

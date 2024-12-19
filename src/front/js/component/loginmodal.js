@@ -39,7 +39,7 @@ export const LoginModal = ({ show, onHide }) => {
 
   const createUser = (e) => {
     e.preventDefault();
-    fetch(`${process.env.BACKEND_URL}/signup`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
