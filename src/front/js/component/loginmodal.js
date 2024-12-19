@@ -5,8 +5,7 @@ import Form from "react-bootstrap/Form";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 
-export const LoginModal = () => {
-  const [show, setShow] = useState(false);
+export const LoginModal = ({ show, onHide }) => {
   const [signupView, setSignupView] = useState(false);
   const navigate = useNavigate();
   const { actions } = useContext(Context);
@@ -18,9 +17,6 @@ export const LoginModal = () => {
     height: "",
     weight: "",
   });
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +30,10 @@ export const LoginModal = () => {
     e.preventDefault();
     actions
       .login(formData.email, formData.password)
-      .then(() => navigate('/profile'))
+      .then(() => {
+        navigate('/profile');
+        onHide(); // Close modal on successful login
+      })
       .catch(() => alert("Error logging in."));
   };
 
@@ -47,7 +46,8 @@ export const LoginModal = () => {
     })
       .then((response) => {
         if (response.ok) {
-          alert("User created successfully!")
+          alert("User created successfully!");
+          onHide(); // Close modal
         } else {
           alert("Error creating user.");
         }
@@ -84,41 +84,39 @@ export const LoginModal = () => {
   ];
 
   return (
-    <>
-      <Button variant="primary" onClick={handleShow} style={{ backgroundColor: "transparent", border: "none", color: "black" , padding: "0"}} >
-        Login
-      </Button>
-
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>
+    <Modal show={show} onHide={onHide} centered>
+      <Modal.Header closeButton>
+        <Modal.Title>
           <img
-                className="img-fluid"
-                alt="Responsive image"
-                src="https://i.imgur.com/sB3VJu2.png"
-                style={{ width: "105px", marginLeft: "177px" }}
-              />
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={signupView ? createUser : logInUser}>
-            {renderFormFields(signupView ? signupFields : loginFields)}
-            <Button type="submit" className="w-100" style={{backgroundColor: "#006A4E", border: "none"}}>
-              {signupView ? "Sign Up" : "Log In"}
-            </Button>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
+            className="img-fluid"
+            alt="Responsive image"
+            src="https://i.imgur.com/sB3VJu2.png"
+            style={{ width: "105px", marginLeft: "177px" }}
+          />
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <Form onSubmit={signupView ? createUser : logInUser}>
+          {renderFormFields(signupView ? signupFields : loginFields)}
           <Button
-            variant="link"
-            style={{textDecoration: "none", color: "#000000"}}
-            onClick={() => setSignupView(!signupView)}
+            type="submit"
+            className="w-100"
+            style={{ backgroundColor: "#006A4E", border: "none" }}
           >
-            {signupView ? "Go to Login" : "Create New Account"}
+            {signupView ? "Sign Up" : "Log In"}
           </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </Form>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button
+          variant="link"
+          style={{ textDecoration: "none", color: "#000000" }}
+          onClick={() => setSignupView(!signupView)}
+        >
+          {signupView ? "Go to Login" : "Create New Account"}
+        </Button>
+      </Modal.Footer>
+    </Modal>
   );
 };
 
