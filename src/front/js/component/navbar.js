@@ -53,7 +53,7 @@ export const Navbar = () => {
             {/* Show Logout if user is logged in */}
             {store.user && (
               <li className="nav-item nav-link">
-                <LogoutButton />
+                <LogoutButton />  
               </li>
             )}
           </ul>
