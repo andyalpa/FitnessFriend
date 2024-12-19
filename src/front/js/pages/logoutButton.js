@@ -17,7 +17,7 @@ export const LogoutButton = () => {
   };
 
   return (
-    <button style={{color:"#686868", padding: "0"}} className="btn logout-btnNav" onClick={handleLogout}>
+    <button style={{color:"#686868", padding: "0", display: "flex"}} className="btn logout-btnNav" onClick={handleLogout}>
       Log Out
     </button>
   );

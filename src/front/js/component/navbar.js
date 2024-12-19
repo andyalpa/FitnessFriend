@@ -37,8 +37,9 @@ export const Navbar = () => {
                 <button
                   className="btn btn-link"
                   style={{
+                    display:"flex",
                     textDecoration: "none",
-                    color: "black",
+                    color: "#686868",
                     padding: "0",
                     border: "none",
                     background: "transparent",
