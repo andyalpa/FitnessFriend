@@ -12,7 +12,7 @@ const Workout = () => {
 
     useEffect(() => {
         async function getExercise() {
-            if (!url) return; 
+            if (!url) return;
             const options = {
                 method: 'GET',
                 headers: {
@@ -20,7 +20,7 @@ const Workout = () => {
                     'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
                 }
             };
-            
+
             try {
                 const response = await fetch(url, options);
                 const result = await response.json();
