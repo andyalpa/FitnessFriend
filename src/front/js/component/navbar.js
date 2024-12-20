@@ -3,6 +3,7 @@ import { LoginModal } from "./loginmodal";
 import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { LogoutButton } from "../pages/logoutButton";
+import fitnessFriend from "/public/fitnessFriend.png";
 
 export const Navbar = () => {
   const { store } = useContext(Context);
@@ -16,7 +17,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid d-flex justify-content-between">
         <Link to={"/"} className="logo">
-        <img src="https://i.imgur.com/y0Ia8hZ.png" alt="Logo Here" />
+          <img src={fitnessFriend} alt="Logo Here" />
         </Link>
 
         <h1 className="homeHeader">Meet Your Newest Friend in Fitness</h1>
@@ -41,7 +42,7 @@ export const Navbar = () => {
                 <button
                   className="btn btn-link"
                   style={{
-                    display:"flex",
+                    display: "flex",
                     textDecoration: "none",
                     color: "#686868",
                     padding: "0",
@@ -58,7 +59,7 @@ export const Navbar = () => {
             {/* Show Logout if user is logged in */}
             {store.user && (
               <li className="nav-item nav-link">
-                <LogoutButton />  
+                <LogoutButton />
               </li>
             )}
           </ul>
@@ -67,6 +68,6 @@ export const Navbar = () => {
 
       {/* Render the LoginModal */}
       <LoginModal show={showLoginModal} onHide={() => setShowLoginModal(false)} />
-    </nav>
+    </nav >
   );
 };

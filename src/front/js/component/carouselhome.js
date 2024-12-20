@@ -10,18 +10,18 @@ export const Carousel = () => {
                 <div className="carousel-item active">
                     <img src="https://i.imgur.com/3uDXlnP.png" className="d-block w-100" alt="Slide 1" />
                 </div>
-                
+
                 <div className="carousel-item">
                     <img src="https://images.pexels.com/photos/7937049/pexels-photo-7937049.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 2" />
                 </div>
                 <div className="carousel-item">
-                    <img src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dd75459b029f544a4ec2/previews/6737dd7b459b029f544a5133/download/ella-olsson-lMcRyBx4G50-unsplash.webp" className="d-block w-100" alt="Slide 3" />
+                    <img src="https://plus.unsplash.com/premium_photo-1673108852141-e8c3c22a4a22?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="d-block w-100" alt="Slide 3" />
                 </div>
                 <div className="carousel-item">
                     <img src="https://images.pexels.com/photos/7991936/pexels-photo-7991936.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 4" />
                 </div>
                 <div className="carousel-item">
-                    <img src="https://trello.com/1/cards/6737db7c2a103058f98d1dec/attachments/6737dd518155bce7f31244ae/previews/6737dd548155bce7f3124daf/download/wesual-click-HK4n3W95F2c-unsplash.webp" className="d-block w-100" alt="Slide 5" />
+                    <img src="https://images.unsplash.com/photo-1466637574441-749b8f19452f?q=80&w=2428&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="d-block w-100" alt="Slide 5" />
                 </div>
                 <div className="carousel-item">
                     <img src="https://images.pexels.com/photos/416528/pexels-photo-416528.jpeg?auto=compress&cs=tinysrgb&w=600" className="d-block w-100" alt="Slide 6" />
