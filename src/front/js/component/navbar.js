@@ -16,7 +16,7 @@ export const Navbar = () => {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid d-flex justify-content-between">
         <Link to={"/"} className="logo">
-          <img src="https://i.imgur.com/y0Ia8hZ.png" alt="Logo Here" />
+        <img src="https://i.imgur.com/y0Ia8hZ.png" alt="Logo Here" />
         </Link>
 
         <h1 className="homeHeader">Meet Your Newest Friend in Fitness</h1>
