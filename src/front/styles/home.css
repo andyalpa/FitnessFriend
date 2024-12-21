@@ -7,15 +7,15 @@
 */
 
 .navbar .logo img {
-  height: 359px;
+  max-height: 300px;
   width: auto;
-  margin: -250px;
-  padding: 30px;
+  margin: -240px;
+  padding: 60px;
 }
 
 .navbar {
   padding-top: 3px;
-  padding-bottom: 1px;
+  padding-bottom: 5px;
   padding-left: 12%;
   background: linear-gradient(0deg, #348ac7) 4%, rgba(15, 2, 5, 0.968207351299895 53%);
 }

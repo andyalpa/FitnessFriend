@@ -20,7 +20,7 @@ export const SignUp = () => {
 
   const createUser = async (e) => {
     e.preventDefault();
-    let response = await fetch(process.env.BACKEND_URL + "/signup", {
+    let response = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL + "/signup", {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(formData),

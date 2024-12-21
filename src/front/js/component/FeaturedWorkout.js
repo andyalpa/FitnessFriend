@@ -17,7 +17,7 @@ const FeaturedWorkout = () => {
           'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
         }
       };
-      
+
       try {
         const response = await fetch(url, options);
         const result = await response.json();
@@ -37,18 +37,18 @@ const FeaturedWorkout = () => {
 
   return (
     <>
-      
-        {
-          show ? randomWorkout?.map((workout, index) => (
-            <WorkoutCard key={index} data={workout} />
 
-          ))
+      {
+        show ? randomWorkout?.map((workout, index) => (
+          <WorkoutCard key={index} data={workout} />
 
-            : "Loading..."
-        }
+        ))
 
-      
-{/* proccess.env.API_KEY */}
+          : "Loading..."
+      }
+
+
+      {/* proccess.env.API_KEY */}
 
     </>
   );

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import MealCard from "./MealCard";
-import RecipeLetters from "./RecipeLetters";
+import FeaturedRecipes from "./FeaturedRecipes";
 import MealCategories from "../pages/MealCategories";
-import FeaturedRecipes from "/workspaces/pt72-Fitness_Friend/src/front/js/component/FeaturedRecipes.js"
+import MealCard from "./MealCard";
+
 const Meal = () => {
     const [url, setUrl] = useState("");
     const [meal, setMeal] = useState([])
@@ -40,8 +40,6 @@ const Meal = () => {
     return (
         <>
             <div className="main text-center">
-
-
                 <div data-aos="zoom-out-right" className="heading">
                     <h1 className="header">Recipes:</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
