@@ -4,50 +4,45 @@ import WorkoutCategories from "../pages/WorkoutCategories";
 import FeaturedWorkout from "./FeaturedWorkout";
 
 const Workout = () => {
-    const [url, setUrl] = useState("");
-    const [workout, setWorkout] = useState([]);
+    const [allExercises, setAllExercises] = useState([]);
+    const [filteredExercises, setFilteredExercises] = useState([]);
     const [search, setSearch] = useState("");
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-        async function getExercise() {
-            if (!url) return;
-            const options = {
-                method: "GET",
-                headers: {
-                    "x-rapidapi-key": process.env.API_KEY,
-                    "x-rapidapi-host": "exercisedb.p.rapidapi.com",
-                },
-            };
-
+        async function fetchAllExercises() {
             try {
-                const response = await fetch(url, options);
-                const result = await response.json();
-
-                if (Array.isArray(result) && result.length > 0) {
-                    setWorkout(result);
-                } else {
-                    setWorkout([]); // Clear previous workouts if none found
-                }
-
+                const response = await fetch(
+                    "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/dist/exercises.json"
+                );
+                const data = await response.json();
+                setAllExercises(data);
+                
+                // Extract unique categories from primaryMuscles
+                const muscles = [...new Set(data.flatMap(ex => ex.primaryMuscles))];
+                setCategories(muscles);
             } catch (error) {
-                console.error(error);
-                setWorkout([]); // Clear data on error
+                console.error("Error fetching exercises:", error);
             }
         }
-        getExercise();
-    }, [url]);
+        fetchAllExercises();
+    }, []);
 
-    const catIndex = (cat) => {
-        console.log("Selected category:", cat);
-        setUrl(`https://exercisedb.p.rapidapi.com/exercises/bodyPart/${cat}`);
-        setSelectedCategory(cat);
+    const handleCategoryFilter = (category) => {
+        setSelectedCategory(category);
+        const filtered = allExercises.filter(exercise => 
+            exercise.primaryMuscles.includes(category)
+        );
+        setFilteredExercises(filtered);
     };
 
-    const searchExercise = (e) => {
+    const handleSearch = (e) => {
         if (e.key === "Enter") {
-            console.log("Searching for:", search);
-            setUrl(`https://exercisedb.p.rapidapi.com/exercises/name/${search}?offset=0&limit=10`);
+            const results = allExercises.filter(exercise =>
+                exercise.name.toLowerCase().includes(search.toLowerCase())
+            );
+            setFilteredExercises(results);
             setSelectedCategory("search");
         }
     };
@@ -62,26 +57,30 @@ const Workout = () => {
                         <div className="search input-group mb-3">
                             <input
                                 onChange={(e) => setSearch(e.target.value)}
-                                onKeyDown={searchExercise}
+                                onKeyDown={handleSearch}
                                 type="search"
                                 className="input"
                                 placeholder="Search workouts..."
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
                             />
                         </div>
                         <i className="fas fa-search"></i>
                     </div>
                 </div>
                 <div className="categories text-center d-flex">
-                    <WorkoutCategories catIndex={catIndex} />
+                    <WorkoutCategories 
+                        categories={categories} 
+                        onSelectCategory={handleCategoryFilter} 
+                    />
                 </div>
                 <div className="recipes_grid mt-5 mx-auto">
-                    {selectedCategory === null && <FeaturedWorkout />}
-                    {workout.length > 0 ? (
-                        <WorkoutCard data={workout} />
+                    {!selectedCategory ? (
+                        <FeaturedWorkout exercises={allExercises.slice(0, 10)} />
+                    ) : filteredExercises.length > 0 ? (
+                        filteredExercises.map((exercise) => (
+                            <WorkoutCard key={exercise.id} data={exercise} />
+                        ))
                     ) : (
-                        selectedCategory && <p>No workouts found for this category.</p>
+                        <p>No workouts found for this category.</p>
                     )}
                 </div>
             </div>

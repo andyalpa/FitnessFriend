@@ -4,79 +4,44 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 
 const WorkoutCard = ({ data }) => {
-  const { store, actions } = useContext(Context);
-  let navigate = useNavigate();
+    const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
 
-  const handleClick = (e, workout) => {
-    e.preventDefault();
+    const handleFavorite = (e, exercise) => {
+        e.preventDefault();
+        const existing = store.favs.find(fav => fav.id === exercise.id && fav.type === "workout");
+        existing ? actions.removeFav(exercise.id) : actions.addFav(exercise, "workout");
+    };
 
-    const existingFav = store.favs.find(
-      (fav) => fav.id === workout.id && fav.type === "workout"
-    );
-
-    if (existingFav) {
-      actions.removeFav(existingFav.id); // Remove favorite from backend  
-    } else {
-      actions.addFav(workout, "workout"); // Add favorite to backend  
-    }
-  };
-
-  return (
-    <>
-      {!data ? (
-        "No Workout Found"
-      ) : (
-        data.map((workout, index) => {
-          return (
-            <div data-aos="fade-in">
-              <div
-                className="recipe_card m-2 d-flex"
-                style={{
-                  borderRadius: "1.25rem",
-                  boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)",
-                }}
-                key={index}
-              >
-                {store.token ? (
-                  <div onClick={() => navigate(`/workout/${workout.id}`)}>
-                    <img src={workout.gifUrl} alt="/" />
-                  </div>
-                ) : (
-                  <div onClick={() => navigate(`/profile`)}>
-                    <img src={workout.gifUrl} alt="/" />
-                  </div>
+    return (
+        <div data-aos="fade-in">
+            <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)" }}>
+                <div onClick={() => store.token ? navigate(`/workout/${data.id}`) : navigate('/profile')}>
+                    <img 
+                        src={`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${data.images[0]}`} 
+                        alt={data.name} 
+        
+                    />
+                </div>
+                <div className="ms-2">
+                    <h3>{data.name}</h3>
+                    <p><strong>Category:</strong> {data.category}</p>
+                    <p><strong>Primary Muscles:</strong> {data.primaryMuscles.join(", ")}</p>
+                </div>
+                {store.token && (
+                    <div className="fav-button-container">
+                        <button 
+                            onClick={(e) => handleFavorite(e, data)}
+                            className="btn btn-warning ms-5"
+                            style={{ borderRadius: "1.25rem" }}
+                        >
+                            <i className={`fa ${store.favs.some(fav => fav.id === data.id) ? 'fa-solid' : 'fa-regular'} fa-heart`} />
+                        </button>
+                    </div>
                 )}
-
-                <h3 className="ms-2">{workout.name}</h3>
-                {store.token ? (
-                  <div className="fav-button-container">
-                    <a
-                      onClick={(e) => handleClick(e, workout)}
-                      style={{ borderRadius: "1.25rem" }}
-                      href="#"
-                      className="btn btn-warning ms-5"
-                    >
-                      <i
-                        className={
-                          store.favs.some(
-                            (fav) => fav.id === workout.id && fav.type === "workout"
-                          )
-                            ? "fa fa-solid fa-heart"
-                            : "fa fa-regular fa-heart test"
-                        }
-                      ></i>
-                    </a>
-                  </div>
-                ) : (
-                  <div className="d-none"></div>
-                )}
-              </div>
             </div>
-          );
-        })
-      )}
-    </>
-  );
+        </div>
+    );
 };
 
 export default WorkoutCard;

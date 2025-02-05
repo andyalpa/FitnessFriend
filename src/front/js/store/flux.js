@@ -143,11 +143,9 @@ const getState = ({ getStore, getActions, setStore }) => {
             image = data.meals[0].strMealThumb;
             id = fav.idMeal; // Use the original ID from the API  
           } else if (type === "workout") {
-            const response = await fetch(`https://exercisedb.p.rapidapi.com/exercises/exercise/${fav.id}`, {
-              headers: {
-                'X-RapidAPI-Key': process.env.API_KEY, // Replace with your API key  
-                'X-RapidAPI-Host': 'exercisedb.p.rapidapi.com'
-              }
+            const encodedFavId = encodeURIComponent(fav.id);
+            const response = await fetch(`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${encodedFavId}`, {
+             
             });
             const data = await response.json();
             name = data.name;

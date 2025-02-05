@@ -3,106 +3,110 @@ import { useParams } from "react-router-dom";
 
 const WorkoutInfo = () => {
   const { WorkoutID } = useParams();
-  const [info, setInfo] = useState({});
-  const [instructions, setInstructions] = useState([]);
-  const [secondaryMuscles, setSecondaryMuscles] = useState([]);
+  const [exercise, setExercise] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getInfo() {
-      const url = `https://exercisedb.p.rapidapi.com/exercises/exercise/${WorkoutID}`;
-      const options = {
-        method: 'GET',
-        headers: {
-          'x-rapidapi-key': process.env.API_KEY,
-          'x-rapidapi-host': 'exercisedb.p.rapidapi.com'
-        }
-      };
-
+    async function fetchExercise() {
       try {
-        const response = await fetch(url, options);
-        const result = await response.json();
-        console.log(result);
-        setInfo(result);
+        // Fetch all exercises from the GitHub API
+        const response = await fetch(
+          "https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/dist/exercises.json"
+        );
+        const data = await response.json();
 
-        if (result.instructions) {
-          setInstructions(result.instructions);
-        }
-        if (result.secondaryMuscles) {
-          setSecondaryMuscles(result.secondaryMuscles);
+        // Find the specific exercise by ID
+        const selectedExercise = data.find((ex) => ex.id === WorkoutID);
+        if (selectedExercise) {
+          setExercise(selectedExercise);
+        } else {
+          console.error("Exercise not found");
         }
       } catch (error) {
-        console.error(error);
+        console.error("Error fetching exercise:", error);
+      } finally {
+        setLoading(false);
       }
     }
-    getInfo();
+
+    fetchExercise();
   }, [WorkoutID]);
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
+  if (!exercise) {
+    return <div>Exercise not found.</div>;
+  }
 
   return (
-    <>
-      {!info ? (
-        ""
-      ) : (
-        <div data-aos="fade-in" className="recipe-box card mb-3 m-5" style={{ minWidth: "540px", borderRadius: "1.25rem", boxShadow: "0px 0px 30px 7px rgba(0,0,0,0.1)" }}>
-          <div className="" style={{ flexDirection: "row-reverse" }}>
-            <div className="meal-info_header d-flex">
-              <div data-aos="fade-up-left" style={{ "border-radius": "20px !important" }} >
-                <img style={{ borderRadius: "1.25rem", width: "300px" }} className="img-fluid" src={info.gifUrl} alt={info.name} />
-              </div>
-              <h1 data-aos="fade-down-right" style={{ alignSelf: "center", fontSize: "2rem", marginLeft: "3rem" }}>{info.name}</h1>
-              <h2 data-aos="fade-down-right" style={{ alignSelf: "center", fontSize: "2rem", marginLeft: "3rem" }}>Target: {info.target}</h2>
-              <h2 data-aos="fade-down-right" style={{ alignSelf: "center", fontSize: "2rem", marginLeft: "3rem" }}>Body Part: {info.bodyPart}</h2>
-              <h2 data-aos="fade-down-right" style={{ alignSelf: "center", fontSize: "2rem", marginLeft: "3rem" }}>secondaryMuscles:
-                <ul>
-                  {secondaryMuscles.map((secondaryMuscle, index) => (
-                    <li key={index}>{secondaryMuscle}</li>
-                  ))}
-                </ul></h2>
-            </div>
+    <div
+      data-aos="fade-in"
+      className="recipe-box card mb-3 m-5"
+      style={{
+        minWidth: "540px",
+        borderRadius: "1.25rem",
+        boxShadow: "0px 0px 30px 7px rgba(0,0,0,0.1)",
+      }}
+    >
+      <div style={{ flexDirection: "row-reverse" }}>
+        <div className="meal-info_header d-flex">
+          {/* Exercise Image */}
+          <div data-aos="fade-up-left" style={{ borderRadius: "20px !important" }}>
+            <img
+              style={{ borderRadius: "1.25rem", width: "300px" }}
+              className="img-fluid"
+              src={`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${exercise.images[0]}`}
+              alt={exercise.name}
+            />
+          </div>
 
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div className="meal-body my-3">
-                <div style={{borderTopLeftRadius: "10px", borderBottomLeftRadius: "10px" }} data-aos="fade-left" className="meal-instructions ps-4">
-                  <h2>Instructions</h2>
-                  <ul>
-                    {instructions.map((instruction, index) => (
-                      <li key={index}>{instruction}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          {/* Exercise Details */}
+          <div style={{ marginLeft: "3rem" }}>
+            <h1 data-aos="fade-down-right" style={{ fontSize: "2rem" }}>
+              {exercise.name}
+            </h1>
+            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+              Category: {exercise.category}
+            </h2>
+            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+              Primary Muscles: {exercise.primaryMuscles.join(", ")}
+            </h2>
+            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+              Secondary Muscles:
+              <ul>
+                {exercise.secondaryMuscles.map((muscle, index) => (
+                  <li key={index}>{muscle}</li>
+                ))}
+              </ul>
+            </h2>
+          </div>
+        </div>
+
+        {/* Exercise Instructions */}
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div className="meal-body my-3">
+            <div
+              style={{
+                borderTopLeftRadius: "10px",
+                borderBottomLeftRadius: "10px",
+              }}
+              data-aos="fade-left"
+              className="meal-instructions ps-4"
+            >
+              <h2>Instructions</h2>
+              <ul>
+                {exercise.instructions.map((instruction, index) => (
+                  <li key={index}>{instruction}</li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
 export default WorkoutInfo;
-
-bodyPart
-:
-"waist"
-equipment
-:
-"body weight"
-gifUrl
-:
-"https://v2.exercisedb.io/image/n5lhFRwIiHQhuz"
-id
-:
-"0001"
-instructions
-:
-(5)['Lie flat on your back with your knees bent and feet flat on the ground.', 'Place your hands behind your head with your elbows pointing outwards.', 'Engaging your abs, slowly lift your upper body off…forward until your torso is at a 45-degree angle.', 'Pause for a moment at the top, then slowly lower your upper body back down to the starting position.', 'Repeat for the desired number of repetitions.']
-name
-:
-"3/4 sit-up"
-secondaryMuscles
-:
-(2)['hip flexors', 'lower back']
-target
-:
-"abs"
