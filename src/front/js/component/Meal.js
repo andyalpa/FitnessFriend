@@ -41,7 +41,7 @@ const Meal = () => {
         <>
             <div className="main text-center">
                 <div data-aos="zoom-out-right" className="heading">
-                    <h1 className="header">Recipes:</h1>
+                    <h1 className="header">Recipes</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
                     <div className="search--box">
                         <div className="search input-group mb-3">

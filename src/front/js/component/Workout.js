@@ -51,7 +51,7 @@ const Workout = () => {
         <>
             <div className="main text-center">
                 <div data-aos="zoom-out-right" className="workout-heading">
-                    <h1 className="header">Workouts:</h1>
+                    <h1 className="header">Workouts</h1>
                     <h2 className="subheader">Simple Workout, Stunning Results</h2>
                     <div className="search--box">
                         <div className="search input-group mb-3">
@@ -60,7 +60,7 @@ const Workout = () => {
                                 onKeyDown={handleSearch}
                                 type="search"
                                 className="input"
-                                placeholder="Search workouts..."
+                                placeholder=""
                             />
                         </div>
                         <i className="fas fa-search"></i>

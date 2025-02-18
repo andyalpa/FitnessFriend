@@ -49,6 +49,11 @@ a {
 
 }
 
+.carousel-image {
+  border-radius: 300px;
+ 
+}
+
 .overlay {
   overflow: hidden;
   position: relative;
@@ -83,11 +88,10 @@ a {
   text-decoration: none;
   text-align: center;
   padding-top: 8px;
-  padding-left: 9%;
-  font-size: 35px;
+  /* padding-left: 9%; */
+  font-size: 37px;
   color: #ea9010;
-  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-
+  text-shadow: 1px 0 black, 3px 0px black, 3px 0px black, 0 0px black;
 }
 
 .container {
@@ -141,7 +145,7 @@ filter: progid: DXImageTransform.Microsoft.gradient( startColorstr="#EA9010", en
 
 
 body {
-  background-color: #98a863;
+  background-color: #f9f7fd;
   height: 100vh;
 }
 

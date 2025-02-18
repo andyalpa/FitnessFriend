@@ -34,11 +34,11 @@ const MealCard = ({ data }) => {
               className="recipe_card m-2 d-flex"
               style={{
                 borderRadius: "1.25rem",
-                boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)",
+                boxShadow: "0px 0px 13px 10px rgba(112, 112, 112, 0.1)",
               }}
             >
               {store.token ? (
-                <div onClick={() => navigate(`/meal/${meal.idMeal}`)}>
+                <div style={{width: "200px" }} onClick={() => navigate(`/meal/${meal.idMeal}`)}>
                   <img src={meal.strMealThumb} alt="/" />
                 </div>
               ) : (

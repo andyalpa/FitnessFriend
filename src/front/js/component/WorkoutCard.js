@@ -15,9 +15,10 @@ const WorkoutCard = ({ data }) => {
 
     return (
         <div data-aos="fade-in">
-            <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)" }}>
-                <div onClick={() => store.token ? navigate(`/workout/${data.id}`) : navigate('/profile')}>
+            <div className="recipe_card m-2 d-flex" style={{ borderRadius: "1.25rem", boxShadow: "0px 0px 13px 10px rgba(112, 112, 112, 0.1)" }}>
+                <div style={{width: "200px",height: "200px" }} onClick={() => store.token ? navigate(`/workout/${data.id}`) : navigate('/profile')}>
                     <img 
+                        style={{width: "200px", height: "100%", objectFit: "cover", borderRadius: "1.25rem"}}
                         src={`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${data.images[0]}`} 
                         alt={data.name} 
         
