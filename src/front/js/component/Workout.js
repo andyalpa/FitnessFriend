@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WorkoutCard from "./WorkoutCard";
 import WorkoutCategories from "../pages/WorkoutCategories";
 import FeaturedWorkout from "./FeaturedWorkout";
+import Image from "../../img/upscalemedia-transformed.webp";
 
 const Workout = () => {
     const [allExercises, setAllExercises] = useState([]);
@@ -50,7 +51,22 @@ const Workout = () => {
     return (
         <>
             <div className="main text-center">
-                <div data-aos="zoom-out-right" className="workout-heading">
+                <div 
+                    data-aos="zoom-out-right" 
+                    className="workout-heading"
+                    style={{
+                        backgroundImage: `url(${Image})`,
+                        backgroundSize: "cover",
+                        backgroundRepeat: "no-repeat",
+                        height: "400px",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "flex-end",
+                        justifyContent: "center",
+                        paddingRight: "6rem",
+                        marginBottom: "2rem"
+                    }}
+                >
                     <h1 className="header">Workouts</h1>
                     <h2 className="subheader">Simple Workout, Stunning Results</h2>
                     <div className="search--box">

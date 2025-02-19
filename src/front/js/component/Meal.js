@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import FeaturedRecipes from "./FeaturedRecipes";
 import MealCategories from "../pages/MealCategories";
 import MealCard from "./MealCard";
+import Image from "../../img/wmremove-transformed.png";
 
 const Meal = () => {
     const [url, setUrl] = useState("");
@@ -40,7 +41,22 @@ const Meal = () => {
     return (
         <>
             <div className="main text-center">
-                <div data-aos="zoom-out-right" className="heading">
+                <div 
+                                    data-aos="zoom-out-right" 
+                                    className="heading"
+                                    style={{
+                                        backgroundImage: `url(${Image})`,
+                                        backgroundSize: "cover",
+                                        backgroundRepeat: "no-repeat",
+                                        height: "400px",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "flex-end",
+                                        justifyContent: "center",
+                                        paddingRight: "6rem",
+                                        marginBottom: "2rem"
+                                    }}
+                                >
                     <h1 className="header">Recipes</h1>
                     <h2 className="subheader">Simple Recipes, Stunning Results</h2>
                     <div className="search--box">
