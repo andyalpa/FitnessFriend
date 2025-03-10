@@ -51,7 +51,7 @@ a {
 
 .carousel-image {
   border-radius: 300px;
- 
+
 }
 
 .overlay {
@@ -217,3 +217,43 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
 }
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #333;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: #007bff;
+}
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.recipes_grid,
+.workouts_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+}
+
