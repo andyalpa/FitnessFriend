@@ -14,47 +14,43 @@ const MealCard = ({ data }) => {
     );
 
     if (existingFav) {
-      actions.removeFav(existingFav.id); // Remove favorite from backend
+      actions.removeFav(existingFav.id);
     } else {
-      actions.addFav(meal, "meal"); // Add favorite to backend
+      actions.addFav(meal, "meal");
     }
   };
 
   return (
     <>
       {!data ? (
-        "No Meal Found"
+        <div className="no-results">No Meals Found</div>
       ) : (
         data.map((meal) => (
           <div
             data-aos="fade-in"
-            key={meal.idMeal} // Use a unique identifier from the meal data
+            key={meal.idMeal}
+            className="meal-card-container"
           >
-            <div
-              className="recipe_card m-2 d-flex"
-              style={{
-                borderRadius: "1.25rem",
-                boxShadow: "0px 0px 13px 10px rgba(112, 112, 112, 0.1)",
-              }}
-            >
-              {store.token ? (
-                <div style={{width: "200px" }} onClick={() => navigate(`/meal/${meal.idMeal}`)}>
-                  <img src={meal.strMealThumb} alt="/" />
-                </div>
-              ) : (
-                <div onClick={() => navigate(`/profile`)}>
-                  <img src={meal.strMealThumb} alt="/" />
-                </div>
-              )}
-
-              <h3 className="ms-2">{meal.strMeal}</h3>
-              {store.token ? (
+            <div className="recipe_card m-2">
+              <div
+                className="meal-image-container"
+                onClick={() => navigate(store.token ? `/meal/${meal.idMeal}` : '/profile')}
+              >
+                <img
+                  src={meal.strMealThumb}
+                  alt={meal.strMeal}
+                  className="meal-image"
+                />
+              </div>
+              <h3 className="meal-name">{meal.strMeal}</h3>
+              {store.token && (
                 <div className="fav-button-container">
-                  <a
+                  <button
                     onClick={(e) => handleClick(e, meal)}
-                    style={{ borderRadius: "1.25rem" }}
-                    href="#"
-                    className="btn btn-warning ms-5"
+                    className="btn btn-favorite"
+                    aria-label={store.favs.some(
+                      (fav) => fav.id === meal.idMeal && fav.type === "meal"
+                    ) ? "Remove from favorites" : "Add to favorites"}
                   >
                     <i
                       className={
@@ -62,13 +58,11 @@ const MealCard = ({ data }) => {
                           (fav) => fav.id === meal.idMeal && fav.type === "meal"
                         )
                           ? "fa fa-solid fa-heart"
-                          : "fa fa-regular fa-heart test"
+                          : "fa fa-regular fa-heart"
                       }
-                    ></i>
-                  </a>
+                    />
+                  </button>
                 </div>
-              ) : (
-                <div className="d-none"></div>
               )}
             </div>
           </div>
@@ -77,6 +71,5 @@ const MealCard = ({ data }) => {
     </>
   );
 };
-
 
 export default MealCard;

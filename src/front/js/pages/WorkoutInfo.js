@@ -33,11 +33,11 @@ const WorkoutInfo = () => {
   }, [WorkoutID]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (!exercise) {
-    return <div>Exercise not found.</div>;
+    return <div className="not-found">Exercise not found.</div>;
   }
 
   return (
@@ -47,7 +47,6 @@ const WorkoutInfo = () => {
       style={{
         minWidth: "540px",
         borderRadius: "1.25rem",
-        boxShadow: "0px 0px 30px 7px rgba(0,0,0,0.1)",
       }}
     >
       <div style={{ flexDirection: "row-reverse" }}>
@@ -57,25 +56,25 @@ const WorkoutInfo = () => {
             <img
               style={{ borderRadius: "1.25rem", width: "300px" }}
               className="img-fluid"
-              src={`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/${exercise.images[0]}`}
+              src={`https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/dist/exercises/${exercise.images[0]}`}
               alt={exercise.name}
             />
           </div>
 
           {/* Exercise Details */}
           <div style={{ marginLeft: "3rem" }}>
-            <h1 data-aos="fade-down-right" style={{ fontSize: "2rem" }}>
+            <h1 data-aos="fade-down-right" className="exercise-title">
               {exercise.name}
             </h1>
-            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+            <h2 data-aos="fade-down-right" className="exercise-category">
               Category: {exercise.category}
             </h2>
-            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+            <h2 data-aos="fade-down-right" className="exercise-muscles">
               Primary Muscles: {exercise.primaryMuscles.join(", ")}
             </h2>
-            <h2 data-aos="fade-down-right" style={{ fontSize: "1.5rem" }}>
+            <h2 data-aos="fade-down-right" className="exercise-muscles">
               Secondary Muscles:
-              <ul>
+              <ul className="muscles-list">
                 {exercise.secondaryMuscles.map((muscle, index) => (
                   <li key={index}>{muscle}</li>
                 ))}
@@ -88,15 +87,15 @@ const WorkoutInfo = () => {
         <div style={{ display: "flex", flexDirection: "column" }}>
           <div className="meal-body my-3">
             <div
+              className="meal-instructions ps-4"
               style={{
                 borderTopLeftRadius: "10px",
                 borderBottomLeftRadius: "10px",
               }}
               data-aos="fade-left"
-              className="meal-instructions ps-4"
             >
               <h2>Instructions</h2>
-              <ul>
+              <ul className="instructions-list">
                 {exercise.instructions.map((instruction, index) => (
                   <li key={index}>{instruction}</li>
                 ))}

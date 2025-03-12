@@ -133,16 +133,16 @@ export const Profile = () => {
   }, [store.token, navigate]);
 
   return (
-    <div className="mt-5">
+    <div className="main">
       {store.token ? (
-        <div className="container text-center">
+        <div className="container py-5">
           <div className="row">
             {/* Left Column - User Info & Social Links */}
             <div className="col-md-6">
               <div
                 data-aos="fade-in"
-                className="bg-white p-3 mb-3"
-                style={{ borderRadius: "10px", marginLeft: "30px" }}
+                className="card p-4 mb-4"
+                style={{ borderRadius: "16px" }}
               >
                 <div className="d-flex flex-column align-items-center">
                   <UploadImage />
@@ -171,8 +171,8 @@ export const Profile = () => {
               {/* Social Links */}
               <div
                 data-aos="fade-in"
-                className="bg-white p-3 mb-3"
-                style={{ borderRadius: "10px", marginLeft: "30px", height: "289px"}}
+                className="card p-4 mb-4"
+                style={{ borderRadius: "16px", height: "289px" }}
               >
                 <h5>Social Links</h5>
                 {Object.entries(socialLinks).map(([field, link]) => (
@@ -199,12 +199,8 @@ export const Profile = () => {
             <div className="col-md-6">
               <div
                 data-aos="fade-in"
-                className="bg-white p-3 mb-3"
-                style={{
-                  borderRadius: "10px",
-                  marginRight: "10px",
-                  height: "565px",
-                }}
+                className="card p-4 mb-4"
+                style={{ borderRadius: "16px" }}
               >
                 <h2>Weight Tracker</h2>
                 <input
@@ -213,26 +209,11 @@ export const Profile = () => {
                   value={newWeight}
                   onChange={(e) => setNewWeight(e.target.value)}
                   className="form-control mb-2"
-                  style={{
-                    borderRadius: "5px",
-                    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                  }}
                 />
                 <button
-
-
-
                   onClick={addNewWeight}
                   className="btn btn-primary mt-2"
                   disabled={!newWeight || isNaN(newWeight)}
-                  style={{
-                    backgroundColor: "#006A4E",
-                    border: "none",
-                    color: "white",
-                    borderRadius: "5px",
-                    padding: "8px 15px",
-                    boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
-                  }}
                 >
                   Add Weight
                 </button>
@@ -263,57 +244,38 @@ export const Profile = () => {
             </div>
           </div>
 
-          <div style={{marginLeft:"23px"}}>
-                  <FoodTracker/>
-
-
-
-
+          <div className="mt-5">
+            <FoodTracker />
           </div>
 
-
-
-
-
-          <div data-aos="fade-in">
-            <div className="recipes_grid mt-5 mx-auto">
-            <h2  data-aos="fade-in" className="home-header">Favorites: </h2>
-              <div className="recipes_grid mt-5 mx-auto">
-                {store.favs.length > 0 ? (
-                  store.favs.map((fav, index) => (
-                    <div data-aos="fade-in" key={index}>
-                      <div
-                        className="recipe_card m-2 d-flex"
-                        style={{
-                          borderRadius: "1.25rem",
-                          boxShadow: "0px 0px 13px 10px rgba(0,0,0,0.1)",
-                        }}
-                      >
-                        <Link to={`/${fav.type}/${fav.id}`}>
-                          <img src={fav.image} alt={fav.name} />
-                        </Link>
-                        <h3 className="ms-2">{fav.name}</h3>
-                      </div>
+          <div data-aos="fade-in" className="mt-5">
+            <h2 data-aos="fade-in" className="home-header">Favorites</h2>
+            <div className="recipes_grid">
+              {store.favs.length > 0 ? (
+                store.favs.map((fav, index) => (
+                  <div data-aos="fade-in" key={index}>
+                    <div
+                      className="recipe_card"
+                    >
+                      <Link to={`/${fav.type}/${fav.id}`}>
+                        <img src={fav.image} alt={fav.name} />
+                      </Link>
+                      <h3 className="meal-name">{fav.name}</h3>
                     </div>
-                  ))
-                ) : (
-                  <p>No favorites found</p>
-                )}
-              </div>
+                  </div>
+                ))
+              ) : (
+                <p className="no-results">No favorites found</p>
+              )}
             </div>
           </div>
-
         </div>
-
-
       ) : (
-        <div style={{ paddingTop: "240px" }}>
+        <div className="container text-center py-5">
           <div className="alert alert-light">
-            <div className="text-center" role="alert">
+            <div role="alert">
               You must log in to see your profile{" "}
-              <a href="#" className="alert-link">
-                <LoginModal />
-              </a>
+              <LoginModal />
             </div>
           </div>
         </div>

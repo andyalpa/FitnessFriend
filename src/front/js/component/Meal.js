@@ -2,87 +2,82 @@ import React, { useEffect, useState } from "react";
 import FeaturedRecipes from "./FeaturedRecipes";
 import MealCategories from "../pages/MealCategories";
 import MealCard from "./MealCard";
-import Image from "../../img/wmremove-transformed.png";
 
 const Meal = () => {
     const [url, setUrl] = useState("");
-    const [meal, setMeal] = useState([])
-    const [show, setShow] = useState(false)
-    const [search, setSearch] = useState("")
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [meal, setMeal] = useState([]);
+    const [show, setShow] = useState(false);
+    const [search, setSearch] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState(null);
+
     useEffect(() => {
         async function getRecipe() {
-            let res = await fetch(url);
-            let data = await res.json();
-            console.log(data);
-            setMeal(data.meals);
-            setShow(true)
-
-
+            try {
+                let res = await fetch(url);
+                let data = await res.json();
+                setMeal(data.meals);
+                setShow(true);
+            } catch (error) {
+                console.error("Error fetching recipes:", error);
+                setShow(true);
+            }
         }
-        getRecipe();
-    }, [url])
-
-    // const letterIndex = (letter) => {
-    //     setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`)
-
-    // }
+        if (url) {
+            getRecipe();
+        }
+    }, [url]);
 
     const catIndex = (cat) => {
-        setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`)
-        setSelectedCategory(cat)
-    }
+        setUrl(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${cat}`);
+        setSelectedCategory(cat);
+    };
 
     const searchRecipe = (e) => {
-        if (e.key == 'Enter')
-            setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`)
-        setSelectedCategory("search")
-    }
+        if (e.key === 'Enter') {
+            setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
+            setSelectedCategory("search");
+        }
+    };
+
     return (
-        <>
-            <div className="main text-center">
-                <div 
-                                    data-aos="zoom-out-right" 
-                                    className="heading"
-                                    style={{
-                                        backgroundImage: `url(${Image})`,
-                                        backgroundSize: "cover",
-                                        backgroundRepeat: "no-repeat",
-                                        height: "400px",
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-end",
-                                        justifyContent: "center",
-                                        paddingRight: "6rem",
-                                        marginBottom: "2rem"
-                                    }}
-                                >
-                    <h1 className="header">Recipes</h1>
-                    <h2 className="subheader">Simple Recipes, Stunning Results</h2>
-                    <div className="search--box">
-                        <div className="search input-group mb-3">
-                            <input onChange={(e) => setSearch(e.target.value)} onKeyDown={searchRecipe} type="search" className="input" placeholder="" aria-label="Username" aria-describedby="basic-addon1" />
-                        </div>
-                        <i className="fas fa-search"></i>
-                    </div>
+        <div className="main">
+            <div
+                className="heading"
+                style={{
+                    backgroundImage: `url(https://images.unsplash.com/photo-1543339308-43e59d6b73a6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80)`
+                }}
+            >
+                <h1 className="header">Discover Delicious Recipes</h1>
+                <h2 className="subheader">Find your next culinary adventure</h2>
+                <div className="search--box">
+                    <input
+                        onChange={(e) => setSearch(e.target.value)}
+                        onKeyDown={searchRecipe}
+                        type="search"
+                        className="input"
+                        placeholder="Search for recipes..."
+                        aria-label="Search recipes"
+                    />
+                    <i className="fas fa-search search-icon"></i>
                 </div>
-                <div className="categories text-center d-flex">
-                    <MealCategories catIndex={(cat) => catIndex(cat)} />
-                </div>
-
-                <div className="recipes_grid mt-5 mx-auto">
-                    {selectedCategory === null && <FeaturedRecipes />}
-                    {show ? <MealCard data={meal} /> : ""}
-
-
-                </div>
-
             </div>
 
+            <div className="container">
+                <div className="categories">
+                    <MealCategories catIndex={catIndex} />
+                </div>
 
-        </>
-
+                <div className="recipes_grid">
+                    {selectedCategory === null && <FeaturedRecipes />}
+                    {show && meal ? (
+                        <MealCard data={meal} />
+                    ) : (
+                        <div className="no-results">No recipes found</div>
+                    )}
+                </div>
+            </div>
+        </div>
     );
-}
-// https://github.com/Valerieclaire96/whoKnows
+};
+
 export default Meal;
